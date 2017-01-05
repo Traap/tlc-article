@@ -148,8 +148,8 @@
     \cfoot{\tiny\tlcDarkblue{cfoot}}
     \rfoot{\tiny\tlcDarkblue{Page~\thepage~of~\pageref{LastPage}}}
     \renewcommand{\footrulewidth}{0.1pt}
-    % We want our header and footer to remain consistent with table of contents
-    % that span multiple pages.
+    % We want our header and footer to remain consistent with a table of
+    % contents that span multiple pages.
     \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
   }
 
