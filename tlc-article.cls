@@ -31,7 +31,6 @@
 
 % ------------------------------------------------------------------------------
 % Color, Graphics and links.
-\RequirePackage[colorlinks]{hyperref}
 \RequirePackage{graphicx}
 \RequirePackage[table]{xcolor}
 \RequirePackage{xcolor}
@@ -144,6 +143,7 @@
 
 % ------------------------------------------------------------------------------
 % We define colors that are used throughout the document.
+\RequirePackage[colorlinks]{hyperref}
 \definecolor{darkblue}{rgb}{0,0,0.5}
 \hypersetup{
   bookmarksopen   = true,
