@@ -1,12 +1,15 @@
+language: generic
 sudo: required
 dist: trusty
 before_install:
 - sudo apt-get -qq update
-- sudo apt-get install -y --no-install-recommends texlive-fonts-recommended 
-- sudo apt-get install -y --no-install-recommends texlive-latex-extra
-- sudo apt-get install -y --no-install-recommends texlive-fonts-extra 
-- sudo apt-get install -y --no-install-recommends dvipng 
-- sudo apt-get install -y --no-install-recommends texlive-latex-recommended
+- sudo apt-get install -y --no-install-recommends \
+- texlive-fonts-recommended \
+- texlive-latex-extra \
+- texlive-fonts-extra \
+- dvipng \
+- texlive-latex-recommended \
+- lmodern
 script:
 - mkdir _build
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build GettingStarted.tex
