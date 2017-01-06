@@ -1,17 +1,17 @@
 sudo: required
 dist: trusty
 before_install:
-- sudo apt-get -qq update 
-- sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+- sudo apt-get -qq update
+- sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra
+  texlive-fonts-extra dvipng texlive-latex-recommended
 script:
 - mkdir _build
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build GettingStarted.tex 
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build GettingStarted.tex
 deploy:
   provider: releases
   api_key:
-    secure: 35625aa2b42cfa72b160d975a4fa6db589c63f27
-  file:
-  - _build/GettingStarted.pdf
-  skip_cleanup: true
+    secure: KanBv2KKOrWWQ7MNOjBoWEpYyrcsDvJXB3vPo5dMxC0NxC4Ymmd8K5p6fCMko1P1g+MzXxYgh62Gy+kgqB07tbJzZvB8h7m5bRa0hE/6HHbeZvEyWIpc8oTXZZa2KduzRXOrLy9KGzfDK2jcpB4W600MPLUjR1F3fz9/CwAn5RPArlX/VYfmBc0kXp0rM4SENP3QIfuEhmT00Bb8SyYvomV1kxVLlE/hGd94m8C52m6KlbfBXrKdw8LLSWnAutSmeXVCtiCLpD4E4jeaJv3bYi6GNak3wgO3bdCVyEBtmYABlBqPkQ90TU3unhUKtd2uJto0Zzp/9OrUV5/OLTJqy8OMhDv48xuM81nSBfTuPgXfyjUUvVIGn2qiOSK+jr1qrhCLIiL73j3uXal4bFk4FEHi4Ucnzyk4FzE6tWkI24Ayv+oi+h4bZto7UNLfUL4z/OCJZuYahv1E0yCCoCbcRQDiP9gGOswfxwwE4e+Q3Y/EVCaHxc83g9HqTUkXrGkDv4AjknuOn9VzI4USaT9EWJc2RPbYy/VRR9Taw2D5ORsFGstEzVnoarN8ek1YbjXt75zchMHbSaQ0OeucDqO4NUfsa4/UvjCmFB3r0XJ8nsc9FkNC/U4CfimLxp9MW3H0CEpkCZCJoXcNfxvXkIfcMRUYz/AJewvbzp3sTB35CYk=
+  file: _build/GettingStarted.pdf
   on:
-    tags: true
+    repo: Traap/tlc-article
+    branch: v1.0.0-install
