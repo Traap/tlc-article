@@ -4,9 +4,9 @@ dist: trusty
 before_install:
 - sudo apt-get -qq update
 - sudo apt-get install -y --no-install-recommends texlive-base
+- sudo apt-get install -y --no-install-recommends texlive-font-utils
 - sudo apt-get install -y --no-install-recommends texlive-fonts-extra
 - sudo apt-get install -y --no-install-recommends texlive-fonts-recommended
-- sudo apt-get install -y --no-install-recommends texlive-fonts-utils
 - sudo apt-get install -y --no-install-recommends texlive-latex-base
 - sudo apt-get install -y --no-install-recommends texlive-latex-extra
 - sudo apt-get install -y --no-install-recommends texlive-latex-recommended
