@@ -10,7 +10,9 @@ before_install:
 - sudo apt-get install -y --no-install-recommends texlive-latex-base
 - sudo apt-get install -y --no-install-recommends texlive-latex-extra
 - sudo apt-get install -y --no-install-recommends texlive-latex-recommended
-- sudo apt-get install -y --no-install-recommends lmodern 
+- sudo apt-get install -y --no-install-recommends lmodern
+- sudo apt-get install -y --no-install-recommends latex-xcolor 
+
 script:
 - mkdir _build
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build GettingStarted.tex
