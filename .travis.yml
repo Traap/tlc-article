@@ -24,3 +24,6 @@ deploy:
   on:
     repo: Traap/tlc-article
     branch: v1.0.0-install
+
+notifications:
+  slack: allanconsulting:ELPuuRukqtuNYj7kwIedYv44
