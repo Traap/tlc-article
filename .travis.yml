@@ -39,6 +39,7 @@ deploy:
   on:
     tags: true
     all_branches: true
+    repo: Traap/tlc-article
 
 # We will notify Allan Consulting's Slack channel tlc-article about Travis
 # continuous integration status changes.
