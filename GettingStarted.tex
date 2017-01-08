@@ -1,28 +1,117 @@
-\documentclass{tlc-article}
+\documentclass[12pt]{tlc-article}
+
+\def\tlca{\tlcDarkblue{tlc-article}}
+\def\tlcal{\textit{docstyle/additional-layout.tex}}
+\def\tlchf{\textit{docstyle/header-footer.tex}}
+
+% ------------------------------------------------------------------------------
 
 \begin{document}
-  \tlcTitlePageAndTableOfContents
-    {Getting Started}
-    {Gary Allan Howard}
-    {Getting Started guide covers tlc-article installation and use.}
+
+% ------------------------------------------------------------------------------
+
+\tlcTitlePageAndTableOfContents
+  {Getting Started}
+  {Gary Allan Howard}
+  {Getting Started guide covers how to install \tlca\ both globally and
+    locally, describes the general use case, how to customize your \tlca\
+    environment, describes the commands \tlca\ implements, and reveals the
+    packages \tlca\ depends upon.}
+
+% ------------------------------------------------------------------------------
 
 \section{Installation}
-\subsection{global installation}
-\subsection{local installation}
+\subsection{Global installation}
+\subsection{Local installation}
 
+% ------------------------------------------------------------------------------
 
-\section{General Use}
+\section{General Use Case}
 \subsection{documentclass}
 
-\subsection{Customization}
-\subsubsection{docstyle/additional-layout.tex}
-\subsubsection{docstyle/header-footer.tex}
+% ------------------------------------------------------------------------------
 
-\subsection{Commands}
+\section{Customization}
+This section describes how \tlca\ can be customized by using the file-hooks
+\tlca\ check for.  \tlca\ default implementation will be used when the
+file-hooks are now found.
+
+% ------------------------------------------------------------------------------
+
+\subsection{\tlcal}
+\tlca\ will use whatever \LaTeX\ definitions are found in \tlcal\ when it
+exists.  The file-check is shown
+below:
+
+\begin{lstlisting}[basicstyle=\tiny]
+  \IfFileExists{docstyle/additional-layout.tex}
+    {\input{docstyle/additional-layout.tex}}
+    {}
+\end{lstlisting}
+
+% ------------------------------------------------------------------------------
+
+\subsection{\tlchf}
+\tlca\ has a builtin header and footer strategy that is base on
+\textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\ packages.
+The default implementation is show below:
+
+\begin{lstlisting}[basicstyle=\tiny]
+  \IfFileExists{docstyle/header-footer.tex}
+    {\input{docstyle/header-footer.tex}}
+    {
+    % We provide a default implementation for lhead, chead, rhead, 
+    % lfoot, cfoot, and rfoot.
+    \newcommand*{\tlc@Lhead}{\tiny \tlcDarkblue{fancyndr.lhead}}
+    \newcommand*{\tlc@Chead}{\large\tlcDarkblue{fancyndr.chead}}
+    \newcommand*{\tlc@Rhead}{\tiny \tlcDarkblue{fancyndr.rhead}}
+    \newcommand*{\tlc@Lfoot}{\tiny \tlcDarkblue{fancyndr.lfoot}}
+    \newcommand*{\tlc@Cfoot}{\tiny \tlcDarkblue{fancyndr.cfoot}}
+    \newcommand*{\tlc@Rfoot}{\tiny \tlcDarkblue{Page~\thepage~of~\pageref{LastPage}}}
+
+    % We want our table of contents to use dots as a leader.
+    \RequirePackage{tocloft}
+    \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
+    % Packages needed to create nice looking headers and footers.
+    \RequirePackage{fancyhdr}   % Page layout in \LaTeX
+    \RequirePackage{titling}    % Control over \maketitle & \thanks
+    \RequirePackage{lastpage}   % Page n of m
+    \pagestyle{fancy}           % fancy page style
+    % Header applied to all pages.
+    \lhead{\tlc@Lhead}
+    \chead{\tlc@Chead}
+    \rhead{\tlc@Rhead}
+    \renewcommand{\headrulewidth}{0.1pt}
+    % Eliminate head height too small warning, which is occurring because
+    % we are using multiple lines in our header.
+    \setlength\headheight{18pt}
+    % Footer applied to all pages.
+    \lfoot{\tlc@Lfoot}
+    \cfoot{\tlc@Cfoot}
+    \rfoot{\tlc@Rfoot}
+    \renewcommand{\footrulewidth}{0.1pt}
+    % We want our header and footer to remain consistent with a table of
+    % contents that span multiple pages.
+    \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
+    }
+\end{lstlisting}
+
+The default implementation can be overridden by defining \tlchf. \textbf{Note:}
+When \tlchf\ exists and is empty, your document will be typeset with the
+defaults from document-class article.
+
+% ------------------------------------------------------------------------------
+
+\section{Commands}
 \subsection{tlcBeginLandscape}
 \subsection{tlcDarkblue}
 \subsection{tlcEndLandscape}
 \subsection{tlcTitlePageAndTableOfContents}
 
-\subsection{Required Packages}
+% ------------------------------------------------------------------------------
+
+\section{Required Packages}
+
+% ------------------------------------------------------------------------------
+
 \end{document}
