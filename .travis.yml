@@ -44,4 +44,5 @@ deploy:
 # We will notify Allan Consulting's Slack channel tlc-article about Travis
 # continuous integration status changes.
 notifications:
+  email: false
   slack: allanconsulting:ELPuuRukqtuNYj7kwIedYv44
