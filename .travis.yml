@@ -5,6 +5,9 @@
 #   This Travis continuous integration file is use to convert LaTeX source files
 #   into pdf documents.
 
+# Programming language
+language: generic
+
 # sudo is required to install packages.
 sudo: required
 
@@ -39,7 +42,7 @@ deploy:
   file: _build/GettingStarted.pdf
   on:
     tags: true
-    all_branches: true
+    branch: master 
     repo: Traap/tlc-article
 
 # We will notify Allan Consulting's Slack channel tlc-article about Travis
