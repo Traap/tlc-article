@@ -33,7 +33,6 @@
 % Color, Graphics and links.
 \RequirePackage{graphicx}
 \RequirePackage[table]{xcolor}
-\RequirePackage{xcolor}
 \definecolor{darkblue}{rgb}{0,0,0.5}
 
 % ------------------------------------------------------------------------------
@@ -46,7 +45,6 @@
 \RequirePackage{array}
 \RequirePackage{csvsimple}
 \RequirePackage{enumitem}
-\RequirePackage{listings}
 \RequirePackage{longtable}
 \RequirePackage{makecell}
 \RequirePackage{tabularx}
@@ -59,7 +57,6 @@
 
 % ------------------------------------------------------------------------------
 % Misc
-\RequirePackage{parskip}
 \RequirePackage[toc,page]{appendix}
 
 % ------------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+name       | description
+appendix   | The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/sec­tion ap­pen­dices.
+array      | An extended implementation of the array and tabular environments which extends the options for column formats, and provides `programmable' format specifications.
+csvsimple  | The package provides a simple LATEX interface for the processing of files with comma separated values (CSV); it relies on the key value syntax supported by pgfkeys to simplify usage.
+enumitem   | This package provides user control over the layout of the three basic list environments: enumerate, itemize and description.
+fancyhdr   | The package provides extensive facilities, both for constructing headers and footers, and for controlling their use (for example, at times when LATEX would automatically change the heading style in use).
+fontenc    | The package alows the user to select font encodings, and for each encoding provides an interface to `font-encoding specific' commands for each font.
+geometry   | The package provides an easy and flexible user interface to customize page layout, implementing autocentering and auto-balancing mechanisms so that the users have only to give the least description for the page layout.
+graphicx   | The package builds upon the graphics package, providing a key-value interface for optional arguments to the `gin­clude­graph­ics' com­mand. This interface provides facilities that go far beyond what the graphics package offers on its own.
+hyperref   | The hyperref package is used to handle cross-referencing commands in LATEX to produce hypertext links in the document.
+lastpage   | Reference the number of pages in your LATEX document through the introduction of a new label which can be referenced like `gpageref{LastPage}' to give a reference to the last page of a document.
+listings   | The package enables the user to typeset programs (programming code) within LATEX; the source code is read directly by TEX -- no frontend processor is needed.
+lmodern    | Latin modern fonts
+longtable  | Longtable allows you to write ta­bles that con­tinue to the next page. You can write captions within the ta­ble (typically at the start of the table), and headers and trailers for pages of table.
+makecell   | This package supports common layouts for tabular column heads in whole documents, based on one-column tabular environment.
+multicol   | Multicol defines a multicols environment which typesets text in multiple columns (up to a maximum of 10), and (by default) balances the end of each column at the end of the environment.
+parskip    | Simply changing `gparskip' and `parindent' leaves a layout that is untidy; this package (though it is no substitute for a properly-designed class) helps alleviate this untidiness.
+pdflscape  | The package adds PDF support to the landscape environment of package lscape, by setting the PDF /Rotate page attribute.
+pdfpages   | This package simplifies the inclusion of external multipage PDF documents in LATEX documents.
+spverbatim | The spverbatim package provides an `gspverb' macro that is analogous to 'verb' and an spverbatim environment that is analogous to verbatim with the difference being that `spverb' and spverbatim allow LATEX to break lines at space characters.
+tabularx   | The package defines an environment tabularx, an extension of tabular which has an additional column designator, X, which creates a paragraph-like column whose width automatically expands so that the declared width of the environment is filled.
+textcomp   | The package supports the Text Companion fonts, which provide many text symbols (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen), in the TS1 encoding.
+titling    | The titling package provides control over the typesetting of the `gmaketitle' command and `thanks' commands, and makes the `title', `author' and `date' information perma­nently available.
+tocloft    | Provides control over the typography of the Table of Contents, List of Figures and List of Tables, and the ability to create new ‘List of ...’. The ToC `gparskip' may be changed.
+xcolor     | The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors.

@@ -109,9 +109,33 @@ defaults from document-class article.
 \subsection{tlcTitlePageAndTableOfContents}
 
 % ------------------------------------------------------------------------------
-
+\clearpage
 \section{Required Packages}
+This section documents the dependencies of the required package tlc-article has.
+Package names are listed in alphabetical order. A complete description of each
+package is found at \url{http://www.ctan.org/}. At this writing, you can type in the
+package name and press the search button to learn more about each package.
 
+% Define the package file name.
+\def\pkgFile{required-packages.csv}
+
+% Define the column names used by csvreader when reading \packageFile.
+\csvnames{pkgNames}{
+   1=\name
+  ,2=\description
+}
+
+% Define the table style used to report the required package names and
+% descriptions.
+\csvstyle{pkgStyle}{
+  longtable=|L{3cm}|L{12cm}|
+  ,table head=\hline Name & Description\\\hline\hline\endhead
+  ,late after line=\\\hline
+  ,pkgNames
+}
+
+% Render pckFile using pckStyle as a longtable.
+\csvreader[pkgStyle, separator=pipe]{\pkgFile}{}{\name & \description}
 % ------------------------------------------------------------------------------
 
 \end{document}
