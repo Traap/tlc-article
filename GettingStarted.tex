@@ -6,15 +6,19 @@
 \def\tlcAL{\textit{docstyle/additional-layout.tex}}
 \def\tlcHF{\textit{docstyle/header-footer.tex}}
 
-\def\texDist{/usr/local/texlive/2015/texmf-dist}
+\def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}
+\def\texDist{\kpse}
 \def\tlcDist{/tex/latex/\tlcProduct}
 \def\tlcGlobalDist{\texDist\tlcDist}
 
 \def\tlcHome{\$HOME}
 \def\tlcMyDoc{\tlcHome/mydoc}
-\def\tlcRepo{git@github.com:Traap/\tlcProduct.git}
+
+\def\gitHub{GitHub.com}
+\def\gitHubUrl{http://\gitHub}
 
 % ------------------------------------------------------------------------------
+\def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
 
 \begin{document}
 
@@ -31,22 +35,31 @@
 % ------------------------------------------------------------------------------
 
 \section{Installation}
-This section describes how to install \tlcA\ either globally to make it avalilbe
-to your \LaTeX\ environment or locally to the document you are authoring.
+This section describes how to install \tlcA\ either globally to make it available
+to your \LaTeX\ environment or locally to the document you are authoring.  This
+section identifies the prerequisites you must meet in order to clone a repository
+from GitHub.com and install software on your computer.
 
-\subsection{Global installation}
-A global installation is done by installing \tlcA\ into your /path/to/your/texmf
-directory.  Assuming a TexLive installation exists at \texDist\ the following
-shell commands will make \tlcA\ available to your \LaTeX\ environment.
+\subsection{Prerequisites}
+The following prerequisites are needed.
+\begin{description}[style=nextline]
+  \item[Administrative privilege] You will need administrative privileges to
+    install \tlcA\ globally because `sudo' is used.
 
-\begin{enumerate}
-  \item cd \tlcHome
-  \item git clone \tlcRepo\
-  \item cd \tlcProduct\
-  \item mkdir \tlcGlobalDist
-  \item cp -v \tlcProduct.cls \tlcGlobalDist/.
-  \item sudo mktexlsr \texDist\
-\end{enumerate}
+  \item[SSH key] You will need your private key to access \gitHub.  Please refer
+    to \url{http://help.github.com/articles/generating-an-ssh-key} for
+    instructions on `Generating an SSH key'.
+    
+  \item[Enable your SSH key] The following instructions enable your SSH key so
+    you to not have to enter the passphrase for each git command.
+
+    \begin{enumerate}
+      \item eval \$(ssh-agent -s)
+      \item ssh-add ~/.ssh/your-private-key
+      \item enter your passphrase
+    \end{enumerate}
+
+\end{description}
 
 \subsection{Local installation}
 A local installation is done by installing \tlcA\ into
@@ -60,6 +73,24 @@ following shell commands will make \tlcA\ available to your document.
   \item mkdir \tlcMyDoc
   \item cp -v \tlcProduct.cls \tlcMyDoc/.
 \end{enumerate}
+
+\clearpage
+\subsection{Global installation}
+A global installation is done by installing \tlcA\ into your /path/to/your/texmf
+directory.  Assuming a TexLive installation exists at \texDist\ the following
+shell commands will make \tlcA\ available to your \LaTeX\ environment.
+
+\begin{enumerate}
+  \item cd \tlcHome
+  \item git clone \tlcRepo\
+  \item cd \tlcProduct\
+  \item sudo mkdir -p \tlcGlobalDist
+  \item sudo mv -v \tlcProduct.cls \tlcGlobalDist/.
+  \item sudo mktexlsr \texDist\
+\end{enumerate}
+
+\bigskip
+\textbf{Note:} You may remove your local installation by removing \tlcProduct.
 
 % ------------------------------------------------------------------------------
 
