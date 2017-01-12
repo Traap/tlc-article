@@ -1,10 +1,24 @@
 \documentclass[12pt]{tlc-article}
 
-\def\tlca{\tlcDarkblue{tlc-article}}
-\def\tlcal{\textit{docstyle/additional-layout.tex}}
-\def\tlchf{\textit{docstyle/header-footer.tex}}
+\def\tlcProduct{tlc-article}
+
+\def\tlcA{\tlcDarkblue{\tlcProduct}}
+\def\tlcAL{\textit{docstyle/additional-layout.tex}}
+\def\tlcHF{\textit{docstyle/header-footer.tex}}
+
+\def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}
+\def\texDist{\kpse}
+\def\tlcDist{/tex/latex/\tlcProduct}
+\def\tlcGlobalDist{\texDist\tlcDist}
+
+\def\tlcHome{\$HOME}
+\def\tlcMyDoc{\tlcHome/mydoc}
+
+\def\gitHub{GitHub.com}
+\def\gitHubUrl{http://\gitHub}
 
 % ------------------------------------------------------------------------------
+\def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
 
 \begin{document}
 
@@ -13,16 +27,71 @@
 \tlcTitlePageAndTableOfContents
   {Getting Started}
   {Gary Allan Howard}
-  {Getting Started guide covers how to install \tlca\ both globally and
-    locally, describes the general use case, how to customize your \tlca\
-    environment, describes the commands \tlca\ implements, and reveals the
-    packages \tlca\ depends upon.}
+  {Getting Started guide covers how to install \tlcA\ both globally and
+    locally, describes the general use case, how to customize your \tlcA\
+    environment, describes the commands \tlcA\ implements, and reveals the
+    packages \tlcA\ depends upon.}
 
 % ------------------------------------------------------------------------------
 
 \section{Installation}
-\subsection{Global installation}
+This section describes how to install \tlcA\ either globally to make it
+available to your \LaTeX\ environment or locally to the document you are
+authoring.  And, this section identifies the prerequisites you must meet in
+order to clone a repository from GitHub.com and install software on your
+computer.
+
+\subsection{Prerequisites}
+The following prerequisites are needed.
+\begin{description}[style=nextline]
+  \item[Administrative privilege] You will need administrative privileges to
+    install \tlcA\ globally because `sudo' is used.
+
+  \item[SSH key] You will need your private key to access \gitHub.  Please refer
+    to \url{http://help.github.com/articles/generating-an-ssh-key} for
+    instructions on `Generating an SSH key'.
+    
+  \item[Enable your SSH key] The following instructions enable your SSH key so
+    you to not have to enter the passphrase for each git command.
+
+    \begin{enumerate}
+      \item eval \$(ssh-agent -s)
+      \item ssh-add ~/.ssh/your-private-key
+      \item enter your passphrase
+    \end{enumerate}
+
+\end{description}
+
 \subsection{Local installation}
+A local installation is done by installing \tlcA\ into
+/the/path/to/your/document.  Assuming your document is located at \tlcMyDoc\ the
+following shell commands will make \tlcA\ available to your document.
+
+\begin{enumerate}
+  \item cd \tlcHome
+  \item git clone \tlcRepo\
+  \item cd \tlcProduct\ 
+  \item mkdir \tlcMyDoc
+  \item cp -v \tlcProduct.cls \tlcMyDoc/.
+\end{enumerate}
+
+\clearpage
+\subsection{Global installation}
+A global installation is done by installing \tlcA\ into your /path/to/your/texmf
+directory.  Assuming a TexLive installation exists at \texDist\ the following
+shell commands will make \tlcA\ available to your \LaTeX\ environment.
+
+\begin{enumerate}
+  \item cd \tlcHome
+  \item git clone \tlcRepo\
+  \item cd \tlcProduct\
+  \item sudo mkdir -p \tlcGlobalDist
+  \item sudo mv -v \tlcProduct.cls \tlcGlobalDist/.
+  \item sudo mktexlsr \texDist\
+\end{enumerate}
+
+\bigskip
+\textbf{Note:} You may remove your local installation by removing \tlcProduct.
 
 % ------------------------------------------------------------------------------
 
@@ -32,14 +101,14 @@
 % ------------------------------------------------------------------------------
 
 \section{Customization}
-This section describes how \tlca\ can be customized by using the file-hooks
-\tlca\ check for.  \tlca\ default implementation will be used when the
+This section describes how \tlcA\ can be customized by using the file-hooks
+\tlcA\ check for.  \tlcA\ default implementation will be used when the
 file-hooks are now found.
 
 % ------------------------------------------------------------------------------
 
-\subsection{\tlcal}
-\tlca\ will use whatever \LaTeX\ definitions are found in \tlcal\ when it
+\subsection{\tlcAL}
+\tlcA\ will use whatever \LaTeX\ definitions are found in \tlcAL\ when it
 exists.  The file-check is shown
 below:
 
@@ -51,8 +120,8 @@ below:
 
 % ------------------------------------------------------------------------------
 
-\subsection{\tlchf}
-\tlca\ has a builtin header and footer strategy that is base on
+\subsection{\tlcHF}
+\tlcA\ has a builtin header and footer strategy that is base on
 \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\ packages.
 The default implementation is show below:
 
@@ -96,8 +165,8 @@ The default implementation is show below:
     }
 \end{lstlisting}
 
-The default implementation can be overridden by defining \tlchf. \textbf{Note:}
-When \tlchf\ exists and is empty, your document will be typeset with the
+The default implementation can be overridden by defining \tlcHF. \textbf{Note:}
+When \tlcHF\ exists and is empty, your document will be typeset with the
 defaults from document-class article.
 
 % ------------------------------------------------------------------------------
