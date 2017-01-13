@@ -1,7 +1,4 @@
 # tlc_article
-A LaTeX class provides a specialized article implementation that standardizes
-document layout with header, footers, table of contents and colors.
-
 The tlc_article repository uses a SCRUM framework adapted to standard GitHub
 tooling.  tlc_article has been integrated with Travis-ci.org for continuous
 integration and AllanConsulting.slack.com for centralized notification.
