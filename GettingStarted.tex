@@ -1,10 +1,19 @@
 \documentclass[12pt]{tlc-article}
 
+% ------------------------------------------------------------------------------
+% \makeatletter is used so we can reference commands and definitions defined by
+% tlc-article, which are all prefaced with tlc@.
+\makeatletter
+
+% ------------------------------------------------------------------------------
+
 \def\tlcProduct{tlc-article}
 
 \def\tlcA{\tlcDarkblue{\tlcProduct}}
-\def\tlcAL{\textit{docstyle/additional-layout.tex}}
-\def\tlcHF{\textit{docstyle/header-footer.tex}}
+\def\tlcAL{\textit{\tlc@additionalLayout}}
+\def\tlcHF{\textit{\tlc@headerFooter}}
+\def\tlcLG{\textit{\tlc@logoFile}}
+\def\tlcVE{\textit{\tlc@versionFile}}
 
 \def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}
 \def\texDist{\kpse}
@@ -17,8 +26,8 @@
 \def\gitHub{GitHub.com}
 \def\gitHubUrl{http://\gitHub}
 
-% ------------------------------------------------------------------------------
 \def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
+
 
 \begin{document}
 
@@ -50,7 +59,7 @@ The following prerequisites are needed.
   \item[SSH key] You will need your private key to access \gitHub.  Please refer
     to \url{http://help.github.com/articles/generating-an-ssh-key} for
     instructions on `Generating an SSH key'.
-    
+
   \item[Enable your SSH key] The following instructions enable your SSH key so
     you to not have to enter the passphrase for each git command.
 
@@ -70,7 +79,7 @@ following shell commands will make \tlcA\ available to your document.
 \begin{enumerate}
   \item cd \tlcHome
   \item git clone \tlcRepo\
-  \item cd \tlcProduct\ 
+  \item cd \tlcProduct\
   \item mkdir \tlcMyDoc
   \item cp -v \tlcProduct.cls \tlcMyDoc/.
 \end{enumerate}
@@ -100,6 +109,7 @@ shell commands will make \tlcA\ available to your \LaTeX\ environment.
 
 % ------------------------------------------------------------------------------
 
+\clearpage
 \section{Customization}
 This section describes how \tlcA\ can be customized by using the file-hooks
 \tlcA\ check for.  \tlcA\ default implementation will be used when the
@@ -121,53 +131,88 @@ below:
 % ------------------------------------------------------------------------------
 
 \subsection{\tlcHF}
-\tlcA\ has a builtin header and footer strategy that is base on
-\textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\ packages.
-The default implementation is show below:
+In the absence of \tlcAL\, \tlcA\ has a builtin header and footer strategy that
+is base on \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\
+packages. The default implementation is show below:
 
 \begin{lstlisting}[basicstyle=\tiny]
-  \IfFileExists{docstyle/header-footer.tex}
-    {\input{docstyle/header-footer.tex}}
-    {
-    % We provide a default implementation for lhead, chead, rhead, 
-    % lfoot, cfoot, and rfoot.
-    \newcommand*{\tlc@Lhead}{\tiny \tlcDarkblue{fancyndr.lhead}}
-    \newcommand*{\tlc@Chead}{\large\tlcDarkblue{fancyndr.chead}}
-    \newcommand*{\tlc@Rhead}{\tiny \tlcDarkblue{fancyndr.rhead}}
-    \newcommand*{\tlc@Lfoot}{\tiny \tlcDarkblue{fancyndr.lfoot}}
-    \newcommand*{\tlc@Cfoot}{\tiny \tlcDarkblue{fancyndr.cfoot}}
-    \newcommand*{\tlc@Rfoot}{\tiny \tlcDarkblue{Page~\thepage~of~\pageref{LastPage}}}
-
-    % We want our table of contents to use dots as a leader.
-    \RequirePackage{tocloft}
-    \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
-    % Packages needed to create nice looking headers and footers.
-    \RequirePackage{fancyhdr}   % Page layout in \LaTeX
-    \RequirePackage{titling}    % Control over \maketitle & \thanks
-    \RequirePackage{lastpage}   % Page n of m
-    \pagestyle{fancy}           % fancy page style
-    % Header applied to all pages.
-    \lhead{\tlc@Lhead}
-    \chead{\tlc@Chead}
-    \rhead{\tlc@Rhead}
-    \renewcommand{\headrulewidth}{0.1pt}
-    % Eliminate head height too small warning, which is occurring because
-    % we are using multiple lines in our header.
-    \setlength\headheight{18pt}
-    % Footer applied to all pages.
-    \lfoot{\tlc@Lfoot}
-    \cfoot{\tlc@Cfoot}
-    \rfoot{\tlc@Rfoot}
-    \renewcommand{\footrulewidth}{0.1pt}
-    % We want our header and footer to remain consistent with a table of
-    % contents that span multiple pages.
-    \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
-    }
+  \IfFileExists{\tlc@logoFile}
+  { % Typeset the logo in the left side of the document header.
+    \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}
+  }
+  {% Else: no operation because tlc@logoFile does not exist.
+  }
+  % Typeset the title in the center of the document header.
+  \chead{\large{\thetitle}}
+  % Typeset version information in the right side of the document header.
+  \IfFileExists{\tlc@versionFile}
+  {
+    % Define extractions macros when \tlc@versionFile exists.
+    \def\tlc@version{\tlcVersionPart{\version}}
+    \def\tlc@date{\tlcVersionPart{\version}}
+    \def\tlc@status{\tlcVersionPart{\version}}
+    \def\tlc@instatution{\tlcVersionPart{\version}}
+    \def\tlc@permission{\tlcVersionPart{\version}}
+    % document status, document date and document version.
+    \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}
+    % document owner.  This maybe a person or company name.
+    \lfoot{\tiny \tlc@instatution}
+    % document license. This maybe a license or word like confidential.
+    \cfoot{\tiny \tlc@permission}
+  }
+  {% Else: no operation because tlc@versionFile does not exist.
+  }
+  \renewcommand{\headrulewidth}{0.1pt}
+  % eliminate head height too small warning, which is occurring because
+  % we are using multiple lines in our header.
+  \setlength\headheight{52pt}
+  % % footer applied to all pages.
+  \rfoot{\tiny{page \thepage~of~\pageref{LastPage}}}
+  \renewcommand{\footrulewidth}{0.1pt}
+  % we want our header and footer to remain consistent with a table of
+  % contents that span multiple pages.
+  \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
 \end{lstlisting}
 
 The default implementation can be overridden by defining \tlcHF. \textbf{Note:}
 When \tlcHF\ exists and is empty, your document will be typeset with the
 defaults from document-class article.
+
+% ------------------------------------------------------------------------------
+
+\clearpage
+\subsection{\tlcVE}
+\tlcA\ will populate the builtin header and footer with information extracted
+from \tlcVE\ when it is present.  \tlcVE\ is a comma-separated-variable file
+that uses the pipe character as the field delimiter.  \tlcVE\ uses the following
+column names:
+
+\begin{description}[style=nextline]
+  \item[version] The version value is typeset in the rhead area.  This field is
+    used to convey the version the document was at the date it reached its
+    current state.
+
+  \item[date] The date value is typeset in the rhead area.  This field is used
+    to communicate when the document transitioned into its current state.
+
+  \item[status] The status value is typeset in the rhead area.  This field is
+    used to convey the document state such as Approved, Draft, Effective, or
+    Obsolete.
+
+  \item[instatution] The institution value is typeset in the lfoot area.  This
+    field is used to tell the reader the author name or company name.
+
+  \item[permission]  The permission value is typeset in the cfoot area.  This
+    field is used to identify confidentiality or a particular license. 
+
+\end{description}
+
+% ------------------------------------------------------------------------------
+
+\subsection{\tlcLG}
+\tlcA\ will typeset the lhead area with \tlcLG\ when it is present. Make sure
+your logo's height is not larger than 34pt to avoid `Package Fancyhdr Warning:
+\\headheight is to small' warning.
 
 % ------------------------------------------------------------------------------
 
@@ -178,6 +223,7 @@ defaults from document-class article.
 \subsection{tlcTitlePageAndTableOfContents}
 
 % ------------------------------------------------------------------------------
+
 \clearpage
 \section{Required Packages}
 This section documents the dependencies of the required package tlc-article has.
