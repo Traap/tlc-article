@@ -1,8 +1,30 @@
+# ![](data/logo.png)
+
 # Abstract
 The tlc_article repository uses a SCRUM framework adapted to standard GitHub
 tooling.  tlc_article is integrated with Travis-ci.org for continuous
 integration and AllanConsulting.slack.com for centralized notification.
 
+## Installation
+### Local
+```bash
+$ cd $HOME
+$ git clone git@github.com:Traap/tlc-article.git
+$ cd tlc-article
+$ cp -v tlc-article.cls $HOME/mydoc
+$ cp -v tlc-article.cls $HOME/mydoc/.
+```
+
+### Global 
+```bash
+$ cd $HOME
+$ git clone git@github.com:Traap/tlc-article.git
+$ cd tlc-article
+$ sudo mkdir -p $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlc-article
+$ sudo mv -v tlc-article.cls $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlcarticle/.
+$ sudo mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
+```
+# Project Management
 ## Project Name and Project Board.
 TLC-ARTICLE is the project name.  The project board has the following columns:
 * **Backlog** - Issues that have not been started.
@@ -54,3 +76,5 @@ naming convention: vM.N.P name, where
 * **N** - the minor Release number starting with 0.
 * **P** - the patch Release number starting with 0.
 * **name** - a descriptive name for the release.
+Current [releases](https://github.com/Traap/tlc-article/releases) include
+a the deployed version of **GettingStarted.pdf**.
