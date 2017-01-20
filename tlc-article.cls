@@ -15,11 +15,7 @@
 % ------------------------------------------------------------------------------
 % Page layout
 \RequirePackage{parskip}                   % Blank line after section break.
-\RequirePackage[a4paper,
-                top=1.0in,
-                bottom=1.0in,
-                left=1.0in,
-                right=1.0in]{geometry}
+\RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}
 \RequirePackage{multicol}
 \setlength{\parskip}{0.5em}
 
@@ -71,9 +67,10 @@
 \def\tlc@additionalLayout{\tlc@location/additional-layout.tex}
 \def\tlc@headerFooter{\tlc@location/header-footer.tex}
 
-% columns.  L, C, R are Left, Center, Right. Text is wrapped within the cell.
-% Argument is used to specify the column width.  L{2cm} gives us Left aligned,
-% ragged right, wrapped text a 2cm wide.
+% New column types: L, C, and R are Left, Center, and Right, respectively are
+% designed to use with longtable.  Data is wrapped within a table cell.   The
+% parameter defines the column width.  As an example, L{2cm} yields a Left
+% aligned, ragged right, wrapped text within a 2cm wide cell.
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash}p{#1}}
@@ -115,9 +112,10 @@
 \RequirePackage{lastpage}   % Page n of m
 \pagestyle{fancy}           % fancy page style
 
-% extract document version information from a data file.
-% extract document status, document date and document version from
-% argument:
+% ------------------------------------------------------------------------------
+% Extract document status, document date and document version from
+% \tlc@versionFile.
+% Argument:
 %   1 - the column name to extract from the data file.
 \newcommand{\tlcVersionPart}[1]{
   \csvreader[separator=pipe]
@@ -129,6 +127,18 @@
     5=\permission
   }{#1}
 }%
+
+% Define extractions macros when \tlc@versionFile exists.
+\IfFileExists{\tlc@versionFile}
+{ 
+  \def\tlc@version{\tlcVersionPart{\version}}
+  \def\tlc@date{\tlcVersionPart{\date}}
+  \def\tlc@status{\tlcVersionPart{\status}}
+  \def\tlc@instatution{\tlcVersionPart{\version}}
+  \def\tlc@permission{\tlcVersionPart{\version}}
+}
+{% Else: no operation because tlc@versionFile does not exist. 
+}
 
 % ------------------------------------------------------------------------------
 % we want to allow the calling document to override the headers and footers that
@@ -149,12 +159,6 @@
   % Typeset version information in the right side of the document header. 
   \IfFileExists{\tlc@versionFile}
   { 
-    % Define extractions macros when \tlc@versionFile exists.
-    \def\tlc@version{\tlcVersionPart{\version}}
-    \def\tlc@date{\tlcVersionPart{\date}}
-    \def\tlc@status{\tlcVersionPart{\status}}
-    \def\tlc@instatution{\tlcVersionPart{\version}}
-    \def\tlc@permission{\tlcVersionPart{\version}}
     % document status, document date and document version.
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}
     % document owner.  This maybe a person or company name.

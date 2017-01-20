@@ -10,10 +10,22 @@
 \def\tlcProduct{tlc-article}
 
 \def\tlcA{\tlcDarkblue{\tlcProduct}}
-\def\tlcAL{\textit{\tlc@additionalLayout}}
-\def\tlcHF{\textit{\tlc@headerFooter}}
-\def\tlcLG{\textit{\tlc@logoFile}}
-\def\tlcVE{\textit{\tlc@versionFile}}
+
+\def\tlcAL{\tlcDarkblue{\tlc@additionalLayout}}
+\def\tlcBL{\tlcDarkblue{tlcBeginLandscape}}
+\def\tlcDB{\tlcDarkblue{tlcDarkblue}}
+\def\tlcEL{\tlcDarkblue{tlcEndLandScape}}
+\def\tlcHF{\tlcDarkblue{\tlc@headerFooter}}
+\def\tlcLG{\tlcDarkblue{\tlc@logoFile}}
+\def\tlcNCT{newcolumn type: \tlcDarkblue{L, C} \& \tlcDarkblue{R}}
+\def\tlcTOC{\tlcDarkblue{tlcTitlePageAndTableOfContents}}
+\def\tlcVE{\tlcDarkblue{\tlc@versionFile}}
+
+\def\tlcVC{\tlcDarkblue{tlc@version}}
+\def\tlcDC{\tlcDarkblue{tlc@date}}
+\def\tlcSC{\tlcDarkblue{tlc@status}}
+\def\tlcIC{\tlcDarkblue{tlc@instatution}}
+\def\tlcPC{\tlcDarkblue{tlc@permission}}
 
 \def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}
 \def\texDist{\kpse}
@@ -28,7 +40,8 @@
 
 \def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
 
-\def\tlcTOC{\tlcDarkblue{tlcTitlePageAndTableOfContents}}
+\def\tlcPkgFile{data/required-packages.csv}
+\def\tlcNote{\tlcDarkblue{Note}}
 
 % ------------------------------------------------------------------------------
 
@@ -103,7 +116,7 @@ shell commands will make \tlcA\ available to your \LaTeX\ environment.
 \end{enumerate}
 
 \bigskip
-\textbf{Note:} You may remove your local installation by removing \tlcProduct.
+\tlcNote\ You may remove your local installation by removing \tlcA.
 
 % ------------------------------------------------------------------------------
 \clearpage
@@ -111,12 +124,18 @@ shell commands will make \tlcA\ available to your \LaTeX\ environment.
 The goal of \tlcA\ is to simplify document layout.  \tlcA\ orchestrates a
 logical arrangement for document header, footer, author, abstract, table of
 contents, and margins.  The following sections outline the default
-implementation for each part \tlcA\ organizes. \textbf{Note:} This document was
-typeset using the instructions provided throughout this section.
+implementation for each part \tlcA\ organizes. 
+
+\tlcNote\ This document was typeset using the instructions provided throughout
+this section.
 
 \subsection{Document Layout}
-\includegraphics{images/titlepage.png}
-
+\begin{figure}[h]
+  \centering
+  \includegraphics{images/titlepage.png}
+  \caption{Document Layout}
+  \label{fig:layout}
+\end{figure}
 \subsection{documentclass \tlcA}
 \tlcA\ extends the article document class.  \tlcA\ provide options directly to
 the article document class.  As an example, the Author can specify the font as
@@ -126,7 +145,7 @@ follows:
   \documentclass[12pt]{tlc-article}
 \end{lstlisting}
 
-\subsection{Title, Author \& Abstract}
+\subsection{Title, Author \& Abstract} \label{sec:TAA}
 \tlcA\ has a macro \tlcTOC\ that can be used to set the document title, document
 author, document abstract, and establish the Table of Contents.  The sample
 below reveals how to use \tlcTOC.
@@ -139,12 +158,17 @@ below reveals how to use \tlcTOC.
 \end{lstlisting}
 
 \subsection{Table of Contents}
-The Table of Contents immediatly follows the document abstract on page 1, uses
-dark blue for content, dots separate items, and are followed by roman numeral. 
+The Table of Contents immediately follows the document abstract on page 1, uses
+dark blue for content, dots separate table of contents sections and page number,
+and uses roman numerals.
 
 \subsection{Header \& Footer}
-fancyhdr is use to render the header and footer.  The Author can override the
-header and footer by providing an implementation in \tlcHF.
+fancyhdr is used to render the header and footer.  The Author can override the
+\tlcA\ by providing an implementation in \tlcHF\, or augment \tlcA\ 
+application by providing \tlcVE. The sections below show the placement \tlcA\
+uses when writing objects, and where the objects are defined.
+
+\tlcNote\ \tlcA\ ignors \tlcVE\ when \tlcHF\ is defined.
 
 \subsubsection{Header}
 
@@ -206,12 +230,6 @@ packages. The default implementation is show below:
   % Typeset version information in the right side of the document header.
   \IfFileExists{\tlc@versionFile}
   {
-    % Define extractions macros when \tlc@versionFile exists.
-    \def\tlc@version{\tlcVersionPart{\version}}
-    \def\tlc@date{\tlcVersionPart{\version}}
-    \def\tlc@status{\tlcVersionPart{\version}}
-    \def\tlc@instatution{\tlcVersionPart{\version}}
-    \def\tlc@permission{\tlcVersionPart{\version}}
     % document status, document date and document version.
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}
     % document owner.  This maybe a person or company name.
@@ -233,14 +251,15 @@ packages. The default implementation is show below:
   \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
 \end{lstlisting}
 
-The default implementation can be overridden by defining \tlcHF. \textbf{Note:}
-When \tlcHF\ exists and is empty, your document will be typeset with the
-defaults from document-class article.
+The default implementation can be overridden by defining \tlcHF. 
+
+\tlcNote\ When \tlcHF\ exists and is empty, your document will be typeset
+with the defaults from document-class \tlcDarkblue{article}.
 
 % ------------------------------------------------------------------------------
 
 \clearpage
-\subsection{\tlcVE}
+\subsection{\tlcVE} \label{sec:version}
 \tlcA\ will populate the builtin header and footer with information extracted
 from \tlcVE\ when it is present.  \tlcVE\ is a comma-separated-variable file
 that uses the pipe character as the field delimiter.  \tlcVE\ uses the following
@@ -266,6 +285,36 @@ column names:
 
 \end{description}
 
+The extaction methods are shown below.
+\begin{lstlisting}[basicstyle=\tiny]
+  % Extract document status, document date and document version from
+  % \tlc@versionFile.
+  % Argument:
+  %   1 - the column name to extract from the data file.
+  \newcommand{\tlcVersionPart}[1]{
+    \csvreader[separator=pipe]
+    {\tlc@versionFile}{
+      1=\version,
+      2=\date,
+      3=\status,
+      4=\instatution,
+      5=\permission
+    }{#1}
+  }%
+
+  % Define extractions macros when \tlc@versionFile exists.
+  \IfFileExists{\tlc@versionFile}
+  { 
+    \def\tlc@version{\tlcVersionPart{\version}}
+    \def\tlc@date{\tlcVersionPart{\date}}
+    \def\tlc@status{\tlcVersionPart{\status}}
+    \def\tlc@instatution{\tlcVersionPart{\version}}
+    \def\tlc@permission{\tlcVersionPart{\version}}
+  }
+  {% Else: no operation because tlc@versionFile does not exist. 
+  }
+\end{lstlisting}
+
 % ------------------------------------------------------------------------------
 
 \subsection{\tlcLG}
@@ -276,12 +325,59 @@ your logo's height is not larger than 34pt to avoid `Package Fancyhdr Warning:
 % ------------------------------------------------------------------------------
 
 \clearpage
-\section{Commands}
-\subsection{tlcBeginLandscape}
-\subsection{tlcDarkblue}
-\subsection{tlcEndLandscape}
-\subsection{tlcTitlePageAndTableOfContents}
+\section{Definitions \& Commands}
+\subsection{\tlcBL}
+Page layout is rotated 90\textdegree\ clockwise resulting in a landscape page
+orientation.  Landscape orientation remains active until \tlcEL.
 
+\subsection{\tlcEL}
+Page layout is returned to portrate orientation when \tlcEL\ is reached.
+
+\subsection{\tlcDB}
+\tlcDB\ is used throughout this document to render text using rbg\{0,0,0.5\}. 
+\tlcDB\ is safe to use within your document.
+
+\subsection{\tlcTOC}
+\tlcTOC\ creates the document layout showen in Figure \ref{fig:layout}.  Section
+\ref{sec:TAA} shows an example implementation.
+
+\subsection{\tlcNCT}
+New \tlcNCT\ are Left, Center, and Right, respectively are
+designed to use with longtable.  Data is wrapped within a table cell.   The
+parameter defines the column width.  As an example, L{2cm} yields a Left
+aligned, ragged right, wrapped text within a 2cm wide cell.  
+
+\begin{lstlisting}[basicstyle=\tiny]
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash}p{#1}}
+\end{lstlisting}
+
+\subsection{\tlcAL}
+\tlcAL\ is an architectural hook the Author should use when it becomes necessary
+to use packages not provided by \tlcA\, and to design commands that are specific
+to your document.
+
+\subsection{\tlcHF}
+\tlcHF\ is an architectural hook the Author should use to completely override
+the document layout \tlcA\ implements.
+
+\subsection{\tlcVE}
+\tlcVE\ is by used \tlcA\ to populate the document header \& footer.  Refer to
+section \ref{sec:version} for \tlcVE\ definitions. \tlcVE\ is not
+used by \tlcA\ when \tlcHF\ is define.  However, you might want to use the
+version hook by defining \tlcVE\ and using the commands below to extract data
+from \tlcVE in your \tlcHF.
+\begin{enumerate}
+  \item \tlcVC\
+  \item \tlcDC\
+  \item \tlcSC\
+  \item \tlcIC\
+  \item \tlcPC\
+\end{enumerate}
+
+\subsection{\tlcLG}
+\tlcLG\ is used to place your logo in the header created by \tlcA. 
 % ------------------------------------------------------------------------------
 
 \clearpage
@@ -291,26 +387,23 @@ Package names are listed in alphabetical order. A complete description of each
 package is found at \url{http://www.ctan.org/}. At this writing, you can type in the
 package name and press the search button to learn more about each package.
 
-% Define the package file name.
-\def\pkgFile{required-packages.csv}
-
 % Define the column names used by csvreader when reading \packageFile.
-\csvnames{pkgNames}{
+\csvnames{tlcPkgNames}{
    1=\name
   ,2=\description
 }
 
 % Define the table style used to report the required package names and
 % descriptions.
-\csvstyle{pkgStyle}{
+\csvstyle{tlcPkgStyle}{
   longtable=|L{3cm}|L{12cm}|
   ,table head=\hline Name & Description\\\hline\hline\endhead
   ,late after line=\\\hline
-  ,pkgNames
+  ,tlcPkgNames
 }
 
 % Render pckFile using pckStyle as a longtable.
-\csvreader[pkgStyle, separator=pipe]{\pkgFile}{}{\name & \description}
+\csvreader[tlcPkgStyle, separator=pipe]{\tlcPkgFile}{}{\name & \description}
 % ------------------------------------------------------------------------------
 
 \end{document}
