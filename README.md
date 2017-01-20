@@ -1,9 +1,8 @@
-# ![](data/logo.png)
-
-# Abstract
+![](data/logo.png)
 The tlc_article repository uses a SCRUM framework adapted to standard GitHub
 tooling.  tlc_article is integrated with Travis-ci.org for continuous
 integration and AllanConsulting.slack.com for centralized notification.
+#
 
 ## Installation
 ### Local
