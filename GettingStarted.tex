@@ -28,6 +28,9 @@
 
 \def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
 
+\def\tlcTOC{\tlcDarkblue{tlcTitlePageAndTableOfContents}}
+
+% ------------------------------------------------------------------------------
 
 \begin{document}
 
@@ -103,9 +106,65 @@ shell commands will make \tlcA\ available to your \LaTeX\ environment.
 \textbf{Note:} You may remove your local installation by removing \tlcProduct.
 
 % ------------------------------------------------------------------------------
-
+\clearpage
 \section{General Use Case}
-\subsection{documentclass}
+The goal of \tlcA\ is to simplify document layout.  \tlcA\ orchestrates a
+logical arrangement for document header, footer, author, abstract, table of
+contents, and margins.  The following sections outline the default
+implementation for each part \tlcA\ organizes. \textbf{Note:} This document was
+typeset using the instructions provided throughout this section.
+
+\subsection{Document Layout}
+\includegraphics{images/titlepage.png}
+
+\subsection{documentclass \tlcA}
+\tlcA\ extends the article document class.  \tlcA\ provide options directly to
+the article document class.  As an example, the Author can specify the font as
+follows:
+
+\begin{lstlisting}[basicstyle=\tiny]
+  \documentclass[12pt]{tlc-article}
+\end{lstlisting}
+
+\subsection{Title, Author \& Abstract}
+\tlcA\ has a macro \tlcTOC\ that can be used to set the document title, document
+author, document abstract, and establish the Table of Contents.  The sample
+below reveals how to use \tlcTOC.
+
+\begin{lstlisting}[basicstyle=\tiny]
+  \tlcTitlePageAndTableOfContents
+     {Document Title}
+     {Document Article}
+     {Document Abstract}
+\end{lstlisting}
+
+\subsection{Table of Contents}
+The Table of Contents immediatly follows the document abstract on page 1, uses
+dark blue for content, dots separate items, and are followed by roman numeral. 
+
+\subsection{Header \& Footer}
+fancyhdr is use to render the header and footer.  The Author can override the
+header and footer by providing an implementation in \tlcHF.
+
+\subsubsection{Header}
+
+\begin{description}
+  \item[lhead] When \tlcLG\ is found, logo.
+  \item[chead] Document Title
+  \item[rhead] When \tlcVE\ is present, status, date, and version columns.
+\end{description}
+
+\subsubsection{Footer}
+
+\begin{description}
+  \item[lfoot] When \tlcVE\ is present, instatution column. 
+  \item[cfoot] When \tlcVE\ is present, permission column. 
+  \item[rfoot] Page 1 of N.
+\end{description}
+
+\subsubsection{Rule width}
+A 0.1pt rule witdh is placed below the document header and above the document
+footer.
 
 % ------------------------------------------------------------------------------
 
@@ -216,6 +275,7 @@ your logo's height is not larger than 34pt to avoid `Package Fancyhdr Warning:
 
 % ------------------------------------------------------------------------------
 
+\clearpage
 \section{Commands}
 \subsection{tlcBeginLandscape}
 \subsection{tlcDarkblue}

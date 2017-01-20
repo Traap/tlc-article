@@ -151,8 +151,8 @@
   { 
     % Define extractions macros when \tlc@versionFile exists.
     \def\tlc@version{\tlcVersionPart{\version}}
-    \def\tlc@date{\tlcVersionPart{\version}}
-    \def\tlc@status{\tlcVersionPart{\version}}
+    \def\tlc@date{\tlcVersionPart{\date}}
+    \def\tlc@status{\tlcVersionPart{\status}}
     \def\tlc@instatution{\tlcVersionPart{\version}}
     \def\tlc@permission{\tlcVersionPart{\version}}
     % document status, document date and document version.
@@ -169,7 +169,7 @@
   % we are using multiple lines in our header.
   \setlength\headheight{34.0pt}
   % % footer applied to all pages.
-  \rfoot{\tiny{page \thepage~of~\pageref{LastPage}}}
+  \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}
   \renewcommand{\footrulewidth}{0.1pt}
   % we want our header and footer to remain consistent with a table of
   % contents that span multiple pages.
