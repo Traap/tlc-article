@@ -93,5 +93,6 @@ name, where
 * **P** - the patch Release number starting with 0.
 * **name** - a descriptive name for the release.
 
-Current [releases](https://github.com/Traap/tlc-article/releases) include
-a the deployed version of **GettingStarted.pdf**.
+[Current](https://github.com/Traap/tlc-article/releases/latest)
+[releases](https://github.com/Traap/tlc-article/releases) include a the deployed
+version of **GettingStarted.pdf**.
