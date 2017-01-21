@@ -1,11 +1,12 @@
 ![](data/logo.png)
+
 The tlc_article repository uses a SCRUM framework adapted
 to standard GitHub tooling.  tlc_article is integrated with Travis-ci.org for
 continuous integration and AllanConsulting.slack.com for centralized
 notification.
 
-## Installation
-### Local
+## Installation are done Locally or Globally
+### Local Installation
 ```bash
 $ cd $HOME
 $ git clone git@github.com:Traap/tlc-article.git
@@ -14,7 +15,7 @@ $ cp -v tlc-article.cls $HOME/mydoc
 $ cp -v tlc-article.cls $HOME/mydoc/.
 ```
 
-### Global 
+### Global Installation 
 ```bash
 $ cd $HOME
 $ git clone git@github.com:Traap/tlc-article.git
@@ -56,8 +57,8 @@ TLC-ARTICLE uses labels as follows:
 * **bug** - is an issue that did not meet the intent of the Story.
 * **duplicate** - is an issue that duplicates another issue regardless of the
   issue label.  A rationale is given for duplicate issues.
-* **enhancement** - the Agile Story format **As a <type of user> I want <some
-  goal> so that <some reason>.**
+* **enhancement** - the Agile Story format 
+```As a <type of user> I want <some goal> so that <some reason>.```jkkkkj
 * **help wanted** - is most often used as a secondary tag to ask for help
   determining the direction an issue should take.
 * **invalid** - is an issue that is invalid.  A rationale is given for invalid
