@@ -1,6 +1,4 @@
-![](data/logo.png)
-
-The tlc_article repository uses a SCRUM framework adapted
+#![](data/logo.png) The tlc_article repository uses a SCRUM framework adapted
 to standard GitHub tooling.  tlc_article is integrated with Travis-ci.org for
 continuous integration and AllanConsulting.slack.com for centralized
 notification.
@@ -76,5 +74,6 @@ naming convention: vM.N.P name, where
 * **N** - the minor Release number starting with 0.
 * **P** - the patch Release number starting with 0.
 * **name** - a descriptive name for the release.
+
 Current [releases](https://github.com/Traap/tlc-article/releases) include
 a the deployed version of **GettingStarted.pdf**.
