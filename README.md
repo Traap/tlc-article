@@ -1,7 +1,7 @@
-#![](data/logo.png) The tlc_article repository uses a SCRUM framework adapted
-to standard GitHub tooling.  tlc_article is integrated with Travis-ci.org for
-continuous integration and AllanConsulting.slack.com for centralized
-notification.
+#![](data/logo.png) 
+The tlc_article repository uses a SCRUM framework adapted to standard GitHub
+tooling.  tlc_article is integrated with Travis-ci.org for continuous
+integration and AllanConsulting.slack.com for centralized notification.
 
 ## Installation are done Locally or Globally
 ### Local Installation
@@ -24,7 +24,8 @@ $ sudo mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
 ```
 # Project Management
 ## Project Name and Project Board.
-TLC-ARTICLE is the project name.  The project board has the following columns:
+[TLC-ARTICLE](https://github.com/Traap/tlc-article/projects/1) is the project
+name.  The project board has the following columns:
 * **Backlog** - Issues that have not been started.
 * **In Progress** - Issues that have been started.
 * **In Review** - Issues that have are part of a pull request.
@@ -32,15 +33,17 @@ TLC-ARTICLE is the project name.  The project board has the following columns:
 * **Pull Resuest** - Issues that are a pull request.
 
 ## What does Done mean?
-TLC-ARTICLE uses different done classifications as follows:
+[TLC-ARTICLE](https://github.com/Traap/tlc-article/projects/1) uses different
+done classifications as follows:
 * **duplicate** - A reference to one or more duplicate issues is provided.
 * **invalid** - An issue has been determined to be invalid.  A rationale is given.
 * **wontfix** - An issue will not be fixed and a rationale is given.
 
 ## Milestones Equate to Sprints.
-TLC-ARTICLE uses GitHub milestones as a Sprint.  The project uses 3-day sprints
-and started on January 5th, 2017.  Sprints names use the following naming
-convention: Sprint vM.N.S, where
+[TLC-ARTICLE](https://github.com/Traap/tlc-article/projects/1) uses GitHub
+milestones as a Sprint.  The project uses 3-day sprints and started on January
+5th, 2017.  Sprints names use the following naming convention: Sprint vM.N.S,
+where
 * **M** - the major Release number starting with 1.
 * **N** - the minor Release number starting with 0.
 * **S** - the Sprint number starting with 0.
@@ -51,7 +54,8 @@ Therefore the next Sprints have been declared:
 * **Sprint v1.0.2** - Started 2017.01.09 and ended 2017.01.13.
 
 ## Labels
-TLC-ARTICLE uses labels as follows:
+[TLC-ARTICLE](https://github.com/Traap/tlc-article/projects/1) uses labels as
+follows:
 * **bug** - is an issue that did not meet the intent of the Story.
 * **duplicate** - is an issue that duplicates another issue regardless of the
   issue label.  A rationale is given for duplicate issues.
@@ -68,8 +72,9 @@ TLC-ARTICLE uses labels as follows:
   that are not fixed.
 
 ## Releases
-TLC-ARTICLE consist of one or more milestones.  Release names use the following
-naming convention: vM.N.P name, where
+[TLC-ARTICLE](https://github.com/Traap/tlc-article/projects/1) consist of one or
+more milestones.  Release names use the following naming convention: vM.N.P
+name, where
 * **M** - the major Release number starting with 1.
 * **N** - the minor Release number starting with 0.
 * **P** - the patch Release number starting with 0.
