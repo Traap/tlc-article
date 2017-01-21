@@ -41,9 +41,9 @@ done classifications as follows:
 
 ## Milestones Equate to Sprints.
 [TLC-ARTICLE](https://github.com/Traap/tlc-article/projects/1) uses GitHub
-milestones as a Sprint.  The project uses 3-day sprints and started on January
-5th, 2017.  Sprints names use the following naming convention: Sprint vM.N.S,
-where
+[milestones](https://github.com/Traap/tlc-article/milestones) as a Sprint.  The
+project uses 3-day sprints and started on January 5th, 2017.  Sprints names use
+the following naming convention: Sprint vM.N.S, where
 * **M** - the major Release number starting with 1.
 * **N** - the minor Release number starting with 0.
 * **S** - the Sprint number starting with 0.
@@ -60,7 +60,7 @@ follows:
 * **duplicate** - is an issue that duplicates another issue regardless of the
   issue label.  A rationale is given for duplicate issues.
 * **enhancement** - the Agile Story format 
-```As a <type of user> I want <some goal> so that <some reason>.```jkkkkj
+```As a <type of user> I want <some goal> so that <some reason>.```
 * **help wanted** - is most often used as a secondary tag to ask for help
   determining the direction an issue should take.
 * **invalid** - is an issue that is invalid.  A rationale is given for invalid
