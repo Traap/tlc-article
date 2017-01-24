@@ -134,8 +134,8 @@
   \def\tlc@version{\tlcVersionPart{\version}}
   \def\tlc@date{\tlcVersionPart{\date}}
   \def\tlc@status{\tlcVersionPart{\status}}
-  \def\tlc@instatution{\tlcVersionPart{\version}}
-  \def\tlc@permission{\tlcVersionPart{\version}}
+  \def\tlc@instatution{\tlcVersionPart{\instatution}}
+  \def\tlc@permission{\tlcVersionPart{\permission}}
 }
 {% Else: no operation because tlc@versionFile does not exist. 
 }
