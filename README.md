@@ -19,7 +19,7 @@ $ cd $HOME
 $ git clone git@github.com:Traap/tlc-article.git
 $ cd tlc-article
 $ sudo mkdir -p $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlc-article
-$ sudo mv -v tlc-article.cls $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tl-carticle/.
+$ sudo mv -v tlc-article.cls $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlc-article/.
 $ sudo mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
 ```
 # Project Management
