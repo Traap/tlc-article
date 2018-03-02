@@ -206,6 +206,37 @@
 }
 
 % ------------------------------------------------------------------------------
+% We define colors that are used code listings.
+\lstdefinestyle{tlcStyle}{
+        backgroundcolor=\color{backcolour},
+        commentstyle=\color{codegreen},
+        keywordstyle=\color{magenta},
+        numberstyle=\tiny\color{codegray},
+        stringstyle=\color{codepurple},
+        basicstyle=\footnotesize,
+        breakatwhitespace=false,
+        breaklines=true,
+        captionpos=b,
+        keepspaces=true,
+        numbers=left,
+        numbersep=4pt,
+        showspaces=false,
+        showstringspaces=false,
+        showtabs=false,
+        tabsize=2
+}
+\lstset{style=tlcStyle}
+
+% ------------------------------------------------------------------------------
+% End Row : Generally applied to the end of a table row.
+\newcommand{\ER}{\\ \hline}%
+
+% ------------------------------------------------------------------------------
+% Macro to include a file if it exists.
+% 1 = the file path to input
+\newcommand{\inputIfExists}[1]{\IfFileExists{#1}{\input{#1}}{}}%
+
+% ------------------------------------------------------------------------------
 % Each document uses the same author name, title page and table of contents.
 % Arguments:
 %   1 - the title
