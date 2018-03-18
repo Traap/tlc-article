@@ -49,4 +49,4 @@ deploy:
 # continuous integration status changes.
 notifications:
   email: false
-  slack: allanconsulting:ELPuuRukqtuNYj7kwIedYv44
+  slack: allanconsulting:FDn63nuwQxikPCD93hza3dk1
