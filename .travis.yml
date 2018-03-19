@@ -1,17 +1,5 @@
-# Project: 
-#   tlc-article
-
-# Purpose: 
-#   This Travis continuous integration file is use to convert LaTeX source files
-#   into pdf documents.
-
-# Programming language
 language: generic
-
-# sudo is required to install packages.
 sudo: required
-
-# Ubuntu trusty distribution is location for the TeX and LaTex packages needed.
 dist: trusty
 addons:
   apt:
@@ -24,29 +12,18 @@ addons:
     - texlive-latex-extra
     - texlive-latex-recommended
     - lmodern
-    - latex-xcolor 
-    - pgf 
-
-
-# We use pdflatex to compile LaTex sources to pdf.
+    - latex-xcolor
+    - pgf
 script:
 - mkdir _build
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build GettingStarted.tex
-
-# We will deploy the pdf file(s) back to a GitHub releases.
 deploy:
   provider: releases
-  skip_cleanup: true
   api_key:
-    secure: "KanBv2KKOrWWQ7MNOjBoWEpYyrcsDvJXB3vPo5dMxC0NxC4Ymmd8K5p6fCMko1P1g+MzXxYgh62Gy+kgqB07tbJzZvB8h7m5bRa0hE/6HHbeZvEyWIpc8oTXZZa2KduzRXOrLy9KGzfDK2jcpB4W600MPLUjR1F3fz9/CwAn5RPArlX/VYfmBc0kXp0rM4SENP3QIfuEhmT00Bb8SyYvomV1kxVLlE/hGd94m8C52m6KlbfBXrKdw8LLSWnAutSmeXVCtiCLpD4E4jeaJv3bYi6GNak3wgO3bdCVyEBtmYABlBqPkQ90TU3unhUKtd2uJto0Zzp/9OrUV5/OLTJqy8OMhDv48xuM81nSBfTuPgXfyjUUvVIGn2qiOSK+jr1qrhCLIiL73j3uXal4bFk4FEHi4Ucnzyk4FzE6tWkI24Ayv+oi+h4bZto7UNLfUL4z/OCJZuYahv1E0yCCoCbcRQDiP9gGOswfxwwE4e+Q3Y/EVCaHxc83g9HqTUkXrGkDv4AjknuOn9VzI4USaT9EWJc2RPbYy/VRR9Taw2D5ORsFGstEzVnoarN8ek1YbjXt75zchMHbSaQ0OeucDqO4NUfsa4/UvjCmFB3r0XJ8nsc9FkNC/U4CfimLxp9MW3H0CEpkCZCJoXcNfxvXkIfcMRUYz/AJewvbzp3sTB35CYk="
+    secure: JOUIFD22x6LVwYPDdRz740za6fHmn+Y6fLymUv+l5j65Y+i8vcOTkkaQ0z9peQ+eXjGItaSLD0gfe6JY4WsYYlDgscdCzhjTIlsuervLfmv7W4gQv3FbUT6BahEUu6GUE8sYOU0iSQh/jq8fyRum26LCUljMHJ8A6+f+/y9S8JeQp2WzKsZak5pbdeFB/ZbK3Ia6Lo3RLlD2qTleBWgbCC2lVFY7AhhmRwEbUAaVDyYF/I2vK4gLMUIDzTitwQSegKvpd0GNdync6GJiqMJdRPpy8z8/WHULLgsAOvoG5+1xyCLDfZ1TW7MQTf8VASjU0gtYI3tfJf8ME+CCtPAtw7m+yshOhmVDmy+cqGD5SJE18iFK3j+QR5/na8UEdTS8ws6NQcLL+6b8FgDZtZze8XwBG/dY3+2f7sssZN1n6AJgifnOZaGfpv1KMVJQn1nvIiE7IJFqSokywiiIO21PgwoiRyLfuJVgwm4jJr4A4kIRO1V7R4epvLMGeqnRGnWwKPicRjpbOE2WDGfwQVYQEq+yAKH5lMo7ta7bTzNSeZ9DKVZP5KB5KsiBfAYHpVSO8A1BFRUdV46zE1hbqohh9yHqKfE7l8oCnoLp3AblPldm2Pqpba3d5z5B/zsBhalAD7iIPh5C/CeHZV83T0XNritS2cXNnLh8Mxp6mH68Bgw=
   file: _build/GettingStarted.pdf
   on:
-    tags: true
-    branch: master 
     repo: Traap/tlc-article
-
-# We will notify Allan Consulting's Slack channel tlc-article about Travis
-# continuous integration status changes.
 notifications:
   email: false
   slack: allanconsulting:FDn63nuwQxikPCD93hza3dk1
