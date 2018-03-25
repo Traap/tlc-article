@@ -5,7 +5,7 @@
 % a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tlc-article}[2017/01/05 v1.0.1 Traap LaTeX Class Article]
+\ProvidesClass{tlc-article}[2018/03/25 v1.0.9 Traap LaTeX Class Article]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions
@@ -83,11 +83,11 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 % ------------------------------------------------------------------------------
-% myBeginLandscape and myEndLandscape are two new commands used to simplify
+% tlcBeginLandscape and tlcEndLandscape are two new commands used to simplify
 % setting page orientation to landscape and consistently setting margins.
 \newcommand{\tlcBeginLandscape}{%
   \begin{landscape}%
-  \newgeometry{top=1in, bottom=1in,left=1.9in,right=0in}%
+  \newgeometry{top=1in, bottom=1in,left=1in,right=1in}%
 }%
 \newcommand{\tlcEndLandscape}{%
   \restoregeometry%
@@ -105,6 +105,7 @@
   {\input{\tlc@additionalLayout}}
   {}
 
+% ------------------------------------------------------------------------------
 % Create a beautiful document header and document footer using the packages 
 % listed below.
 \RequirePackage{fancyhdr}   % Page layout in \LaTeX
@@ -123,25 +124,26 @@
     1=\version,
     2=\date,
     3=\status,
-    4=\instatution,
+    4=\institution,
     5=\permission
   }{#1}
 }%
 
+% ------------------------------------------------------------------------------
 % Define extractions macros when \tlc@versionFile exists.
 \IfFileExists{\tlc@versionFile}
 { 
   \def\tlc@version{\tlcVersionPart{\version}}
   \def\tlc@date{\tlcVersionPart{\date}}
   \def\tlc@status{\tlcVersionPart{\status}}
-  \def\tlc@instatution{\tlcVersionPart{\instatution}}
+  \def\tlc@institution{\tlcVersionPart{\institution}}
   \def\tlc@permission{\tlcVersionPart{\permission}}
 }
 {% Else: no operation because tlc@versionFile does not exist. 
 }
 
 % ------------------------------------------------------------------------------
-% we want to allow the calling document to override the headers and footers that
+% We want to allow the calling document to override the headers and footers that
 % we are defining.
 \IfFileExists{\tlc@headerFooter}
 { % use the customer header and footer defined by \tlc@headerfooter
@@ -162,7 +164,7 @@
     % document status, document date and document version.
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}
     % document owner.  This maybe a person or company name.
-    \lfoot{\tiny \tlc@instatution}
+    \lfoot{\tiny \tlc@institution}
     % document license. This maybe a license or word like confidential.
     \cfoot{\tiny \tlc@permission}
   }
@@ -172,7 +174,7 @@
   % eliminate head height too small warning, which is occurring because
   % we are using multiple lines in our header.
   \setlength\headheight{34.0pt}
-  % % footer applied to all pages.
+  % footer applied to all pages.
   \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}
   \renewcommand{\footrulewidth}{0.1pt}
   % we want our header and footer to remain consistent with a table of
@@ -206,7 +208,7 @@
 }
 
 % ------------------------------------------------------------------------------
-% We define colors that are used code listings.
+% We define colors that are used when includeing code files (software). 
 \lstdefinestyle{tlcStyle}{
         backgroundcolor=\color{backcolour},
         commentstyle=\color{codegreen},
@@ -252,5 +254,44 @@
   \clearpage%
 }%
 
+% ------------------------------------------------------------------------------
+% We define tlcDebug to aid our users when they are debugging their document.
+% tlcDebug should be placed at the end of your document to allow LaTeX to 
+% fully expand all macros and definitions.
+\newcommand{\tlcIsDefined}[1]%
+{\IfFileExists{#1}%
+  {\textcolor{green}{DEFINED}}%
+  {\textcolor{red}{NOT DEFINED}}%
+}%
+\newcommand{\tlcDebug}{%
+  \clearpage
+  \section{tlc-article Debug}
+  \subsection{tlc-article default files}
+  \begin{description}[align=right,leftmargin=*,labelindent=5cm]
+    \item[tlc@location:]\tlc@location
+    \item[tlc@additionalLayout:]\tlc@additionalLayout
+    \item[tlc@headerFooter:]\tlc@headerFooter
+    \item[tlc@versionFile:]\tlc@versionFile
+    \item[tlc@logoFile:]\tlc@logoFile
+    \item[tlc@versionFile:]\tlc@versionFile
+  \end{description}
+  %
+  \subsection{tlc-article file hooks}
+  \begin{description}[align=right,leftmargin=*,labelindent=5cm]
+    \item [tlc@additionalLayout:]\tlcIsDefined{\tlc@additionalLayout}
+    \item [tlc@headerFooter:]\tlcIsDefined{\tlc@headerFooter}
+    \item [tlc@logoFile:]\tlcIsDefined{\tlc@logoFile}
+    \item [tlc@versionFile:]\tlcIsDefined{\tlc@versionFile}
+  \end{description}
+  %
+  \subsection{tlc-article header and footer hooks}
+  \begin{description}[align=right,leftmargin=*,labelindent=5cm]
+    \item[tlc@version:] \tlc@version
+    \item[tlc@date:] \tlc@date
+    \item[tlc@status:] \tlc@status
+    \item[tlc@institution:] \tlc@institution
+    \item[tlc@permission:] \tlc@permission
+  \end{description}
+}%
 % ------------------------------------------------------------------------------
 \endinput
