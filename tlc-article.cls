@@ -5,7 +5,7 @@
 % a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tlc-article}[2018/03/25 v1.0.9 Traap LaTeX Class Article]
+\ProvidesClass{tlc-article}[2018/05/30 v1.0.10 Traap LaTeX Class Article]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions
