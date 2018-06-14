@@ -5,7 +5,7 @@
 % a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tlc-article}[2018/05/30 v1.0.10 Traap LaTeX Class Article]
+\ProvidesClass{tlc-article}[2018/06/11 v1.0.11 Traap LaTeX Class Article]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions
@@ -177,10 +177,12 @@
   % footer applied to all pages.
   \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}
   \renewcommand{\footrulewidth}{0.1pt}
-  % we want our header and footer to remain consistent with a table of
-  % contents that span multiple pages.
-  \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
 }
+
+% ------------------------------------------------------------------------------
+% We want our header and footer to remain consistent with a table of
+% contents that span multiple pages.
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
 
 % ------------------------------------------------------------------------------
 % We define colors that are used throughout the document.
