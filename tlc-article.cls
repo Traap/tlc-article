@@ -24,6 +24,7 @@
 \RequirePackage{lmodern}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{textcomp}
+\RequirePackage[utf8]{inputenc}
 
 % ------------------------------------------------------------------------------
 % Color, Graphics and links.
