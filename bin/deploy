@@ -1,0 +1,20 @@
+#!/bin/bash
+# Deplay a new LaTeX style or package.
+
+# Todo:
+# 1) Accept command line argument tlc-article.clas | dirtree.sty | etc ...
+# 2) Display help
+# 3) Improve documentation.
+# 4) usage:
+#    deply tlc-article.clas
+# ------------------------------------------------------------------------------
+main() {
+  mkdir -p $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}
+  cp -v $1 $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/dirtree/. 
+  mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
+}
+
+# ------------------------------------------------------------------------------
+# Kick start start this script.
+# ------------------------------------------------------------------------------
+main $@
