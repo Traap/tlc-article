@@ -1,5 +1,6 @@
-\documentclass[12pt]{tlc-article}
+documentclass\documentclass[12pt]{tlc-article}
 
+% ------------------------------------------------------------------------------
 \begin{document}
 
 % ------------------------------------------------------------------------------
@@ -123,7 +124,7 @@ fancyhdr is used to render the header and footer.  The Author can override the
 application by providing \tlcVE. The sections below show the placement \tlcA\
 uses when writing objects, and where the objects are defined.
 
-\tlcNote\ \tlcA\ ignors \tlcVE\ when \tlcHF\ is defined.
+\tlcNote\ \tlcA\ ignore \tlcVE\ when \tlcHF\ is defined.
 
 \subsubsection*{Header}
 
@@ -136,13 +137,13 @@ uses when writing objects, and where the objects are defined.
 \subsubsection*{Footer}
 
 \begin{description}
-  \item[lfoot] When \tlcVE\ is present, instatution column. 
+  \item[lfoot] When \tlcVE\ is present, institution column. 
   \item[cfoot] When \tlcVE\ is present, permission column. 
   \item[rfoot] Page 1 of N.
 \end{description}
 
 \subsubsection*{Rule width}
-A 0.1pt rule witdh is placed below the document header and above the document
+A 0.1pt rule width is placed below the document header and above the document
 footer.
 
 % ------------------------------------------------------------------------------
@@ -240,7 +241,7 @@ column names:
 
 \end{description}
 
-The extaction methods are shown below.
+The exaction methods are shown below.
 \begin{lstlisting}[basicstyle=\tiny]
   % Extract document status, document date and document version from
   % \tlc@versionFile.
@@ -286,14 +287,14 @@ Page layout is rotated 90\textdegree\ clockwise resulting in a landscape page
 orientation.  Landscape orientation remains active until \tlcEL.
 
 \subsection{\tlcEL}
-Page layout is returned to portrate orientation when \tlcEL\ is reached.
+Page layout is returned to portrait orientation when \tlcEL\ is reached.
 
 \subsection{\tlcDB}
 \tlcDB\ is used throughout this document to render text using rbg\{0,0,0.5\}. 
 \tlcDB\ is safe to use within your document.
 
 \subsection{\tlcTOC}
-\tlcTOC\ creates the document layout showen in Figure \ref{fig:layout}.  Section
+\tlcTOC\ creates the document layout shown in Figure \ref{fig:layout}.  Section
 \ref{sec:TAA} shows an example implementation.
 
 \subsection{\tlcNCT}
@@ -339,23 +340,8 @@ from \tlcVE in your \tlcHF.
 \section{Required Packages}
 This section documents the dependencies of the required package tlc-article has.
 Package names are listed in alphabetical order. A complete description of each
-package is found at \url{http://www.ctan.org/}. At this writing, you can type in the
-package name and press the search button to learn more about each package.
-
-% Define the column names used by csvreader when reading \packageFile.
-\csvnames{tlcPkgNames}{
-   1=\name
-  ,2=\description
-}
-
-% Define the table style used to report the required package names and
-% descriptions.
-\csvstyle{tlcPkgStyle}{
-  longtable=|L{3cm}|L{12cm}|
-  ,table head=\hline Name & Description\\\hline\hline\endhead
-  ,late after line=\\\hline
-  ,tlcPkgNames
-}
+package is found at \url{http://www.ctan.org/}. At this writing, you can type in
+the package name and press the search button to learn more about each package.
 
 % Render pckFile using pckStyle as a longtable.
 \csvreader[tlcPkgStyle, separator=pipe]{\tlcPkgFile}{}{\name & \description}

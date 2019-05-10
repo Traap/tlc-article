@@ -1,0 +1,25 @@
+\RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}
+\RequirePackage{array}
+\RequirePackage[colorlinks]{hyperref}
+\RequirePackage{csvsimple}
+\RequirePackage{enumitem}
+\RequirePackage{fancyhdr}   % Page layout in \LaTeX
+\RequirePackage{graphicx}
+\RequirePackage{lastpage}   % Page n of m
+\RequirePackage{listings}
+\RequirePackage{lmodern}
+\RequirePackage{longtable}
+\RequirePackage{makecell}
+\RequirePackage{multicol}
+\RequirePackage{parskip}                   % Blank line after section break.
+\RequirePackage{pdflscape}
+\RequirePackage{pdfpages}
+\RequirePackage{spverbatim}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[table]{xcolor}
+\RequirePackage{tabularx}
+\RequirePackage{textcomp}
+\RequirePackage{titling}    % Control over \maketitle & \thanks
+\RequirePackage{tocloft}
+\RequirePackage[toc,page]{appendix}
+\RequirePackage[utf8]{inputenc}

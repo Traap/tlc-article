@@ -1,45 +1,65 @@
+% This use case demonstrates tlc-article being extended.  All definitions are
+% process during preamble phase.  In other words, before your \begin{document}
+% statement.
+
 % ------------------------------------------------------------------------------
 % \makeatletter is used so we can reference commands and definitions defined by
 % tlc-article, which are all prefaced with tlc@.
 \makeatletter
 
 % ------------------------------------------------------------------------------
-% Definitinos used throughout this document.
+% tlc-article.tex (Getting Starting) definitions.
 
-\def\tlcProduct{tlc-article}
+\def\tlcProduct{tlc-article}%
 
-\def\tlcA{\tlcDarkblue{\tlcProduct}}
+\def\tlcA{\tlcDarkblue{\tlcProduct}}%
 
-\def\tlcAL{\tlcDarkblue{\tlc@additionalLayout}}
-\def\tlcBL{\tlcDarkblue{tlcBeginLandscape}}
-\def\tlcDB{\tlcDarkblue{tlcDarkblue}}
-\def\tlcEL{\tlcDarkblue{tlcEndLandScape}}
-\def\tlcHF{\tlcDarkblue{\tlc@headerFooter}}
-\def\tlcLG{\tlcDarkblue{\tlc@logoFile}}
-\def\tlcNCT{newcolumn type: \tlcDarkblue{L, C} \& \tlcDarkblue{R}}
-\def\tlcTOC{\tlcDarkblue{tlcTitlePageAndTableOfContents}}
-\def\tlcVE{\tlcDarkblue{\tlc@versionFile}}
+\def\tlcAL{\tlcDarkblue{\tlc@additionalLayout}}%
+\def\tlcBL{\tlcDarkblue{tlcBeginLandscape}}%
+\def\tlcDB{\tlcDarkblue{tlcDarkblue}}%
+\def\tlcEL{\tlcDarkblue{tlcEndLandScape}}%
+\def\tlcHF{\tlcDarkblue{\tlc@headerFooter}}%
+\def\tlcLG{\tlcDarkblue{\tlc@logoFile}}%
+\def\tlcNCT{newcolumn type: \tlcDarkblue{L, C} \& \tlcDarkblue{R}}%
+\def\tlcTOC{\tlcDarkblue{tlcTitlePageAndTableOfContents}}%
+\def\tlcVE{\tlcDarkblue{\tlc@versionFile}}%
 
-\def\tlcVC{\tlcDarkblue{tlc@version}}
-\def\tlcDC{\tlcDarkblue{tlc@date}}
-\def\tlcSC{\tlcDarkblue{tlc@status}}
-\def\tlcIC{\tlcDarkblue{tlc@instatution}}
-\def\tlcPC{\tlcDarkblue{tlc@permission}}
+\def\tlcVC{\tlcDarkblue{tlc@version}}%
+\def\tlcDC{\tlcDarkblue{tlc@date}}%
+\def\tlcSC{\tlcDarkblue{tlc@status}}%
+\def\tlcIC{\tlcDarkblue{tlc@instatution}}%
+\def\tlcPC{\tlcDarkblue{tlc@permission}}%
 
-\def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}
-\def\texDist{\kpse}
-\def\tlcDist{/tex/latex/\tlcProduct}
-\def\tlcGlobalDist{\texDist\tlcDist}
+\def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}%
+\def\texDist{\kpse}%
+\def\tlcDist{/tex/latex/\tlcProduct}%
+\def\tlcGlobalDist{\texDist\tlcDist}%
 
-\def\tlcHome{\$HOME}
-\def\tlcMyDoc{\tlcHome/mydoc}
+\def\tlcHome{\$HOME}%
+\def\tlcMyDoc{\tlcHome/mydoc}%
 
-\def\gitHub{GitHub.com}
-\def\gitHubUrl{http://\gitHub}
+\def\gitHub{GitHub.com}%
+\def\gitHubUrl{http://\gitHub}%
 
-\def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
+\def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}%
 
-\def\tlcPkgFile{data/required-packages.csv}
-\def\tlcNote{\tlcDarkblue{Note}}
+\def\tlcPkgFile{data/required-packages.csv}%
+\def\tlcNote{\tlcDarkblue{Note}}%
 
-% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------%
+% Define the column names used by csvreader when reading \packageFile.
+\csvnames{tlcPkgNames}{
+   1=\name
+  ,2=\description
+}
+
+% Define the table style used to report the required package names and
+% descriptions.
+\csvstyle{tlcPkgStyle}{
+  longtable=|L{3cm}|L{12cm}|
+  ,table head=\hline Name & Description\\\hline\hline\endhead
+  ,late after line=\\\hline
+  ,tlcPkgNames
+}
+
+% ------------------------------------------------------------------------------%

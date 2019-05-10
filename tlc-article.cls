@@ -34,7 +34,7 @@
 % a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2018/06/11 v1.0.11 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2019/05/10 v1.0.12 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -43,13 +43,13 @@
 
 % ------------------------------------------------------------------------------
 % Page layout
-\RequirePackage{parskip}% Blank line after section break.
+\RequirePackage{parskip}%
 \RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}%
 \RequirePackage{multicol}%
 \setlength{\parskip}{0.5em}%
 
 % ------------------------------------------------------------------------------
-% Required parts to use glossaries. 
+% Required parts to use glossaries.
 \RequirePackage{lmodern}%
 \RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
@@ -83,11 +83,11 @@
 % pdf
 \RequirePackage{pdflscape}%
 \RequirePackage{pdfpages}%
-\RequirePackage{pdf-pie}%
 
 % ------------------------------------------------------------------------------
 % Misc
 \RequirePackage[toc,page]{appendix}%
+% \RequirePackage{pgf-pie}%
 \RequirePackage{todonotes}%
 
 % ------------------------------------------------------------------------------
@@ -181,12 +181,14 @@
 % We want to allow the calling document to override the headers and footers that
 % we are defining.
 \IfFileExists{\tlc@headerFooter}%
-{ % use the customer header and footer defined by \tlc@headerfooter
+{% use the customer header and footer defined by \tlc@headerfooter
  \input{\tlc@headerFooter}%
 }%
-{ % Else : header and footer applied to all pages.
-  \IfFileExists{\tlc@logoFile}%
-  { % Typeset the logo in the left side of the document header.
+{% Else : header and footer applied to all pages.
+  \IfFileExists{\tlc@logoFile}{%
+    %
+    % Typeset the logo in the left side of the document header.
+    %
     \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
   {% Else: no operation because tlc@logoFile does not exist.
@@ -198,23 +200,38 @@
   %
   % Typeset version information in the right side of the document header.
   %
-  \IfFileExists{\tlc@versionFile}%
-  {%
+  \IfFileExists{\tlc@versionFile}{%
+    %
     % document status, document date and document version.
+    %
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
+    %
     % document owner.  This maybe a person or company name.
+    %
     \lfoot{\tiny \tlc@institution}%
+    %
     % document license. This maybe a license or word like confidential.
+    %
     \cfoot{\tiny \tlc@permission}%
   }%
   {% Else: no operation because tlc@versionFile does not exist.
   }%
-  \renewcommand{\headrulewidth}{0.1pt}%
+  %
+  % Very thin horizontal line across the header.
+  %
+  \renewcommand{\headrulewidth}{0.1pt}
+  %
   % eliminate head height too small warning, which is occurring because
   % we are using multiple lines in our header.
+  %
   \setlength\headheight{34.0pt}%
+  %
   % footer applied to all pages.
+  %
   \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}%
+  %
+  % Very thin horizontal line across the footer.
+  %
   \renewcommand{\footrulewidth}{0.1pt}%
 }%
 
@@ -248,7 +265,7 @@
 }%
 
 % ------------------------------------------------------------------------------
-% We define colors that are used when includeing code files (software).
+% We define colors that are used when including code files (software).
 \lstdefinestyle{tlcStyle}{%
   backgroundcolor=\color{backcolour},%
   commentstyle=\color{codegreen},%
@@ -298,10 +315,10 @@
 % We define tlcDebug to aid our users when they are debugging their document.
 % tlcDebug should be placed at the end of your document to allow LaTeX to
 % fully expand all macros and definitions.
-\newcommand{\tlcIsDefined}[1]%
-{\IfFileExists{#1}%
-  {\textcolor{green}{DEFINED}}%
-  {\textcolor{red}{NOT DEFINED}}%
+\newcommand{\tlcIsDefined}[1]{%
+  \IfFileExists{#1}%
+    {\textcolor{green}{DEFINED}}%
+    {\textcolor{red}{NOT DEFINED}}%
 }%
 \newcommand{\tlcDebug}{%
   \clearpage%
