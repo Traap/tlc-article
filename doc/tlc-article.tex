@@ -1,56 +1,11 @@
 \documentclass[12pt]{tlc-article}
 
-% ------------------------------------------------------------------------------
-% \makeatletter is used so we can reference commands and definitions defined by
-% tlc-article, which are all prefaced with tlc@.
-\makeatletter
-
-% ------------------------------------------------------------------------------
-
-\def\tlcProduct{tlc-article}
-
-\def\tlcA{\tlcDarkblue{\tlcProduct}}
-
-\def\tlcAL{\tlcDarkblue{\tlc@additionalLayout}}
-\def\tlcBL{\tlcDarkblue{tlcBeginLandscape}}
-\def\tlcDB{\tlcDarkblue{tlcDarkblue}}
-\def\tlcEL{\tlcDarkblue{tlcEndLandScape}}
-\def\tlcHF{\tlcDarkblue{\tlc@headerFooter}}
-\def\tlcLG{\tlcDarkblue{\tlc@logoFile}}
-\def\tlcNCT{newcolumn type: \tlcDarkblue{L, C} \& \tlcDarkblue{R}}
-\def\tlcTOC{\tlcDarkblue{tlcTitlePageAndTableOfContents}}
-\def\tlcVE{\tlcDarkblue{\tlc@versionFile}}
-
-\def\tlcVC{\tlcDarkblue{tlc@version}}
-\def\tlcDC{\tlcDarkblue{tlc@date}}
-\def\tlcSC{\tlcDarkblue{tlc@status}}
-\def\tlcIC{\tlcDarkblue{tlc@instatution}}
-\def\tlcPC{\tlcDarkblue{tlc@permission}}
-
-\def\kpse{\$(kpsewhich -var-value TEXMFLOCAL)}
-\def\texDist{\kpse}
-\def\tlcDist{/tex/latex/\tlcProduct}
-\def\tlcGlobalDist{\texDist\tlcDist}
-
-\def\tlcHome{\$HOME}
-\def\tlcMyDoc{\tlcHome/mydoc}
-
-\def\gitHub{GitHub.com}
-\def\gitHubUrl{http://\gitHub}
-
-\def\tlcRepo{git@\gitHub:Traap/\tlcProduct.git}
-
-\def\tlcPkgFile{data/required-packages.csv}
-\def\tlcNote{\tlcDarkblue{Note}}
-
-% ------------------------------------------------------------------------------
-
 \begin{document}
 
 % ------------------------------------------------------------------------------
 
 \tlcTitlePageAndTableOfContents
-  {Getting Started}
+  {tlc-article}
   {Gary Allan Howard}
   {Getting Started guide covers how to install \tlcA\ both globally and
     locally, describes the general use case, how to customize your \tlcA\
@@ -206,8 +161,8 @@ exists.  The file-check is shown
 below:
 
 \begin{lstlisting}[basicstyle=\tiny]
-  \IfFileExists{docstyle/additional-layout.tex}
-    {\input{docstyle/additional-layout.tex}}
+  \IfFileExists{data/additional-layout.tex}
+    {\input{data/additional-layout.tex}}
     {}
 \end{lstlisting}
 
