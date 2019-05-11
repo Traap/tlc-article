@@ -1,40 +1,11 @@
 % ------------------------------------------------------------------------------
-\RequirePackage{parskip}% Blank line after section break.
-\RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}%
-\RequirePackage{multicol}%
-\RequirePackage{lmodern}%
-\RequirePackage[T1]{fontenc}%
-\RequirePackage{textcomp}%
-\RequirePackage[utf8]{inputenc}%
-\RequirePackage{babel}%
-\RequirePackage[colorlinks]{hyperref}%
-\RequirePackage[toc]{glossaries}%
-\RequirePackage{graphicx}%
-\RequirePackage[table]{xcolor}%
-\RequirePackage{listings}%
-\RequirePackage{spverbatim}%
-\RequirePackage{array}%
-\RequirePackage{csvsimple}%
-\RequirePackage{enumitem}%
-\RequirePackage{longtable}%
-\RequirePackage{makecell}%
-\RequirePackage{tabularx}%
-\RequirePackage{pdflscape}%
-\RequirePackage{pdfpages}%
-\RequirePackage{pdf-pie}%
-\RequirePackage[toc,page]{appendix}%
-\RequirePackage{todonotes}%
-\RequirePackage{tocloft}%
-\RequirePackage{fancyhdr}   % Page layout in \LaTeX
-\RequirePackage{titling}    % Control over \maketitle & \thanks
-\RequirePackage{lastpage}   % Page n of m
 % Class: tlc-article
 %
 % Purpose: This LaTeX class provides an article implementation that standardizes
 % a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2019/05/10 v1.0.12 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2018/06/11 v1.0.11 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -43,13 +14,13 @@
 
 % ------------------------------------------------------------------------------
 % Page layout
-\RequirePackage{parskip}%
+\RequirePackage{parskip}                   % Blank line after section break.%
 \RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}%
 \RequirePackage{multicol}%
 \setlength{\parskip}{0.5em}%
 
 % ------------------------------------------------------------------------------
-% Required parts to use glossaries.
+% Fonts etc.
 \RequirePackage{lmodern}%
 \RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
@@ -87,8 +58,6 @@
 % ------------------------------------------------------------------------------
 % Misc
 \RequirePackage[toc,page]{appendix}%
-% \RequirePackage{pgf-pie}%
-\RequirePackage{todonotes}%
 
 % ------------------------------------------------------------------------------
 % This function is used to simplify making textcolor darkblue.
@@ -127,12 +96,12 @@
 \newcommand{\tlcEndLandscape}{%
   \restoregeometry%
   \end{landscape}%
-}%
+}
 
 % ------------------------------------------------------------------------------
 % We want our table of contents to use dots as a leader.
 \RequirePackage{tocloft}%
-\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}%
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
 
 % ------------------------------------------------------------------------------
 % We want to allow the calling document to setup additional layout.
@@ -166,8 +135,7 @@
 
 % ------------------------------------------------------------------------------
 % Define extractions macros when \tlc@versionFile exists.
-\IfFileExists{\tlc@versionFile}%
-{%
+\IfFileExists{\tlc@versionFile}{%
   \def\tlc@version{\tlcVersionPart{\version}}%
   \def\tlc@date{\tlcVersionPart{\date}}%
   \def\tlc@status{\tlcVersionPart{\status}}%
@@ -180,15 +148,13 @@
 % ------------------------------------------------------------------------------
 % We want to allow the calling document to override the headers and footers that
 % we are defining.
-\IfFileExists{\tlc@headerFooter}%
-{% use the customer header and footer defined by \tlc@headerfooter
- \input{\tlc@headerFooter}%
+\IfFileExists{\tlc@headerFooter}{%
+  % Use the customer header and footer defined by \tlc@headerfooter
+  \input{\tlc@headerFooter}%
 }%
 {% Else : header and footer applied to all pages.
   \IfFileExists{\tlc@logoFile}{%
-    %
     % Typeset the logo in the left side of the document header.
-    %
     \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
   {% Else: no operation because tlc@logoFile does not exist.
@@ -202,11 +168,11 @@
   %
   \IfFileExists{\tlc@versionFile}{%
     %
-    % document status, document date and document version.
+    % Document status, document date and document version.
     %
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
     %
-    % document owner.  This maybe a person or company name.
+    % Document owner.  This maybe a person or company name.
     %
     \lfoot{\tiny \tlc@institution}%
     %
@@ -217,11 +183,11 @@
   {% Else: no operation because tlc@versionFile does not exist.
   }%
   %
-  % Very thin horizontal line across the header.
+  %  Draw a thin horizontal line across the header.
   %
-  \renewcommand{\headrulewidth}{0.1pt}
+  \renewcommand{\headrulewidth}{0.1pt}%
   %
-  % eliminate head height too small warning, which is occurring because
+  % Eliminate head height too small warning, which is occurring because
   % we are using multiple lines in our header.
   %
   \setlength\headheight{34.0pt}%
@@ -230,7 +196,7 @@
   %
   \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}%
   %
-  % Very thin horizontal line across the footer.
+  %  Draw a thin horizontal line across the footer..
   %
   \renewcommand{\footrulewidth}{0.1pt}%
 }%
@@ -238,7 +204,7 @@
 % ------------------------------------------------------------------------------
 % We want our header and footer to remain consistent with a table of
 % contents that span multiple pages.
-\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}%
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
 
 % ------------------------------------------------------------------------------
 % We define colors that are used throughout the document.
@@ -288,7 +254,7 @@
 
 % ------------------------------------------------------------------------------
 % End Row : Generally applied to the end of a table row.
-\newcommand{\ER}{\\ \hline}%
+\newcommand{\ER}{\\ \hline}%%
 
 % ------------------------------------------------------------------------------
 % Macro to include a file if it exists.
