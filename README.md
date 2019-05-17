@@ -4,7 +4,7 @@
 The goal of **tlc-article** is to simplify document layout.  **tlc-article**
 orchestrates a logical arrangement for document header, footer, author,
 abstract, table of contents, and margins.
-[tlc-article.pdf](../blob/master/doc/tlc-article.pdf) is a document instantiated
+[tlc-article.pdf](doc/tlc-article.pdf) is a document instantiated
 using **tlc-article.cls**.
 
 ## Installation are done Locally or Globally
