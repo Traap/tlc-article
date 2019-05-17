@@ -1,9 +1,11 @@
 ![tlc-article](data/logo.png)
 
 ---
-The **tlc_article** repository uses a SCRUM framework adapted to standard GitHub
-tooling.  **tlc_article** is integrated with Travis-ci.org for continuous
-integration and AllanConsulting.slack.com for centralized notification.
+The goal of **tlc-article** is to simplify document layout.  **tlc-article**
+orchestrates a logical arrangement for document header, footer, author,
+abstract, table of contents, and margins.
+[tlc-article.pdf](../blob/master/doc/tlc-article.pdf) is a document instantiated
+using **tlc-article.cls**.
 
 ## Installation are done Locally or Globally
 ### Local Installation
