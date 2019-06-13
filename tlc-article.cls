@@ -5,7 +5,7 @@
 % a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2019/05/19 v1.0.12 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2019/04/30 v1.0.11 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -14,20 +14,28 @@
 
 % ------------------------------------------------------------------------------
 % Page layout
-\RequirePackage{parskip}                   % Blank line after section break.%
+% \RequirePackage{parskip}% Blank line after section break.
 \RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}%
 \RequirePackage{multicol}%
-\setlength{\parskip}{0.5em}%
+% \setlength{\parskip}{0.5em}%
 
 % ------------------------------------------------------------------------------
-% Fonts etc.
+% Required parts to use glossaries must come first.
 \RequirePackage{lmodern}%
 \RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
 \RequirePackage[utf8]{inputenc}%
 \RequirePackage{babel}%
 \RequirePackage[colorlinks]{hyperref}%
-\RequirePackage[toc]{glossaries}%
+\RequirePackage{bookmark}%
+% ------------------------------------------------------------------------------
+% Define glossaries.
+\RequirePackage[acronym,      % create 'acronym' glossary type,
+                nopostdot,    %
+                nonumberlist, %
+                style=altlist,% use altlist style
+                toc,          % add the gloassary to the table of contents.
+               ]{glossaries}%
 
 % ------------------------------------------------------------------------------
 % Color, Graphics and links.
@@ -58,6 +66,7 @@
 % ------------------------------------------------------------------------------
 % Misc
 \RequirePackage[toc,page]{appendix}%
+\RequirePackage{todonotes}%
 
 % ------------------------------------------------------------------------------
 % This function is used to simplify making textcolor darkblue.
@@ -96,12 +105,12 @@
 \newcommand{\tlcEndLandscape}{%
   \restoregeometry%
   \end{landscape}%
-}
+}%
 
 % ------------------------------------------------------------------------------
 % We want our table of contents to use dots as a leader.
 \RequirePackage{tocloft}%
-\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}%
 
 % ------------------------------------------------------------------------------
 % We want to allow the calling document to setup additional layout.
@@ -135,7 +144,8 @@
 
 % ------------------------------------------------------------------------------
 % Define extractions macros when \tlc@versionFile exists.
-\IfFileExists{\tlc@versionFile}{%
+\IfFileExists{\tlc@versionFile}%
+{%
   \def\tlc@version{\tlcVersionPart{\version}}%
   \def\tlc@date{\tlcVersionPart{\date}}%
   \def\tlc@status{\tlcVersionPart{\status}}%
@@ -148,13 +158,13 @@
 % ------------------------------------------------------------------------------
 % We want to allow the calling document to override the headers and footers that
 % we are defining.
-\IfFileExists{\tlc@headerFooter}{%
-  % Use the customer header and footer defined by \tlc@headerfooter
-  \input{\tlc@headerFooter}%
+\IfFileExists{\tlc@headerFooter}%
+{ % use the customer header and footer defined by \tlc@headerfooter
+ \input{\tlc@headerFooter}%
 }%
-{% Else : header and footer applied to all pages.
-  \IfFileExists{\tlc@logoFile}{%
-    % Typeset the logo in the left side of the document header.
+{ % Else : header and footer applied to all pages.
+  \IfFileExists{\tlc@logoFile}%
+  { % Typeset the logo in the left side of the document header.
     \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
   {% Else: no operation because tlc@logoFile does not exist.
@@ -166,45 +176,30 @@
   %
   % Typeset version information in the right side of the document header.
   %
-  \IfFileExists{\tlc@versionFile}{%
-    %
-    % Document status, document date and document version.
-    %
+  \IfFileExists{\tlc@versionFile}%
+  {%
+    % document status, document date and document version.
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
-    %
-    % Document owner.  This maybe a person or company name.
-    %
+    % document owner.  This maybe a person or company name.
     \lfoot{\tiny \tlc@institution}%
-    %
     % document license. This maybe a license or word like confidential.
-    %
     \cfoot{\tiny \tlc@permission}%
   }%
   {% Else: no operation because tlc@versionFile does not exist.
   }%
-  %
-  %  Draw a thin horizontal line across the header.
-  %
   \renewcommand{\headrulewidth}{0.1pt}%
-  %
   % Eliminate head height too small warning, which is occurring because
   % we are using multiple lines in our header.
-  %
   \setlength\headheight{34.0pt}%
-  %
   % footer applied to all pages.
-  %
   \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}%
-  %
-  %  Draw a thin horizontal line across the footer..
-  %
   \renewcommand{\footrulewidth}{0.1pt}%
 }%
 
 % ------------------------------------------------------------------------------
 % We want our header and footer to remain consistent with a table of
 % contents that span multiple pages.
-\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}%
 
 % ------------------------------------------------------------------------------
 % We define colors that are used throughout the document.
@@ -231,7 +226,7 @@
 }%
 
 % ------------------------------------------------------------------------------
-% We define colors that are used when including code files (software).
+% We define colors that are used when includeing code files (software).
 \lstdefinestyle{tlcStyle}{%
   backgroundcolor=\color{backcolour},%
   commentstyle=\color{codegreen},%
@@ -254,7 +249,11 @@
 
 % ------------------------------------------------------------------------------
 % End Row : Generally applied to the end of a table row.
-\newcommand{\ER}{\\ \hline}%%
+\newcommand{\ER}{\\ \hline}%
+
+% ------------------------------------------------------------------------------
+% Default vertical space
+\newcommand{\tlcVspace}{\vspace{3mm}}%
 
 % ------------------------------------------------------------------------------
 % Macro to include a file if it exists.
@@ -281,10 +280,10 @@
 % We define tlcDebug to aid our users when they are debugging their document.
 % tlcDebug should be placed at the end of your document to allow LaTeX to
 % fully expand all macros and definitions.
-\newcommand{\tlcIsDefined}[1]{%
-  \IfFileExists{#1}%
-    {\textcolor{green}{DEFINED}}%
-    {\textcolor{red}{NOT DEFINED}}%
+\newcommand{\tlcIsDefined}[1]%
+{\IfFileExists{#1}%
+  {\textcolor{green}{DEFINED}}%
+  {\textcolor{red}{NOT DEFINED}}%
 }%
 \newcommand{\tlcDebug}{%
   \clearpage%
