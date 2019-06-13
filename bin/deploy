@@ -8,8 +8,8 @@
 #   I use this script to test my deployment before publishing with CTAN. 
 # ------------------------------------------------------------------------------
 main() {
-  mkdir -p $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}
-  cp -v $1 $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/dirtree/. 
+  mkdir -vp $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}
+  cp -v $1 $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}/. 
   mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
 }
 
