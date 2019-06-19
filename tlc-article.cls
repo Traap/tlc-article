@@ -25,7 +25,6 @@
 \RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
 \RequirePackage[utf8]{inputenc}%
-\RequirePackage{babel}%
 \RequirePackage[colorlinks]{hyperref}%
 \RequirePackage{bookmark}%
 % ------------------------------------------------------------------------------
