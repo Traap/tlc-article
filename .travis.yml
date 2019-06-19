@@ -17,7 +17,7 @@ addons:
     - pgf
 script:
 - mkdir _build
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build GettingStarted.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build tlc-article.texx 
 deploy:
   provider: releases
   skip_cleanup: true
