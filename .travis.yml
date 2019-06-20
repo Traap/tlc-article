@@ -16,14 +16,14 @@ addons:
     - latex-xcolor
     - pgf
 script:
-- mkdir _build
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build tlc-article.texx 
+- mkdir doc
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory doc tlc-article.texx
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
     secure: JOUIFD22x6LVwYPDdRz740za6fHmn+Y6fLymUv+l5j65Y+i8vcOTkkaQ0z9peQ+eXjGItaSLD0gfe6JY4WsYYlDgscdCzhjTIlsuervLfmv7W4gQv3FbUT6BahEUu6GUE8sYOU0iSQh/jq8fyRum26LCUljMHJ8A6+f+/y9S8JeQp2WzKsZak5pbdeFB/ZbK3Ia6Lo3RLlD2qTleBWgbCC2lVFY7AhhmRwEbUAaVDyYF/I2vK4gLMUIDzTitwQSegKvpd0GNdync6GJiqMJdRPpy8z8/WHULLgsAOvoG5+1xyCLDfZ1TW7MQTf8VASjU0gtYI3tfJf8ME+CCtPAtw7m+yshOhmVDmy+cqGD5SJE18iFK3j+QR5/na8UEdTS8ws6NQcLL+6b8FgDZtZze8XwBG/dY3+2f7sssZN1n6AJgifnOZaGfpv1KMVJQn1nvIiE7IJFqSokywiiIO21PgwoiRyLfuJVgwm4jJr4A4kIRO1V7R4epvLMGeqnRGnWwKPicRjpbOE2WDGfwQVYQEq+yAKH5lMo7ta7bTzNSeZ9DKVZP5KB5KsiBfAYHpVSO8A1BFRUdV46zE1hbqohh9yHqKfE7l8oCnoLp3AblPldm2Pqpba3d5z5B/zsBhalAD7iIPh5C/CeHZV83T0XNritS2cXNnLh8Mxp6mH68Bgw=
-  file: _build/GettingStarted.pdf
+  file: doc/tlc-article.pdf
   on:
     tags: true
     branch: master
