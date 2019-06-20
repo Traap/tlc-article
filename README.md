@@ -1,4 +1,4 @@
-![tlc-article](data/logo.png)
+[tlc-article](data/logo.png)
 
 ---
 The goal of **tlc-article** is to simplify document layout.  **tlc-article**
