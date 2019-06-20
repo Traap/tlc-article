@@ -1,7 +1,6 @@
 name       | description
 appendix   | The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/section appendices.
 array      | An extended implementation of the array and tabular environments which extends the options for column formats, and provides `programmable' format specifications.
-babel      | This package manages culturally-determined typographical (and other) rules for a wide range of languages.
 csvsimple  | The package provides a simple \LaTeX\ interface for the processing of files with comma separated values (CSV); it relies on the key value syntax supported by pgfkeys to simplify usage.
 enumitem   | This package provides user control over the layout of the three basic list environments: enumerate, itemize and description.
 fancyhdr   | The package provides extensive facilities, both for constructing headers and footers, and for controlling their use (for example, at times when \LaTeX\ would automatically change the heading style in use).
@@ -9,7 +8,7 @@ fontenc    | The package allows the user to select font encodings, and for each 
 fontenc    | The package alows the user to select font encodings, and for each encoding provides an interface to `font-encoding specific' commands for each font.
 geometry   | The package provides an easy and flexible user interface to customize page layout, implementing auto-centering and auto-balancing mechanisms so that the users have only to give the least description for the page layout.
 geometry   | The package provides an easy and flexible user interface to customize page layout, implementing autocentering and auto-balancing mechanisms so that the users have only to give the least description for the page layout.
-glossaries | The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages. 
+glossaries | The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages.
 graphicx   | The package builds upon the graphics package, providing a key-value interface for optional arguments to the `includegraphics' command. This interface provides facilities that go far beyond what the graphics package offers on its own.
 hyperref   | The hyperref package is used to handle cross-referencing commands in \LaTeX\ to produce hypertext links in the document.
 hyperref   | The package is used to handle cross-referencing commands in \LaTeX\ to produce hypertext links in the document.
@@ -25,11 +24,11 @@ multicol   | Multicol defines a multicols environment which typesets text in mul
 parskip    | Simply changing `gparskip' and `parindent' leaves a layout that is untidy; this package (though it is no substitute for a properly-designed class) helps alleviate this untidiness.
 pdflscape  | The package adds PDF support to the landscape environment of package lscape, by setting the PDF /Rotate page attribute.
 pdfpages   | This package simplifies the inclusion of external multipage PDF documents in \LaTeX\ documents.
-pdf-pie    | Ths package provides the means to draw pie (and variant charts) using PGF/TikZ. 
+pdf-pie    | Ths package provides the means to draw pie (and variant charts) using PGF/TikZ.
 spverbatim | The spverbatim package provides an `gspverb' macro that is analogous to 'verb' and an spverbatim environment that is analogous to verbatim with the difference being that `spverb' and spverbatim allow \LaTeX\ to break lines at space characters.
 tabularx   | The package defines an environment tabularx, an extension of tabular which has an additional column designator, X, which creates a paragraph-like column whose width automatically expands so that the declared width of the environment is filled.
 textcomp   | The package supports the Text Companion fonts, which provide many text symbols (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen), in the TS1 encoding.
 titling    | The titling package provides control over the typesetting of the `gmaketitle' command and `thanks' commands, and makes the `title', `author' and `date' information permanently available.
 tocloft    | Provides control over the typography of the Table of Contents, List of Figures and List of Tables, and the ability to create new `List of ...'. The ToC `gparskip' may be changed.
-todonotes  | The package lets the user mark things to do later, in a simple and visually appealing way.  The package takes several options to enable customization / fine-tuning of the visual appearance. 
+todonotes  | The package lets the user mark things to do later, in a simple and visually appealing way.  The package takes several options to enable customization / fine-tuning of the visual appearance.
 xcolor     | The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors.

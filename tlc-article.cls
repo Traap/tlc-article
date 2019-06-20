@@ -1,11 +1,13 @@
 % ------------------------------------------------------------------------------
-% Class: tlc-article
+% Class:
+%   tlc-article
 %
-% Purpose: This LaTeX class provides an article implementation that standardizes
-% a document layout intended for formal documents.
+% Purpose:
+%   This LaTeX class provides an article implementation that standardizes
+%   a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2019/04/30 v1.0.11 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2019/06/20 v1.0.17 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -25,7 +27,6 @@
 \RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
 \RequirePackage[utf8]{inputenc}%
-\RequirePackage{babel}%
 \RequirePackage[colorlinks]{hyperref}%
 \RequirePackage{bookmark}%
 % ------------------------------------------------------------------------------
@@ -188,6 +189,7 @@
   {% Else: no operation because tlc@versionFile does not exist.
   }%
   \renewcommand{\headrulewidth}{0.1pt}%
+  %
   % Eliminate head height too small warning, which is occurring because
   % we are using multiple lines in our header.
   \setlength\headheight{34.0pt}%
