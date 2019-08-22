@@ -7,7 +7,7 @@
 %   a document layout intended for formal documents.
 % ------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2019/06/20 v1.0.17 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2019/08/21 v1.0.18 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -154,6 +154,11 @@
   \def\tlc@permission{\tlcVersionPart{\permission}}%
 }%
 {% Else: no operation because tlc@versionFile does not exist.
+  \def\tlc@version{\textcolor{red}{NOT USED}}%
+  \def\tlc@date{\textcolor{red}{NOT USED}}%
+  \def\tlc@status{\textcolor{red}{NOT USED}}%
+  \def\tlc@institution{\textcolor{red}{NOT USED}}%
+  \def\tlc@permission{\textcolor{red}{NOT USED}}%
 }%
 
 % ------------------------------------------------------------------------------
