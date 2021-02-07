@@ -1,56 +1,65 @@
-% ------------------------------------------------------------------------------
+% {{{ tlc-article
+%
 % Class:
 %   tlc-article
 %
 % Purpose:
 %   This LaTeX class provides an article implementation that standardizes
 %   a document layout intended for formal documents.
-% ------------------------------------------------------------------------------
+%
+% -------------------------------------------------------------------------- }}}
+% {{{ Base tlc-article definitions.
+
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2019/08/21 v1.0.18 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2021/02/07 v1.1.19 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
 
 \LoadClass{article}%
 
-% ------------------------------------------------------------------------------
-% Page layout
-% \RequirePackage{parskip}% Blank line after section break.
+% -------------------------------------------------------------------------- }}}
+% {{{ Page layout
+
 \RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}%
 \RequirePackage{multicol}%
-% \setlength{\parskip}{0.5em}%
 
-% ------------------------------------------------------------------------------
-% Required parts to use glossaries must come first.
+% -------------------------------------------------------------------------- }}}
+% {{{ Required parts to use glossaries must come first.
+
 \RequirePackage{lmodern}%
 \RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
 \RequirePackage[utf8]{inputenc}%
 \RequirePackage[colorlinks]{hyperref}%
 \RequirePackage{bookmark}%
-% ------------------------------------------------------------------------------
-% Define glossaries.
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Define glossaries.
+
 \RequirePackage[acronym,      % create 'acronym' glossary type,
                 nopostdot,    %
                 nonumberlist, %
                 style=altlist,% use altlist style
-                toc,          % add the gloassary to the table of contents.
+                toc,          % add the glossary to the table of contents.
                ]{glossaries}%
 
-% ------------------------------------------------------------------------------
-% Color, Graphics and links.
+% -------------------------------------------------------------------------- }}}
+% {{{ Color, Graphics and links.
+
 \RequirePackage{graphicx}%
 \RequirePackage[table]{xcolor}%
 \definecolor{darkblue}{rgb}{0,0,0.5}%
 
-% ------------------------------------------------------------------------------
-% Listings and verbatim
+% -------------------------------------------------------------------------- }}}
+% {{{ Listings and verbatim
+
 \RequirePackage{listings}%
 \RequirePackage{spverbatim}%
 
-% ------------------------------------------------------------------------------
-% Arrays, list and tables
+% -------------------------------------------------------------------------- }}}
+% {{{ Arrays, list and tables
+
 \RequirePackage{array}%
 \RequirePackage{csvsimple}%
 \RequirePackage{enumitem}%
@@ -59,46 +68,63 @@
 \RequirePackage{tabularx}%
 \setlength{\parindent}{0pt}%
 
-% ------------------------------------------------------------------------------
-% pdf
+% -------------------------------------------------------------------------- }}}
+% {{{ pdf
+
 \RequirePackage{pdflscape}%
 \RequirePackage{pdfpages}%
 
-% ------------------------------------------------------------------------------
-% Misc
+% -------------------------------------------------------------------------- }}}
+% {{{ Miscellaneous
+
 \RequirePackage[toc,page]{appendix}%
 \RequirePackage{todonotes}%
+\RequirePackage{ifthen}%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Define darkblue.
+%
 % This function is used to simplify making textcolor darkblue.
+
 \newcommand{\tlcDarkblue}[1]{\textcolor{darkblue}{#1}}%
 
-% ------------------------------------------------------------------------------
-% Define the optional input files.
+% -------------------------------------------------------------------------- }}}
+% {{{ Define the optional input files.
+
 \def\tlc@location{data}%
 \def\tlc@logoFile{\tlc@location/logo.png}%
 \def\tlc@versionFile{\tlc@location/version.csv}%
 \def\tlc@additionalLayout{\tlc@location/additional-layout.tex}%
 \def\tlc@headerFooter{\tlc@location/header-footer.tex}%
 
+% -------------------------------------------------------------------------- }}}
+% {{{ Column type definitions.
+
 % New column types: L, C, and R are Left, Center, and Right, respectively are
 % designed to use with longtable.  Data is wrapped within a table cell.   The
 % parameter defines the column width.  As an example, L{2cm} yields a Left
 % aligned, ragged right, wrapped text within a 2cm wide cell.
+
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}%
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash}p{#1}}%
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash}p{#1}}%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Define a few colors.
+%
 % We define colors that we would like to use throughout our documents.
+
 \definecolor{codegreen}{rgb}{0,0.6,0}%
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}%
 \definecolor{codepurple}{rgb}{0.58,0,0.82}%
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Landscpe definitions
+%
 % tlcBeginLandscape and tlcEndLandscape are two new commands used to simplify
 % setting page orientation to landscape and consistently setting margins.
+
 \newcommand{\tlcBeginLandscape}{%
   \begin{landscape}%
   \newgeometry{top=1in, bottom=1in,left=1in,right=1in}%
@@ -108,43 +134,55 @@
   \end{landscape}%
 }%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Table of Contents
 % We want our table of contents to use dots as a leader.
+
 \RequirePackage{tocloft}%
 \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Additional layout hook.
+
 % We want to allow the calling document to setup additional layout.
+
 \IfFileExists{\tlc@additionalLayout}%
   {\input{\tlc@additionalLayout}}%
   {}%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Header and Footers
+
 % Create a beautiful document header and document footer using the packages
 % listed below.
-\RequirePackage{fancyhdr}   % Page layout in \LaTeX
-\RequirePackage{titling}    % Control over \maketitle & \thanks
-\RequirePackage{lastpage}   % Page n of m
-\pagestyle{fancy}           % fancy page style
 
-% ------------------------------------------------------------------------------
+\RequirePackage{fancyhdr}%  Page layout in \LaTeX
+\RequirePackage{titling}%   Control over \maketitle & \thanks
+\RequirePackage{lastpage}%  Page n of m
+\pagestyle{fancy}%          fancy page style
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Define version file parts.
+
 % Extract document status, document date and document version from
 % \tlc@versionFile.
 % Argument:
 %   1 - the column name to extract from the data file.
+
 \newcommand{\tlcVersionPart}[1]{%
-  \csvreader[separator=pipe]%
-  {\tlc@versionFile}{%
-    1=\version,%
-    2=\date,%
-    3=\status,%
-    4=\institution,%
-    5=\permission%
+  \csvreader[separator=pipe]{%
+    \tlc@versionFile}{%
+      1=\version,%
+      2=\date,%
+      3=\status,%
+      4=\institution,%
+      5=\permission%
   }{#1}%
 }%
 
-% ------------------------------------------------------------------------------
-% Define extractions macros when \tlc@versionFile exists.
+% -------------------------------------------------------------------------- }}}
+% {{{ Define extractions macros when \tlc@versionFile exists.
+
 \IfFileExists{\tlc@versionFile}%
 {%
   \def\tlc@version{\tlcVersionPart{\version}}%
@@ -161,55 +199,95 @@
   \def\tlc@permission{\textcolor{red}{NOT USED}}%
 }%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Process Logo file. 
+
+% Typeset the logo in the left side of the document header.  Otherwise no 
+% operation because tlc@logoFile does not exist.
+
+\newcommand{\useLogoFile}{%
+  \IfFileExists{\tlc@logoFile}{%
+    \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+  }{}%
+}%
+
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Process Version file.
+  %
+  % Typeset version information in the right side of the document header.
+  %
+
+\newcommand{\useVersionFile}{%
+  \IfFileExists{\tlc@versionFile}{%
+    %
+    % document status, document date and document version.
+    %
+    \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
+    %
+    % document owner.  This maybe a person or company name.
+    %
+    \lfoot{\tiny \tlc@institution}%
+    %
+    % document license. This maybe a license or word like confidential.
+    %
+    \cfoot{\tiny \tlc@permission}%
+  }{%
+    % Else: no operation because tlc@versionFile does not exist.
+  }%
+}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Add a ruler to the header and footer. 
+
+% 1. Add a ruler to the header.
+% 2. Eliminate head height too small warning, which occurs because we are using
+%    multiple lines in our header.
+% 3. Apply page n o N to right side footer.
+% 4. Add a ruler to the footer.
+
+\newcommand{\useRuler}{%
+  \renewcommand{\headrulewidth}{0.1pt}%
+  \setlength\headheight{34.0pt}%
+  \rfoot{\tiny%
+    {Page \thepage~of~\pageref{LastPage}}%
+  }%
+  \renewcommand{\footrulewidth}{0.1pt}%
+}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Setup Header and Footer.
+%
 % We want to allow the calling document to override the headers and footers that
 % we are defining.
+
 \IfFileExists{\tlc@headerFooter}%
 { % use the customer header and footer defined by \tlc@headerfooter
  \input{\tlc@headerFooter}%
 }%
-{ % Else : header and footer applied to all pages.
-  \IfFileExists{\tlc@logoFile}%
-  { % Typeset the logo in the left side of the document header.
-    \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
-  }%
-  {% Else: no operation because tlc@logoFile does not exist.
-  }%
+{% Else : header and footer applied to all pages.
   %
-  % Typeset the title in the center of the document header.
-  %
-  \chead{\large{\thetitle}}%
-  %
-  % Typeset version information in the right side of the document header.
-  %
-  \IfFileExists{\tlc@versionFile}%
-  {%
-    % document status, document date and document version.
-    \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
-    % document owner.  This maybe a person or company name.
-    \lfoot{\tiny \tlc@institution}%
-    % document license. This maybe a license or word like confidential.
-    \cfoot{\tiny \tlc@permission}%
-  }%
-  {% Else: no operation because tlc@versionFile does not exist.
-  }%
-  \renewcommand{\headrulewidth}{0.1pt}%
-  %
-  % Eliminate head height too small warning, which is occurring because
-  % we are using multiple lines in our header.
-  \setlength\headheight{34.0pt}%
-  % footer applied to all pages.
-  \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}%
-  \renewcommand{\footrulewidth}{0.1pt}%
+  \useLogoFile%              Typeset Logo in the left side of the header.
+  \chead{\large{\thetitle}}% Typeset title in center of the header.
+  \useVersionFile%           Typeset version info in right side of the header.
+  \useRuler%                 Typeset header and footer with a ruler.
 }%
 
-% ------------------------------------------------------------------------------
-% We want our header and footer to remain consistent with a table of
+% -------------------------------------------------------------------------- }}}
+% {{{ Keep header and footer consistent with Table of Contents
+%
+% Keep We want our header and footer to remain consistent with a table of
 % contents that span multiple pages.
-\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}%
 
-% ------------------------------------------------------------------------------
+\AtBeginDocument{%
+  \addtocontents{toc}{\protect\thispagestyle{fancy}}%
+}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Colors and hypersetup. 
+%
 % We define colors that are used throughout the document.
+
 \definecolor{darkblue}{rgb}{0,0,0.5}%
 \hypersetup{%
   bookmarksopen   = true,%
@@ -232,8 +310,11 @@
   urlcolor        = darkblue%
 }%
 
-% ------------------------------------------------------------------------------
-% We define colors that are used when includeing code files (software).
+% -------------------------------------------------------------------------- }}}
+% {{{ tlc style
+
+% We define colors that are used when including code files (software).
+
 \lstdefinestyle{tlcStyle}{%
   backgroundcolor=\color{backcolour},%
   commentstyle=\color{codegreen},%
@@ -254,44 +335,68 @@
 }%
 \lstset{style=tlcStyle}%
 
-% ------------------------------------------------------------------------------
-% End Row : Generally applied to the end of a table row.
+% -------------------------------------------------------------------------- }}}
+% {{{ End Row
+%
+% Generally applied to the end of a table row.
+
 \newcommand{\ER}{\\ \hline}%
 
-% ------------------------------------------------------------------------------
-% Default vertical space
+% -------------------------------------------------------------------------- }}}
+% {{{ Default vertical space
+
 \newcommand{\tlcVspace}{\vspace{3mm}}%
 
-% ------------------------------------------------------------------------------
-% Macro to include a file if it exists.
+% -------------------------------------------------------------------------- }}}
+% {{{ Extract environment variables 
+
+% \RequirePackage{ifxetex,ifluatex}%
+\RequirePackage{catchfile}%
+
+\newcommand{\tlcGetEnv}[2][]{%
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
+  \if\relax\detokenize{#1}\relax\temp\else\let#1\temp\fi}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Macro to include a file if it exists.
 % 1 = the file path to input
+
 \newcommand{\inputIfExists}[1]{\IfFileExists{#1}{\input{#1}}{}}%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Table of Contents command
+%
 % Each document uses the same author name, title page and table of contents.
 % Arguments:
 %   1 - the title
 %   2 - the author
 %   3 - the abstract
+
 \newcommand{\tlcTitlePageAndTableOfContents}[3]{%
   \title{#1}%
   \author{#2}%
   \maketitle%
-  \begin{abstract}#3\end{abstract}%
+  \ifthenelse{\equal{#3}{}}% Check for Empty string.
+             {}% Do nothing.  Parameter is empty.
+             {\begin{abstract}#3\end{abstract}}%
   \tableofcontents%
   \thispagestyle{fancy}%
   \clearpage%
 }%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Debug commands
+%
 % We define tlcDebug to aid our users when they are debugging their document.
 % tlcDebug should be placed at the end of your document to allow LaTeX to
 % fully expand all macros and definitions.
+
 \newcommand{\tlcIsDefined}[1]%
 {\IfFileExists{#1}%
   {\textcolor{green}{DEFINED}}%
   {\textcolor{red}{NOT DEFINED}}%
 }%
+
 \newcommand{\tlcDebug}{%
   \clearpage%
   \section{tlc-article Debug}%
@@ -322,5 +427,10 @@
     \item[tlc@permission:] \tlc@permission%
   \end{description}%
 }%
-% ------------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------- }}}
+% {{{ The end
+
 \endinput%
+
+% -------------------------------------------------------------------------- }}}
