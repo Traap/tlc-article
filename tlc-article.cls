@@ -1,5 +1,4 @@
-% Trap
-% {{{ tlc-article
+% Trap {{{ tlc-article
 %
 % Class:
 %   tlc-article
