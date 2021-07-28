@@ -1,4 +1,4 @@
-% Trap {{{ tlc-article
+% {{{ tlc-article
 %
 % Class:
 %   tlc-article
@@ -21,6 +21,8 @@
 \ProcessOptions%
 
 \LoadClass{article}%
+
+\makeatletter%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Page layout
@@ -87,7 +89,7 @@
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Table of Contents
-% 
+%
 % We want our table of contents to use dots as a leader.
 
 \RequirePackage{tocloft}%
@@ -180,7 +182,7 @@
 \def\tlc@headerFooter{\tlc@location/header-footer.tex}%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: L, C, R 
+% {{{ Command: L, C, R
 
 % New column types: L, C, and R are Left, Center, and Right, respectively are
 % designed to use with longtable.  Data is wrapped within a table cell.   The
@@ -212,7 +214,7 @@
 \newcommand{\inputIfExists}[1]{\IfFileExists{#1}{\input{#1}}{}}%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: tlcBeginLandscape 
+% {{{ Command: tlcBeginLandscape
 %
 % tlcBeginLandscape and tlcEndLandscape are two new commands used to simplify
 % setting page orientation to landscape and consistently setting margins.
@@ -233,7 +235,7 @@
 \newcommand{\tlcDarkblue}[1]{\textcolor{darkblue}{#1}}%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: tlcDebug 
+% {{{ Command: tlcDebug
 %
 % We define tlcDebug to aid our users when they are debugging their document.
 % tlcDebug should be placed at the end of your document to allow LaTeX to
@@ -271,7 +273,7 @@
 }%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: tlcEndLandscape 
+% {{{ Command: tlcEndLandscape
 
 \newcommand{\tlcEndLandscape}{%
   \restoregeometry%
@@ -279,21 +281,21 @@
 }%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: tlcGetEnv
+% {{{ Command: tlcGetEnvironmentVariable
 %
 % A command to extract environment variables
-% 
+%
 % Arguments:
 %   1 - the LaTeX variable to set.
 %   2 - the environment variable to extract.
 %
 % Use:
-%   \tlcGetEnv{\someLaTeXVariable}{someEnviornmentVariable}
-%   \tlcGetEnv{\workingDir}{WORKINGDIR}
+%   \tlcGetEnvironmentVariable{\someLaTeXVariable}{someEnviornmentVariable}
+%   \tlcGetEnvironmentVariable{\workingDir}{WORKINGDIR}
 
 \RequirePackage{catchfile}%
 
-\newcommand{\tlcGetEnv}[2][]{%
+\newcommand{\tlcGetEnvironmentVariable}[2][]{%
   \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
   \if\relax\detokenize{#1}\relax\temp\else\let#1\temp\fi}%
 
@@ -312,7 +314,7 @@
 }%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: tlcVersionPart 
+% {{{ Command: tlcVersionPart
 
 % Extract document status, document date and document version from
 % tlc@versionFile.
@@ -321,7 +323,6 @@
 %   1 - the column name to extract from the data file.
 
 \newcommand{\tlcVersionPart}[1]{%
-  \csvreader[separator=pipe]{%
     \tlc@versionFile}{%
       1=\version,%
       2=\date,%
@@ -339,10 +340,10 @@
 \newcommand{\tlcVspace}{\vspace{3mm}}%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: tlcTitlePageAndTableOfContents 
+% {{{ Command: tlcTitlePageAndTableOfContents
 %
 % Each document uses the same author name, title page and table of contents.
-% 
+%
 %
 % Arguments:
 %   1 - the title
@@ -362,12 +363,13 @@
 }%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: useLogoFile 
+% {{{ Command: useLogoFile
 %
 % Typeset the logo in the left side of the document header.  Otherwise no
 % operation because tlc@logoFile does not exist.
 
 \newcommand{\useLogoFile}{%
+  \tlc@versionFile}{%
   \IfFileExists{\tlc@logoFile}{%
     \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }{}%
@@ -421,7 +423,7 @@
 }%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Hook: tlc@additionalLayout 
+% {{{ Hook: tlc@additionalLayout
 
 % We want to allow the calling document to setup additional layout.
 
@@ -463,7 +465,6 @@
  \input{\tlc@headerFooter}%
 }%
 {% Else : header and footer applied to all pages.
-  %
   \useLogoFile%              Typeset Logo in the left side of the header.
   \chead{\large{\thetitle}}% Typeset title in center of the header.
   \useVersionFile%           Typeset version info in right side of the header.
@@ -472,6 +473,8 @@
 
 % -------------------------------------------------------------------------- }}}
 % {{{ The end
+
+\makeatother%
 
 \endinput%
 
