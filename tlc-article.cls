@@ -15,14 +15,12 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2021/05/12 v1.1.19 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2021/08/03 v1.1.20 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
 
 \LoadClass{article}%
-
-\makeatletter%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Page layout
@@ -43,11 +41,11 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ Define glossaries.
 
-\RequirePackage[acronym,      % create 'acronym' glossary type,
-                nopostdot,    %
-                nonumberlist, %
-                style=altlist,% use altlist style
-                toc,          % add the glossary to the table of contents.
+\RequirePackage[acronym,      % Create 'acronym' glossary type.
+                nopostdot,    % Do not use post dots
+                nonumberlist, % Do not number list.
+                style=altlist,% use altlist style.
+                toc,          % Add the glossary to the table of contents.
                ]{glossaries}%
 
 % -------------------------------------------------------------------------- }}}
@@ -84,6 +82,7 @@
 % {{{ Miscellaneous
 
 \RequirePackage[toc,page]{appendix}%
+\setlength{\marginparwidth}{2cm}%
 \RequirePackage{todonotes}%
 \RequirePackage{ifthen}%
 
@@ -274,6 +273,8 @@
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: tlcEndLandscape
+%
+% Simplify ending landscape.
 
 \newcommand{\tlcEndLandscape}{%
   \restoregeometry%
@@ -315,21 +316,23 @@
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: tlcVersionPart
-
+%
 % Extract document status, document date and document version from
 % tlc@versionFile.
-
+%
 % Argument:
 %   1 - the column name to extract from the data file.
 
 \newcommand{\tlcVersionPart}[1]{%
-    \tlc@versionFile}{%
-      1=\version,%
-      2=\date,%
-      3=\status,%
-      4=\institution,%
-      5=\permission%
-  }{#1}%
+  \csvreader[separator=pipe]%
+  {\tlc@versionFile}%
+  {1=\version,%
+   2=\date,%
+   3=\status,%
+   4=\institution,%
+   5=\permission%
+  }%
+  {#1}%
 }%
 
 % -------------------------------------------------------------------------- }}}
@@ -363,18 +366,32 @@
 }%
 
 % -------------------------------------------------------------------------- }}}
+% {{{ Command: useDefaultHeaderFooter
+%
+% Constuct a beautiful header and footer.
+
+\newcommand{\useDefaultHeaderFooter}{%
+  \useLogoFile%              Typeset Logo in the left side of the header.
+  \chead{\large{\thetitle}}% Typeset title in center of the header.
+  \useVersionFile%           Typeset version info in right side of the header.
+  \useRuler%                 Typeset header and footer with a ruler.
+}%
+
+% -------------------------------------------------------------------------- }}}
 % {{{ Command: useLogoFile
 %
 % Typeset the logo in the left side of the document header.  Otherwise no
 % operation because tlc@logoFile does not exist.
 
 \newcommand{\useLogoFile}{%
-  \tlc@versionFile}{%
-  \IfFileExists{\tlc@logoFile}{%
+  \IfFileExists{\tlc@logoFile}%
+  {%
     \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
-  }{}%
+  }%
+  {%
+   % Else: no operation because tlc@logoFile does not exist.
+  }%
 }%
-
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: useRuler
@@ -391,9 +408,10 @@
 \newcommand{\useRuler}{%
   \renewcommand{\headrulewidth}{0.1pt}%
   \setlength\headheight{34.0pt}%
-  \rfoot{\tiny%
-    {Page \thepage~of~\pageref{LastPage}}%
-  }%
+  \rfoot%
+    {\tiny%
+      {Page \thepage~of~\pageref{LastPage}}%
+    }%
   \renewcommand{\footrulewidth}{0.1pt}%
 }%
 
@@ -402,38 +420,41 @@
 %
 % Typeset version information in the right side of the document header.
 
-
 \newcommand{\useVersionFile}{%
-  \IfFileExists{\tlc@versionFile}{%
-    %
-    % document status, document date and document version.
-    %
+  \IfFileExists{\tlc@versionFile}%
+  {%
+   %
+   % document status, document date and document version.
+   %
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
-    %
-    % document owner.  This maybe a person or company name.
-    %
+   %
+   % document owner.  This maybe a person or company name.
+   %
     \lfoot{\tiny \tlc@institution}%
-    %
-    % document license. This maybe a license or word like confidential.
-    %
+   %
+   % document license. This maybe a license or word like confidential.
+   %
     \cfoot{\tiny \tlc@permission}%
-  }{%
-    % Else: no operation because tlc@versionFile does not exist.
+  }%
+  {%
+   % Else: no operation because tlc@versionFile does not exist.
   }%
 }%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Hook: tlc@additionalLayout
-
+%
 % We want to allow the calling document to setup additional layout.
 
 \IfFileExists{\tlc@additionalLayout}%
   {\input{\tlc@additionalLayout}}%
-  {}%
+  {%
+   % Else: no operation because tlc@additionalLayout does not exist.
+  }%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Hook: tlc@versionFile
-
+%
 % Extract version parts when tlc@versionFile exists.
 
 \IfFileExists{\tlc@versionFile}%
@@ -461,20 +482,15 @@
 % we are defining.
 
 \IfFileExists{\tlc@headerFooter}%
-{ % use the customer header and footer defined by \tlc@headerfooter
- \input{\tlc@headerFooter}%
+{% use the customer header and footer defined by \tlc@headerfooter
+  \input{\tlc@headerFooter}%
 }%
-{% Else : header and footer applied to all pages.
-  \useLogoFile%              Typeset Logo in the left side of the header.
-  \chead{\large{\thetitle}}% Typeset title in center of the header.
-  \useVersionFile%           Typeset version info in right side of the header.
-  \useRuler%                 Typeset header and footer with a ruler.
+{% Else : user default header and footer
+  \useDefaultHeaderFooter%
 }%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ The end
-
-\makeatother%
 
 \endinput%
 

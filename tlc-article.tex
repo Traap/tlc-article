@@ -188,48 +188,64 @@ below:
 
 % ------------------------------------------------------------------------------
 \subsection{\tlcHF}
-In the absence of \tlcAL\, \tlcA\ has a builtin header and footer strategy that
+In the absence of \tlcHF, \tlcA\ has a builtin header and footer strategy that
 is base on \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\
 packages. The default implementation is show below:
 
 \begin{lstlisting}[basicstyle=\tiny]
+
 \IfFileExists{\tlc@headerFooter}%
-{ % use the customer header and footer defined by \tlc@headerfooter
- \input{\tlc@headerFooter}%
+{% use the customer header and footer defined by \tlc@headerfooter
+  \input{\tlc@headerFooter}%
 }%
-{ % Else : header and footer applied to all pages.
+{% Else : user default header and footer
+  \useDefaultHeaderFooter%
+}%
+
+\newcommand{\useDefaultHeaderFooter}{%
+  \useLogoFile%              Typeset Logo in the left side of the header.
+  \chead{\large{\thetitle}}% Typeset title in center of the header.
+  \useVersionFile%           Typeset version info in right side of the header.
+  \useRuler%                 Typeset header and footer with a ruler.
+}%
+
+\newcommand{\useLogoFile}{%
   \IfFileExists{\tlc@logoFile}%
-  { % Typeset the logo in the left side of the document header.
+  {%
     \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
-  {% Else: no operation because tlc@logoFile does not exist.
+  {%
+   % Else: no operation because tlc@logoFile does not exist.
   }%
-  %
-  % Typeset the title in the center of the document header.
-  %
-  \chead{\large{\thetitle}}%
-  %
-  % Typeset version information in the right side of the document header.
-  %
+}%
+
+\newcommand{\useVersionFile}{%
   \IfFileExists{\tlc@versionFile}%
   {%
-    % document status, document date and document version.
+   % document status, document date and document version.
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
-    % document owner.  This maybe a person or company name.
+   %
+   % document owner.  This maybe a person or company name.
     \lfoot{\tiny \tlc@institution}%
-    % document license. This maybe a license or word like confidential.
+   %
+   % document license. This maybe a license or word like confidential.
     \cfoot{\tiny \tlc@permission}%
   }%
-  {% Else: no operation because tlc@versionFile does not exist.
+  {%
+   % Else: no operation because tlc@versionFile does not exist.
   }%
+}%
+
+\newcommand{\useRuler}{%
   \renewcommand{\headrulewidth}{0.1pt}%
-  % Eliminate head height too small warning, which is occurring because
-  % we are using multiple lines in our header.
   \setlength\headheight{34.0pt}%
-  % footer applied to all pages.
-  \rfoot{\tiny{Page \thepage~of~\pageref{LastPage}}}%
+  \rfoot%
+    {\tiny%
+      {Page \thepage~of~\pageref{LastPage}}%
+    }%
   \renewcommand{\footrulewidth}{0.1pt}%
 }%
+
 \end{lstlisting}
 
 The default implementation can be overridden by defining \tlcHF.
