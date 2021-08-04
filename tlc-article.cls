@@ -1,4 +1,3 @@
-% {{{ tlc-article
 %
 % Class:
 %   tlc-article
@@ -75,7 +74,8 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ pdf
 
-\RequirePackage{pdflscape}%
+\RequirePackage{pdf-pie}%
+\RequirePackage{pdfpages}%
 \RequirePackage{pdfpages}%
 
 % -------------------------------------------------------------------------- }}}

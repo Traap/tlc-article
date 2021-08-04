@@ -1,9 +1,12 @@
 \documentclass[12pt]{tlc-article}
 
-% ------------------------------------------------------------------------------
+% {{{ Begin document
+
 \begin{document}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Abstract and Table of Contents
+
 \tlcTitlePageAndTableOfContents
   {tlc-article}
   {Gary Allan Howard}
@@ -12,7 +15,9 @@
    environment, describes the commands \tlcA\ implements, and reveals the
    packages \tlcA\ depends upon.}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Installation
+
 \section{Installation}
 This section describes how to install \tlcA\ either globally to make it
 available to your \LaTeX\ environment or locally to the document you are
@@ -20,7 +25,9 @@ authoring.  And, this section identifies the prerequisites you must meet in
 order to clone a repository from GitHub.com and install software on your
 computer.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Prerequisites
+
 \subsection{Prerequisites}
 The following prerequisites are needed.
 \begin{description}[style=nextline]
@@ -40,7 +47,9 @@ eval \$(ssh-agent -s)
 ssh-add ~/.ssh/your-private-key
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Local installation
+
 \subsection{Local installation}
 A local installation is done by installing \tlcA\ into
 /the/path/to/your/document.  Assuming your document is located at \tlcMyDoc\ the
@@ -54,7 +63,9 @@ mkdir $HOME/mydoc
 cp -v tlc-article.cls $HOME/mydoc/.
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Global installation
+
 \clearpage
 \subsection{Global installation}
 A global installation is done by installing \tlcA\ into your /path/to/your/texmf
@@ -70,19 +81,23 @@ sudo cp -v tlc-article.cls $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlc-arti
 sudo mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
 \end{lstlisting}
 
-\bigskip
+\tlcVspace
 
 \todo[inline]{%
   \tlcNote: You may remove your local installation by removing \tlcA.%
 }%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ General Use Case
+
 \clearpage
 \section{General Use Case}
 The goal of \tlcA\ is to simplify document layout.  \tlcA\ orchestrates a
 logical arrangement for document header, footer, author, abstract, table of
 contents, and margins.  The following sections outline the default
 implementation for each part \tlcA\ organizes.
+
+\tlcVspace
 
 \tlcNote\ This document was typeset using the instructions provided throughout
 this section.
@@ -95,8 +110,10 @@ this section.
   \label{fig:layout}
 \end{figure}
 
-% ------------------------------------------------------------------------------
-\subsection{documentclass \tlcA}
+% -------------------------------------------------------------------------- }}}
+% {{{ Document Class
+
+\subsection{Document Class \tlcA}
 \tlcA\ extends the article document class.  \tlcA\ provide options directly to
 the article document class.  As an example, the Author can specify the font as
 follows:
@@ -105,7 +122,9 @@ follows:
   \documentclass[12pt]{tlc-article}
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Title, Author, and Abstract
+
 \subsection{Title, Author \& Abstract} \label{sec:TAA}
 \tlcA\ has a macro \tlcTOC\ that can be used to set the document title, document
 author, document abstract, and establish the Table of Contents.  The sample
@@ -118,28 +137,32 @@ below reveals how to use \tlcTOC.
      {Document Abstract}
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Table of Contents
+
 \subsection{Table of Contents}
 The Table of Contents immediately follows the document abstract on page 1, uses
 dark blue for content, dots separate table of contents sections and page number,
 and uses roman numerals.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Header and Footer
+
 \subsection{Header \& Footer}
 fancyhdr is used to render the header and footer.  The Author can override the
 \tlcA\ by providing an implementation in \tlcHF\, or augment \tlcA\
 application by providing \tlcVE. The sections below show the placement \tlcA\
 uses when writing objects, and where the objects are defined.
 
-\bigskip
+\tlcVspace
 
 \todo[inline]{%
   \tlcNote: \tlcA\ ignores \tlcVE\ when \tlcHF\ is defined.
 }%
 
+% -------------------------------------------------------------------------- }}}
+% {{{ Header
 
-
-% ------------------------------------------------------------------------------
 \subsubsection*{Header}
 \begin{description}
   \item[lhead] When \tlcLG\ is found, logo.
@@ -147,7 +170,9 @@ uses when writing objects, and where the objects are defined.
   \item[rhead] When \tlcVE\ is present, status, date, and version columns.
 \end{description}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Footer
+
 \subsubsection*{Footer}
 \begin{description}
   \item[lfoot] When \tlcVE\ is present, institution column.
@@ -155,26 +180,32 @@ uses when writing objects, and where the objects are defined.
   \item[rfoot] Page 1 of N.
 \end{description}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Rule width
+
 \subsubsection*{Rule width}
 A 0.1pt rule width is placed below the document header and above the document
 footer.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Customization
+
 \clearpage
 \section{Customization}
 This section describes how \tlcA\ can be customized by using the file-hooks
 \tlcA\ check for.  \tlcA\ default implementation will be used when the
 file-hooks are not found.
 
-\bigskip
+\tlcVspace
 
 \todo[inline]{%
   \tlcNote: \tlcA\ consumes \tlcAL\ \& \tlcHF\ during the preamble compilation
   phase.
 }%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/additional-layout.tex
+
 \subsection{\tlcAL}
 \tlcA\ will use whatever \LaTeX\ definitions are found in \tlcAL\ when it
 exists.  The file-check is shown
@@ -186,7 +217,9 @@ below:
     {}
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/header-footer.tex
+
 \subsection{\tlcHF}
 In the absence of \tlcHF, \tlcA\ has a builtin header and footer strategy that
 is base on \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\
@@ -257,7 +290,9 @@ The default implementation can be overridden by defining \tlcHF.
   the defaults from document-class \tlcDarkblue{article}.
 }%
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/version.csv
+
 \clearpage
 \subsection{\tlcVE} \label{sec:version}
 \tlcA\ will populate the builtin header and footer with information extracted
@@ -315,34 +350,50 @@ The exaction methods are shown below.
   }
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/logo.png
+
 \subsection{\tlcLG}
 \tlcA\ will typeset the lhead area with \tlcLG\ when it is present. Make sure
 your logo's height is not larger than 34pt to avoid `Package Fancyhdr Warning:
 \\headheight is to small' warning.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Definitions and Commands
+
 \clearpage
 \section{Definitions \& Commands}
+
+% -------------------------------------------------------------------------- }}}
+% {{{ tlcBeginLandscape
+
 \subsection{\tlcBL}
 Page layout is rotated 90\textdegree\ clockwise resulting in a landscape page
 orientation.  Landscape orientation remains active until \tlcEL.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ tlcEndLandscape
+
 \subsection{\tlcEL}
 Page layout is returned to portrait orientation when \tlcEL\ is reached.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ tlcDarkblue
+
 \subsection{\tlcDB}
 \tlcDB\ is used throughout this document to render text using rbg\{0,0,0.5\}.
 \tlcDB\ is safe to use within your document.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ tlcTitlePageAndTableOfContents
+
 \subsection{\tlcTOC}
 \tlcTOC\ creates the document layout shown in Figure \ref{fig:layout}.  Section
 \ref{sec:TAA} shows an example implementation.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ newcolumntype type: L, C and R
+
 \subsection{\tlcNCT}
 New \tlcNCT\ are Left, Center, and Right, respectively are
 designed to use with longtable.  Data is wrapped within a table cell.   The
@@ -355,18 +406,24 @@ aligned, ragged right, wrapped text within a 2cm wide cell.
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash}p{#1}}
 \end{lstlisting}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/additional-layout.tex
+
 \subsection{\tlcAL}
 \tlcAL\ is an architectural hook the Author should use when it becomes necessary
 to use packages not provided by \tlcA\, and to design commands that are specific
 to your document.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/.tex
+
 \subsection{\tlcHF}
 \tlcHF\ is an architectural hook the Author should use to completely override
 the document layout \tlcA\ implements.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/version.csv
+
 \clearpage
 \subsection{\tlcVE}
 \tlcVE\ is by used \tlcA\ to populate the document header \& footer.  Refer to
@@ -382,11 +439,15 @@ from \tlcVE\ in your \tlcHF.
   \item \tlcPC\
 \end{enumerate}
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ data/logo.png
+
 \subsection{\tlcLG}
 \tlcA\ places \tlcLG\ in your header when defined.
 
-% ------------------------------------------------------------------------------
+% -------------------------------------------------------------------------- }}}
+% {{{ Required Packages
+
 \clearpage
 \section{Required Packages}
 This section documents the dependencies of the required package tlc-article has.
@@ -396,6 +457,7 @@ the package name and press the search button to learn more about each package.
 
 % Render pckFile using pckStyle as a longtable.
 \csvreader[tlcPkgStyle, separator=pipe]{\tlcPkgFile}{}{\name & \description}
-% ------------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------- }}}
 
 \end{document}
