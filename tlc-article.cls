@@ -74,7 +74,7 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ pdf
 
-\RequirePackage{pdf-pie}%
+\RequirePackage{pgf-pie}%
 \RequirePackage{pdfpages}%
 \RequirePackage{pdfpages}%
 
