@@ -4,13 +4,13 @@
 # Usage:
 #   deploy tlc-article.cls
 #
-# Note:  
-#   I use this script to test my deployment before publishing with CTAN. 
+# Note:
+#   I use this script to test my deployment before publishing with CTAN.
 # ------------------------------------------------------------------------------
 main() {
-  mkdir -vp $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}
-  cp -v $1 $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}/. 
-  mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
+  sudo mkdir -vp $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}
+  sudo cp -v $1 $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/${1%.}/.
+  sudo mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
 }
 
 # ------------------------------------------------------------------------------
