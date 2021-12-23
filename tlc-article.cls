@@ -1,4 +1,3 @@
-% {{{
 %
 % Class:
 %   tlc-article
@@ -8,7 +7,7 @@
 %   a document layout intended for formal documents.
 %
 % Note:
-%   I use 'set foldmethod=market' in my vimrrc to enable folding when viewing or
+%   I use 'set foldmethod=mark' in my vimrrc to enable folding when viewing or
 %   editing this file.
 %
 % -------------------------------------------------------------------------- }}}
@@ -32,9 +31,9 @@
 % {{{ Required parts to use glossaries must come first.
 
 \RequirePackage{lmodern}%
-\RequirePackage[T1]{fontenc}%
 \RequirePackage{textcomp}%
 \RequirePackage[utf8]{inputenc}%
+\RequirePackage[T1]{fontenc}%
 \RequirePackage[colorlinks]{hyperref}%
 \RequirePackage{bookmark}%
 
@@ -75,9 +74,13 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ pdf
 
+\RequirePackage{pdfpages}%
+\RequirePackage{pdfpages}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Pie Charts
+
 \RequirePackage{pgf-pie}%
-\RequirePackage{pdfpages}%
-\RequirePackage{pdfpages}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Miscellaneous
