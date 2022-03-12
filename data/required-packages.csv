@@ -1,8 +1,10 @@
 name       | description
+a4paper    | Provides support for A4 paper sizes, superseding a \LaTeX\ 2.09 package of the same name (the package was developed from a now-extinct package called a4dutch).
+acronym    | This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks.
 appendix   | The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/section appendices.
 array      | An extended implementation of the array and tabular environments which extends the options for column formats, and provides `programmable' format specifications.
-bookmark   |
-catchfile  |
+bookmark   | This package implemetns a new bookmark (outline) organization for package hyperref.
+catchfile  | This package catches the contents of a file and pts it in a macro.
 csvsimple  | The package provides a simple \LaTeX\ interface for the processing of files with comma separated values (CSV); it relies on the key value syntax supported by pgfkeys to simplify usage.
 enumitem   | This package provides user control over the layout of the three basic list environments: enumerate, itemize and description.
 fancyhdr   | The package provides extensive facilities, both for constructing headers and footers, and for controlling their use (for example, at times when \LaTeX\ would automatically change the heading style in use).
@@ -11,7 +13,7 @@ geometry   | The package provides an easy and flexible user interface to customi
 glossaries | The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages.
 graphicx   | The package builds upon the graphics package, providing a key-value interface for optional arguments to the `includegraphics' command. This interface provides facilities that go far beyond what the graphics package offers on its own.
 hyperref   | The package is used to handle cross-referencing commands in \LaTeX\ to produce hypertext links in the document.
-ifthen     |
+ifthen     | The package's basic command is \\ifthenelse, which can use a wide array of tests.
 inputenc   | The package translates various standard and other input encodings into a \LaTeX\ internal language. The internal language is expressed entirely in \TeX\'s base encoding (standard ASCII printable characters, carriage control tokens and \TeX\ control sequences, the latter mostly defined by \LaTeX).
 lastpage   | Reference the number of pages in your \LaTeX\ document through the introduction of a new label which can be referenced like `gpageref{LastPage}' to give a reference to the last page of a document.
 listings   | The package enables the user to typeset programs (programming code) within \LaTeX; the source code is read directly by \TeX\ -- no frontend processor is needed.
