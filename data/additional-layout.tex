@@ -1,14 +1,11 @@
+% {{{ Purpose
+%
 % This use case demonstrates tlc-article being extended.  All definitions are
 % process during preamble phase.  In other words, before your \begin{document}
 % statement.
 
-% ------------------------------------------------------------------------------
-% \makeatletter is used so we can reference commands and definitions defined by
-% tlc-article, which are all prefaced with tlc@.
-\makeatletter
-
-% ------------------------------------------------------------------------------
-% tlc-article.tex (Getting Starting) definitions.
+% -------------------------------------------------------------------------- }}}
+% {{{ tlc-article.tex (Getting Starting) definitions.
 
 \def\tlcProduct{tlc-article}%
 
@@ -46,15 +43,20 @@
 \def\tlcPkgFile{data/required-packages.csv}%
 \def\tlcNote{\tlcDarkblue{Note}}%
 
-% ------------------------------------------------------------------------------%
-% Define the column names used by csvreader when reading \packageFile.
+% -------------------------------------------------------------------------- }}}
+% {{{ Package file column names.
+
 \csvnames{tlcPkgNames}{
    1=\name
   ,2=\description
 }
 
+% -------------------------------------------------------------------------- }}}
+% {{{ Package file table definition.
+%
 % Define the table style used to report the required package names and
 % descriptions.
+
 \csvstyle{tlcPkgStyle}{
   longtable=|L{3cm}|L{12cm}|
   ,table head=\hline Name & Description\\\hline\hline\endhead
@@ -62,4 +64,4 @@
   ,tlcPkgNames
 }
 
-% ------------------------------------------------------------------------------%
+% -------------------------------------------------------------------------- }}}
