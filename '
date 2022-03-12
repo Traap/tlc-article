@@ -9,10 +9,8 @@
 
 main() {
   [[ $# -eq 0 ]] && { echo "Usage: $0 filename"; exit 1; }
-
-  sudo mkdir -vp $(kpsewhich -var-value TEXMFDIST)/tex/latex/${1%.*}
-  sudo cp -v $1  $(kpsewhich -var-value TEXMFDIST)/tex/latex/${1%.*}/.
-  sudo mktexlsr  $(kpsewhich -var-value TEXMFDIST)
+  echo "Filename w/  extension: ${1}"
+  echo "Filename w/o extension: ${1%.}"
 }
 
 # -------------------------------------------------------------------------- }}}
