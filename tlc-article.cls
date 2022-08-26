@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2022/03/12 v1.2.23 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2022/08/28 v1.2.24 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -351,7 +351,6 @@
 %
 % Each document uses the same author name, title page and table of contents.
 %
-%
 % Arguments:
 %   1 - the title
 %   2 - the author
@@ -372,7 +371,7 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: useDefaultHeaderFooter
 %
-% Constuct a beautiful header and footer.
+% Construct a beautiful header and footer.
 
 \newcommand{\useDefaultHeaderFooter}{%
   \useLogoFile%              Typeset Logo in the left side of the header.
@@ -404,8 +403,8 @@
 %
 % Steps:
 %   1. Add a ruler to the header.
-%   2. Eliminate head height too small warning, which occurs because we are using
-%      multiple lines in our header.
+%   2. Eliminate head height too small warning, which occurs because we are
+%      using multiple lines in our header.
 %   3. Apply page n o N to right side footer.
 %   4. Add a ruler to the footer.
 
