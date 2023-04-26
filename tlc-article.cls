@@ -67,7 +67,6 @@
 \RequirePackage{array}%
 \RequirePackage{csvsimple}%
 \RequirePackage{paralist}%
-% \RequirePackage{enumitem}%
 \RequirePackage{longtable}%
 \RequirePackage{makecell}%
 \RequirePackage{tabularx}%
