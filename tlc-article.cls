@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2022/08/28 v1.2.24 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2023/05/29 v1.2.25 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
