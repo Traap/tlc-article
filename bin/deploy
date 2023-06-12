@@ -7,17 +7,17 @@
 # Note:
 #   I use this script to test my deployment before publishing with CTAN.
 
-main() {
+deploy() {
   [[ $# -eq 0 ]] && { echo "Usage: $0 filename"; exit 1; }
 
-  sudo mkdir -vp $(kpsewhich -var-value TEXMFDIST)/tex/latex/${1%.*}
-  sudo cp -v $1  $(kpsewhich -var-value TEXMFDIST)/tex/latex/${1%.*}/.
-  sudo mktexlsr  $(kpsewhich -var-value TEXMFDIST)
+  bin/sayAndDo "sudo mkdir -vp $(kpsewhich -var-value TEXMFDIST)/tex/latex/${1%.*}"
+  bin/sayAndDo "sudo cp -v $1  $(kpsewhich -var-value TEXMFDIST)/tex/latex/${1%.*}/."
+  bin/sayAndDo "sudo mktexlsr  $(kpsewhich -var-value TEXMFDIST)"
 }
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Kick start start this script.
 
-main $@
+deploy "$@"
 
 # -------------------------------------------------------------------------- }}}
