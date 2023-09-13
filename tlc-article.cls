@@ -429,6 +429,7 @@
    %
    % document status, document date and document version.
    %
+    \lhead{}%
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
    %
    % document owner.  This maybe a person or company name.
