@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2023/06/12 v1.2.26 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2023/09/17 v1.2.34 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -185,8 +185,15 @@
 \def\tlc@headerFooter{\tlc@location/header-footer.tex}%
 
 % -------------------------------------------------------------------------- }}}
-% {{{ Command: L, C, R
+% {{{ Clear fancy header and footers.
 
+\fancyhead[L,C,R]{}
+\fancyfoot[L,C,R]{}
+% \lhead{}\chead{}\rhead{}%
+% \lfoot{}\cfoot{}\rfoot{}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Command: L, C, R
 % New column types: L, C, and R are Left, Center, and Right, respectively are
 % designed to use with longtable.  Data is wrapped within a table cell.   The
 % parameter defines the column width.  As an example, L{2cm} yields a Left
@@ -357,15 +364,28 @@
 %   3 - the abstract
 
 \newcommand{\tlcTitlePageAndTableOfContents}[3]{%
-  \title{#1}%
-  \author{#2}%
-  \maketitle%
-  \ifthenelse{\equal{#3}{}}% Check for Empty string.
-             {}% Do nothing.  Parameter is empty.
-             {\begin{abstract}#3\end{abstract}}%
-  \tableofcontents%
-  \thispagestyle{fancy}%
-  \clearpage%
+    \ifthenelse{\equal{#1}{}}{% title check
+      \title{}%
+    }{% Else: title
+      \title{#1}
+    }%
+    \ifthenelse{\equal{#2}{}}{% author check
+      \author{}%a
+    }{% Else: author
+      \author{#2}
+    }%
+    \maketitle%
+    \ifthenelse{\equal{#3}{}}{% abstract check
+      % noop: nothing
+    }{% Else: abstract
+      % \vspace{3mm}% Virtical spacing.
+      \begin{abstract}#3\end{abstract}%
+    }%
+    \thispagestyle{empty}%
+    \clearpage%
+    \tableofcontents%
+    \clearpage%
+  % \end{titlepage}
 }%
 
 % -------------------------------------------------------------------------- }}}
@@ -375,7 +395,7 @@
 
 \newcommand{\useDefaultHeaderFooter}{%
   \useLogoFile%              Typeset Logo in the left side of the header.
-  \chead{\large{\thetitle}}% Typeset title in center of the header.
+  \useTitle%                 Typeset thetile in the center of the header
   \useVersionFile%           Typeset version info in right side of the header.
   \useRuler%                 Typeset header and footer with a ruler.
 }%
@@ -389,7 +409,7 @@
 \newcommand{\useLogoFile}{%
   \IfFileExists{\tlc@logoFile}%
   {%
-    \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+    \fancyhead[L]{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
   {%
    % Else: no operation because tlc@logoFile does not exist.
@@ -429,20 +449,29 @@
    %
    % document status, document date and document version.
    %
-    \lhead{}%
-    \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
+    \fancyhead[L]{}
+    \fancyhead[R]{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
    %
    % document owner.  This maybe a person or company name.
    %
-    \lfoot{\tiny \tlc@institution}%
+    \fancyfoot[L]{\tiny \tlc@institution}%
    %
    % document license. This maybe a license or word like confidential.
    %
-    \cfoot{\tiny \tlc@permission}%
+    \fancyfoot[C]{\tiny \tlc@permission}%
   }%
   {%
    % Else: no operation because tlc@versionFile does not exist.
   }%
+}%
+
+% -------------------------------------------------------------------------- }}}
+% {{{ Command: useTitle
+%
+% Typeset title in the center of the header.
+
+\newcommand{\useTitle}{%
+  \fancyhead[C]{\large{\thetitle}}%
 }%
 
 % -------------------------------------------------------------------------- }}}
@@ -451,13 +480,13 @@
 % We want to allow the calling document to setup additional layout.
 
 \IfFileExists{\tlc@additionalLayout}%
-  {\input{\tlc@additionalLayout}}%
-  {%
-   % Else: no operation because tlc@additionalLayout does not exist.
-  }%
+{\input{\tlc@additionalLayout}}%
+{%
+  % Else: no operation because tlc@additionalLayout does not exist.
+}%
 
-% -------------------------------------------------------------------------- }}}
 % {{{ Hook: tlc@versionFile
+% -------------------------------------------------------------------------- }}}
 %
 % Extract version parts when tlc@versionFile exists.
 
@@ -485,13 +514,15 @@
 % We want to allow the calling document to override the headers and footers that
 % we are defining.
 
-\IfFileExists{\tlc@headerFooter}%
-{% use the customer header and footer defined by \tlc@headerfooter
-  \input{\tlc@headerFooter}%
-}%
-{% Else : user default header and footer
-  \useDefaultHeaderFooter%
-}%
+% \newcommand{\tlcSetupHeaderAndFooter}{%
+  \IfFileExists{\tlc@headerFooter}%
+  {% use the customer header and footer defined by \tlc@headerfooter
+    \input{\tlc@headerFooter}%
+  }%
+  {% Else : user default header and footer
+    \useDefaultHeaderFooter%
+  }%
+% }%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ The end
