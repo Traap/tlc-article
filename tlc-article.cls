@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2023/09/17 v1.2.34 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2023/09/17 v1.2.35 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -255,7 +255,8 @@
   \clearpage%
   \section{tlc-article Debug}%
   \subsection{tlc-article default files}%
-  \begin{description}[align=right,leftmargin=*,labelindent=5cm]%
+
+  \begin{description}[align=right,labelindent=5cm]%
     \item[tlc@location:]\tlc@location%
     \item[tlc@additionalLayout:]\tlc@additionalLayout%
     \item[tlc@headerFooter:]\tlc@headerFooter%
@@ -265,7 +266,7 @@
   \end{description}%
   %
   \subsection{tlc-article file hooks}%
-  \begin{description}[align=right,leftmargin=*,labelindent=5cm]%
+  \begin{description}[align=right,labelindent=5cm]%
     \item [tlc@additionalLayout:]\tlcIsDefined{\tlc@additionalLayout}%
     \item [tlc@headerFooter:]\tlcIsDefined{\tlc@headerFooter}%
     \item [tlc@logoFile:]\tlcIsDefined{\tlc@logoFile}%
@@ -273,7 +274,7 @@
   \end{description}%
   %
   \subsection{tlc-article header and footer hooks}%
-  \begin{description}[align=right,leftmargin=*,labelindent=5cm]%
+  \begin{description}[align=right,labelindent=5cm]%
     \item[tlc@version:] \tlc@version%
     \item[tlc@date:] \tlc@date%
     \item[tlc@status:] \tlc@status%
@@ -431,7 +432,7 @@
 \newcommand{\useRuler}{%
   \renewcommand{\headrulewidth}{0.1pt}%
   \setlength\headheight{34.0pt}%
-  \rfoot%
+  \fancyfoot[R]%
     {\tiny%
       {Page \thepage~of~\pageref{LastPage}}%
     }%
