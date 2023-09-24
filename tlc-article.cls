@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2023/09/17 v1.2.35 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2023/09/21 v1.2.36 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -65,7 +65,7 @@
 % {{{ Arrays, list and tables
 
 \RequirePackage{array}%
-\RequirePackage{csvsimple}%
+\RequirePackage[l3]{csvsimple}%
 \RequirePackage{enumitem}%
 \RequirePackage{longtable}%
 \RequirePackage{makecell}%
