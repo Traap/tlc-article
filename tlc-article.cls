@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2023/09/21 v1.2.36 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2023/09/25 v1.2.38 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -189,8 +189,6 @@
 
 \fancyhead[L,C,R]{}
 \fancyfoot[L,C,R]{}
-% \lhead{}\chead{}\rhead{}%
-% \lfoot{}\cfoot{}\rfoot{}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: L, C, R
@@ -450,7 +448,6 @@
    %
    % document status, document date and document version.
    %
-    \fancyhead[L]{}
     \fancyhead[R]{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
    %
    % document owner.  This maybe a person or company name.
@@ -515,15 +512,13 @@
 % We want to allow the calling document to override the headers and footers that
 % we are defining.
 
-% \newcommand{\tlcSetupHeaderAndFooter}{%
-  \IfFileExists{\tlc@headerFooter}%
-  {% use the customer header and footer defined by \tlc@headerfooter
-    \input{\tlc@headerFooter}%
-  }%
-  {% Else : user default header and footer
-    \useDefaultHeaderFooter%
-  }%
-% }%
+\IfFileExists{\tlc@headerFooter}%
+{% use the customer header and footer defined by \tlc@headerfooter
+  \input{\tlc@headerFooter}%
+}%
+{% Else : user default header and footer
+  \useDefaultHeaderFooter%
+}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ The end
