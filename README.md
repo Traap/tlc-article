@@ -24,7 +24,7 @@ cp -v tlc-article.cls $HOME/mydoc/.
 ```
 
 ### Global Installation
-This is the [deploymnet](https://github.com/Traap/tlc-article/blob/tlc-47/bin/deploy)
+This is the [deployment](https://github.com/Traap/tlc-article/blob/master/bin/deploy)
 strategy that I use prior to releasing to CTAN.
 
 ```bash
