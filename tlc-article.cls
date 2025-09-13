@@ -27,6 +27,7 @@
 
 \RequirePackage[a4paper,top=1.0in,bottom=1.0in,left=1.0in,right=1.0in]{geometry}%
 \RequirePackage{multicol}%
+\RequirePackage{multirow}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Required parts to use glossaries must come first.
