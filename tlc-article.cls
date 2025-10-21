@@ -81,7 +81,7 @@
 % {{{ Pie Charts
 
 \RequirePackage{pgf-pie}%
-\RequirePackage{pdflanscape}%
+\RequirePackage{pdflscape}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Miscellaneous
