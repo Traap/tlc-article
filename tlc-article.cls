@@ -1,4 +1,4 @@
-% {{{ tlc-article
+% {{{ tlc-articlem
 %
 % Class:
 %   tlc-article
@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2023/09/25 v1.2.38 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2025/10/20 v1.2.39 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -54,7 +54,6 @@
 
 \RequirePackage{graphicx}%
 \RequirePackage[table]{xcolor}%
-\definecolor{darkblue}{rgb}{0,0,0.5}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Listings and verbatim
@@ -82,6 +81,7 @@
 % {{{ Pie Charts
 
 \RequirePackage{pgf-pie}%
+\RequirePackage{pdflanscape}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Miscellaneous
@@ -101,7 +101,7 @@
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Header and Footers
-
+%
 % Create a beautiful document header and document footer using the packages
 % listed below.
 
@@ -193,6 +193,7 @@
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: L, C, R
+%
 % New column types: L, C, and R are Left, Center, and Right, respectively are
 % designed to use with longtable.  Data is wrapped within a table cell.   The
 % parameter defines the column width.  As an example, L{2cm} yields a Left
@@ -261,7 +262,6 @@
     \item[tlc@headerFooter:]\tlc@headerFooter%
     \item[tlc@versionFile:]\tlc@versionFile%
     \item[tlc@logoFile:]\tlc@logoFile%
-    \item[tlc@versionFile:]\tlc@versionFile%
   \end{description}%
   %
   \subsection{tlc-article file hooks}%
@@ -517,7 +517,7 @@
 {% use the customer header and footer defined by \tlc@headerfooter
   \input{\tlc@headerFooter}%
 }%
-{% Else : user default header and footer
+{% Else: user default header and footer
   \useDefaultHeaderFooter%
 }%
 
