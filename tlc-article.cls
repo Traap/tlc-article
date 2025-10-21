@@ -15,7 +15,7 @@
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2025/10/20 v1.2.39 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2025/10/20 v1.2.40 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -308,8 +308,25 @@
 \RequirePackage{catchfile}%
 
 \newcommand{\tlcGetEnvironmentVariable}[2][]{%
-  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
-  \if\relax\detokenize{#1}\relax\temp\else\let#1\temp\fi}%
+  % Guard against missing kpsewhich executable.
+  \IfFileExists{\detokenize{kpsewhich}}{%
+    % Normal behavior: capture value from kpsewhich.
+    \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
+    \if\relax\detokenize{#1}\relax
+      \temp
+    \else
+      \let#1\temp
+    \fi
+  }{%
+    % Fallback: kpsewhich not found — define a placeholder.
+    \PackageWarning{tlc-article}{kpsewhich not found. Using EMPTY value for #2.}%
+    \if\relax\detokenize{#1}\relax
+      \textcolor{red}{<undefined>}%
+    \else
+      \def#1{\textcolor{red}{<undefined>}}%
+    \fi
+  }%
+}%
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: tlcIsDefined
