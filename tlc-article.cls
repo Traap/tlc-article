@@ -291,41 +291,30 @@
   \restoregeometry%
   \end{landscape}%
 }%
-
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: tlcGetEnvironmentVariable
 %
-% A command to extract environment variables
-%
-% Arguments:
-%   1 - the LaTeX variable to set.
-%   2 - the environment variable to extract.
-%
-% Use:
-%   \tlcGetEnvironmentVariable{\someLaTeXVariable}{someEnviornmentVariable}
-%   \tlcGetEnvironmentVariable{\workingDir}{WORKINGDIR}
+% Robust version that actually tests if kpsewhich runs successfully.
 
 \RequirePackage{catchfile}%
 
 \newcommand{\tlcGetEnvironmentVariable}[2][]{%
-  % Guard against missing kpsewhich executable.
-  \IfFileExists{\detokenize{kpsewhich}}{%
-    % Normal behavior: capture value from kpsewhich.
-    \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
-    \if\relax\detokenize{#1}\relax
-      \temp
-    \else
-      \let#1\temp
-    \fi
-  }{%
-    % Fallback: kpsewhich not found — define a placeholder.
-    \PackageWarning{tlc-article}{kpsewhich not found. Using EMPTY value for #2.}%
-    \if\relax\detokenize{#1}\relax
-      \textcolor{red}{<undefined>}%
-    \else
-      \def#1{\textcolor{red}{<undefined>}}%
-    \fi
-  }%
+  % Attempt to capture the value. kpsewhich returns an empty string on failure.
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2 2>/dev/null"}{\endlinechar=-1}%
+  \ifx\temp\empty%
+    \PackageWarning{tlc-article}{kpsewhich failed or variable #2 not defined. Using EMPTY value.}%
+    \if\relax\detokenize{#1}\relax%
+      % no variable target
+    \else%
+      \def#1{}%
+    \fi%
+  \else%
+    \if\relax\detokenize{#1}\relax%
+      \temp%
+    \else%
+      \let#1\temp%
+    \fi%
+  \fi%
 }%
 
 % -------------------------------------------------------------------------- }}}
