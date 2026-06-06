@@ -11,8 +11,8 @@
   {tlc-article Getting Started Guide}
   {Gary Allan Howard}
   {The \tlcA\ `Getting Started Guide' covers how to install \tlcA\ both globally
-   and locally, describes the general use case, how to customize your \tlcA\
-   environment, describes the commands \tlcA\ implements, and reveals the
+   and locally, describes the general use case and how to customize your \tlcA\
+   environment, describes the commands \tlcA\ implements, and lists the
    packages \tlcA\ depends upon.}
 
 % -------------------------------------------------------------------------- }}}
@@ -21,7 +21,7 @@
 \section{Installation}
 This section describes how to install \tlcA\ either globally to make it
 available to your \LaTeX\ environment or locally to the document you are
-authoring.  And, this section identifies the prerequisites you must meet in
+authoring.  This section also identifies the prerequisites you must meet in
 order to clone a repository from GitHub.com and install software on your
 computer.
 
@@ -39,7 +39,7 @@ The following prerequisites are needed.
     instructions on `Generating an SSH key'.
 
   \item[Enable your SSH key] The following instructions enable your SSH key so
-    you to not have to enter the passphrase for each git command.
+    you do not have to enter the passphrase for each git command.
 \end{description}
 
 \begin{lstlisting}[language=bash]
@@ -69,7 +69,7 @@ cp -v tlc-article.cls $HOME/mydoc/.
 \clearpage
 \subsection{Global installation}
 A global installation is done by installing \tlcA\ into your /path/to/your/texmf
-directory.  Assuming a TexLive installation exists at \texDist\ the following
+directory.  Assuming a \TeX\ Live installation exists at \texDist\ the following
 shell commands will make \tlcA\ available to your \LaTeX\ environment.
 
 \begin{lstlisting}[language=bash]
@@ -114,8 +114,8 @@ this section.
 % {{{ Document Class
 
 \subsection{Document Class \tlcA}
-\tlcA\ extends the article document class.  \tlcA\ provide options directly to
-the article document class.  As an example, the Author can specify the font as
+\tlcA\ extends the article document class.  \tlcA\ provides options directly to
+the article document class.  As an example, the author can specify the font as
 follows:
 
 \begin{lstlisting}[basicstyle=\tiny]
@@ -127,7 +127,7 @@ follows:
 
 \subsection{Title, Author \& Abstract} \label{sec:TAA}
 \tlcA\ has a macro \tlcTOC\ that can be used to set the document title, document
-author, document abstract, and establish the Table of Contents.  The sample
+author, and document abstract, and establish the Table of Contents.  The sample
 below reveals how to use \tlcTOC.
 
 \begin{lstlisting}[basicstyle=\tiny]
@@ -142,15 +142,15 @@ below reveals how to use \tlcTOC.
 
 \subsection{Table of Contents}
 The Table of Contents immediately follows the document abstract on page 1, uses
-dark blue for content, dots separate table of contents sections and page number,
+dark blue for content; dots separate table of contents sections and page numbers;
 and uses roman numerals.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Header and Footer
 
 \subsection{Header \& Footer}
-fancyhdr is used to render the header and the footer.  The Author can override
-\tlcA\ by providing an implementation in \tlcHF\, or augment \tlcA\
+fancyhdr is used to render the header and the footer.  The author can override
+\tlcA\ by providing an implementation in \tlcHF\, or augment the \tlcA\
 application by providing \tlcVE. The sections below show the placement \tlcA\
 uses when writing objects, and where the objects are defined.
 
@@ -165,7 +165,7 @@ uses when writing objects, and where the objects are defined.
 
 \subsubsection*{Header}
 \begin{description}
-  \item[lhead] When \tlcLG\ is found, logo.
+  \item[lhead] When \tlcLG\ is found, the logo.
   \item[chead] Document Title
   \item[rhead] When \tlcVE\ is present, status, date, and version columns.
 \end{description}
@@ -193,7 +193,7 @@ footer.
 \clearpage
 \section{Customization}
 This section describes how \tlcA\ can be customized by using the file-hooks
-\tlcA\ checks for.  \tlcA\ default implementation will be used when the
+\tlcA\ checks for.  The \tlcA\ default implementation will be used when the
 file-hooks are not found.
 
 \tlcVspace
@@ -220,17 +220,17 @@ exists.  The file-check is shown below:
 % {{{ data/header-footer.tex
 
 \subsection{\tlcHF}
-In the absence of \tlcHF, \tlcA\ has a builtin header and footer strategy that
-is base on \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\
-packages. The default implementation is show below:
+In the absence of \tlcHF, \tlcA\ has a built-in header and footer strategy that
+is based on \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\
+packages. The default implementation is shown below:
 
 \begin{lstlisting}[basicstyle=\tiny]
 
 \IfFileExists{\tlc@headerFooter}%
-{% use the customer header and footer defined by \tlc@headerfooter
+{% use the custom header and footer defined by \tlc@headerfooter
   \input{\tlc@headerFooter}%
 }%
-{% Else : user default header and footer
+{% Else: use default header and footer
   \useDefaultHeaderFooter%
 }%
 
@@ -257,10 +257,10 @@ packages. The default implementation is show below:
    % document status, document date and document version.
     \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
    %
-   % document owner.  This maybe a person or company name.
+   % document owner.  This may be a person or company name.
     \lfoot{\tiny \tlc@institution}%
    %
-   % document license. This maybe a license or word like confidential.
+   % document license. This may be a license or a word like confidential.
     \cfoot{\tiny \tlc@permission}%
   }%
   {%
@@ -291,14 +291,14 @@ The default implementation can be overridden by defining \tlcHF.
 % {{{ data/version.csv
 
 \subsection{\tlcVE} \label{sec:version}
-\tlcA\ will populate the builtin header and footer with information extracted
-from \tlcVE\ when it is present.  \tlcVE\ is a comma-separated-variable file
+\tlcA\ will populate the built-in header and footer with information extracted
+from \tlcVE\ when it is present.  \tlcVE\ is a comma-separated values file
 that uses the pipe character as the field delimiter.  \tlcVE\ uses the following
 column names:
 
 \begin{description}[style=nextline]
   \item[version] The version value is typeset in the rhead area.  This field is
-    used to convey the version the document was at the date it reached its
+    used to convey the document version when it reached its
     current state.
 
   \item[date] The date value is typeset in the rhead area.  This field is used
@@ -308,7 +308,7 @@ column names:
     used to convey the document state such as Approved, Draft, Effective, or
     Obsolete.
 
-  \item[instatution] The institution value is typeset in the lfoot area.  This
+  \item[institution] The institution value is typeset in the lfoot area.  This
     field is used to tell the reader the author name or company name.
 
   \item[permission]  The permission value is typeset in the cfoot area.  This
@@ -316,7 +316,7 @@ column names:
 
 \end{description}
 
-The exaction methods are shown below.
+The extraction methods are shown below.
 \begin{lstlisting}[basicstyle=\tiny]
   % Extract document status, document date and document version from
   % \tlc@versionFile.
@@ -328,7 +328,7 @@ The exaction methods are shown below.
       1=\version,
       2=\date,
       3=\status,
-      4=\instatution,
+      4=\institution,
       5=\permission
     }{#1}
   }%
@@ -339,7 +339,7 @@ The exaction methods are shown below.
     \def\tlc@version{\tlcVersionPart{\version}}
     \def\tlc@date{\tlcVersionPart{\date}}
     \def\tlc@status{\tlcVersionPart{\status}}
-    \def\tlc@instatution{\tlcVersionPart{\version}}
+    \def\tlc@institution{\tlcVersionPart{\version}}
     \def\tlc@permission{\tlcVersionPart{\version}}
   }
   {% Else: no operation because tlc@versionFile does not exist.
@@ -352,8 +352,8 @@ The exaction methods are shown below.
 \newpage
 \subsection{\tlcLG}
 \tlcA\ will typeset the lhead area with \tlcLG\ when it is present. Make sure
-your logo's height is not larger than 34pt to avoid `Package Fancyhdr Warning:
-\\headheight is to small' warning.
+your logo's height is not larger than 34pt to avoid the `Package Fancyhdr Warning:
+\\headheight is too small' warning.
 
 \tlcVspace
 
@@ -396,7 +396,7 @@ Page layout is returned to portrait orientation when \tlcEL\ is reached.
 % {{{ tlcDarkblue
 
 \subsection{\tlcDB}
-\tlcDB\ is used throughout this document to render text using rbg\{0,0,0.5\}.
+\tlcDB\ is used throughout this document to render text using rgb\{0,0,0.5\}.
 \tlcDB\ is safe to use within your document.
 
 % -------------------------------------------------------------------------- }}}
@@ -437,8 +437,8 @@ Page layout is returned to portrait orientation when \tlcEL\ is reached.
 % {{{ newcolumntype type: L, C and R
 
 \subsection{\tlcNCT}
-New \tlcNCT\ are Left, Center, and Right, respectively are
-designed to use with longtable.  Data is wrapped within a table cell.   The
+The new \tlcNCT\ column types are Left, Center, and Right, respectively, and are
+designed for use with longtable.  Data is wrapped within a table cell.  The
 parameter defines the column width.  As an example, L\{3.14159cm\} yields a left
 aligned, ragged right, wrapped text within a 3.14159cm wide cell.
 
@@ -454,7 +454,7 @@ aligned, ragged right, wrapped text within a 3.14159cm wide cell.
 % {{{ data/additional-layout.tex
 
 \subsection{\tlcAL}
-\tlcAL\ is an architectural hook the Author can use to provide packages and
+\tlcAL\ is an architectural hook the author can use to provide packages and
 commands not provided by \tlcA\, and to design implementations that are specific
 to your document.
 
@@ -470,16 +470,16 @@ to your document.
 % {{{ data/header-footer.tex
 
 \subsection{\tlcHF}
-\tlcHF\ is an architectural hook the Author should use to completely override
+\tlcHF\ is an architectural hook the author should use to completely override
 header and footer layouts provided by \tlcA.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ data/version.csv
 
 \subsection{\tlcVE}
-\tlcVE\ is by used \tlcA\ to populate the document header \& footer.  Refer to
+\tlcVE\ is used by \tlcA\ to populate the document header \& footer.  Refer to
 section \ref{sec:version} for \tlcVE\ definitions. \tlcVE\ is not
-used by \tlcA\ when \tlcHF\ is define.  However, you might want to use the
+used by \tlcA\ when \tlcHF\ is defined.  However, you might want to use the
 version hook by defining \tlcVE\ and using the commands below to extract data
 from \tlcVE\ in your \tlcHF.
 \begin{enumerate}
@@ -500,7 +500,7 @@ from \tlcVE\ in your \tlcHF.
 % {{{ debugging
 
 \subsection{\tlcDebug}
-The \tlcDebug\ command can  assist you when encounter compilation errors using
+The \tlcDebug\ command can assist you when you encounter compilation errors using
 \tlcA.
 
 \tlcVspace
@@ -548,7 +548,7 @@ The \tlcDebug\ command can  assist you when encounter compilation errors using
 
 \clearpage
 \section{Required Packages}
-This section documents the dependencies of the required package tlc-article has.
+This section documents the dependencies required by tlc-article.
 Package names are listed in alphabetical order. A complete description for each
 package is found at \url{http://www.ctan.org/}. At this writing, you can type in
 the package name and press the search button to learn more about each package.

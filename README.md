@@ -10,7 +10,7 @@ using **tlc-article.cls**.
 ## Released version
 v1.2.23
 
-## Installation are done Locally or Globally
+## Local or Global Installation
 ### Local Installation
 The example below copies tlc-article.cls to path/to/document. Your LaTeX
 compiler will use tlc-article.cls from path/to/document.
@@ -35,5 +35,5 @@ cd tlc-article
 ```
 
 ### Installation checks
-Use your LaTeX compile and complete tlc-article.tex.  Besides the header, your
+Use your LaTeX compiler to compile tlc-article.tex.  Except for the header, your
 output should match [tlc-article.pdf](doc/tlc-article.pdf).

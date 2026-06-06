@@ -16,7 +16,7 @@ deploy() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Kick start start this script.
+# {{{ Start this script.
 
 deploy "$@"
 

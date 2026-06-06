@@ -1,4 +1,4 @@
-% {{{ tlc-articlem
+% {{{ tlc-article
 %
 % Class:
 %   tlc-article
@@ -8,14 +8,14 @@
 %   a document layout intended for formal documents.
 %
 % Note:
-%   I use 'set foldmethod=mark' in my vimrrc to enable folding when viewing or
+%   I use 'set foldmethod=marker' in my vimrc to enable folding when viewing or
 %   editing this file.
 %
 % -------------------------------------------------------------------------- }}}
 % {{{ Base tlc-article definitions.
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{tlc-article}[2025/10/20 v1.2.40 Traap LaTeX Class Article]%
+\ProvidesClass{tlc-article}[2026/06/06 v1.2.41 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
 \ProcessOptions%
@@ -113,8 +113,8 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ Control header, footer, and table of contents.
 %
-% Keep We want our header and footer to remain consistent with a table of
-% contents that span multiple pages.
+% Keep our header and footer consistent with a table of contents that spans
+% multiple pages.
 
 \AtBeginDocument{%
   \addtocontents{toc}{\protect\thispagestyle{fancy}}%
@@ -194,9 +194,9 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ Command: L, C, R
 %
-% New column types: L, C, and R are Left, Center, and Right, respectively are
-% designed to use with longtable.  Data is wrapped within a table cell.   The
-% parameter defines the column width.  As an example, L{2cm} yields a Left
+% New column types: L, C, and R are Left, Center, and Right, respectively, and
+% are designed for use with longtable.  Data is wrapped within a table cell.
+% The parameter defines the column width.  As an example, L{2cm} yields a left
 % aligned, ragged right, wrapped text within a 2cm wide cell.
 %
 % Argument:
@@ -384,7 +384,7 @@
     \ifthenelse{\equal{#3}{}}{% abstract check
       % noop: nothing
     }{% Else: abstract
-      % \vspace{3mm}% Virtical spacing.
+      % \vspace{3mm}% Vertical spacing.
       \begin{abstract}#3\end{abstract}%
     }%
     \thispagestyle{empty}%
@@ -401,7 +401,7 @@
 
 \newcommand{\useDefaultHeaderFooter}{%
   \useLogoFile%              Typeset Logo in the left side of the header.
-  \useTitle%                 Typeset thetile in the center of the header
+  \useTitle%                 Typeset the title in the center of the header.
   \useVersionFile%           Typeset version info in right side of the header.
   \useRuler%                 Typeset header and footer with a ruler.
 }%
@@ -429,9 +429,9 @@
 %
 % Steps:
 %   1. Add a ruler to the header.
-%   2. Eliminate head height too small warning, which occurs because we are
+%   2. Eliminate the head height too small warning, which occurs because we are
 %      using multiple lines in our header.
-%   3. Apply page n o N to right side footer.
+%   3. Apply page n of N to the right side footer.
 %   4. Add a ruler to the footer.
 
 \newcommand{\useRuler}{%
@@ -457,11 +457,11 @@
    %
     \fancyhead[R]{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
    %
-   % document owner.  This maybe a person or company name.
+   % document owner.  This may be a person or company name.
    %
     \fancyfoot[L]{\tiny \tlc@institution}%
    %
-   % document license. This maybe a license or word like confidential.
+   % document license. This may be a license or a word like confidential.
    %
     \fancyfoot[C]{\tiny \tlc@permission}%
   }%
@@ -482,7 +482,7 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ Hook: tlc@additionalLayout
 %
-% We want to allow the calling document to setup additional layout.
+% We want to allow the calling document to set up additional layout.
 
 \IfFileExists{\tlc@additionalLayout}%
 {\input{\tlc@additionalLayout}}%
@@ -520,10 +520,10 @@
 % we are defining.
 
 \IfFileExists{\tlc@headerFooter}%
-{% use the customer header and footer defined by \tlc@headerfooter
+{% use the custom header and footer defined by \tlc@headerfooter
   \input{\tlc@headerFooter}%
 }%
-{% Else: user default header and footer
+{% Else: use default header and footer
   \useDefaultHeaderFooter%
 }%
 
