@@ -12,7 +12,7 @@ The [getting-started guide](doc/tlc-article.pdf) is typeset with
 
 ## Current release
 
-Version 1.2.41
+Version 1.2.42
 
 ## Installation
 
