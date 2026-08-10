@@ -1,6 +1,4 @@
 name       | description
-a4paper    | Provides support for A4 paper sizes, superseding a \LaTeX\ 2.09 package of the same name (the package was developed from a now-extinct package called a4dutch).
-acronym    | This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks.
 appendix   | The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/section appendices.
 array      | An extended implementation of the array and tabular environments which extends the options for column formats, and provides `programmable' format specifications.
 bookmark   | This package implements a new bookmark (outline) organization for package hyperref.
@@ -15,20 +13,20 @@ graphicx   | The package builds upon the graphics package, providing a key-value
 hyperref   | The package is used to handle cross-referencing commands in \LaTeX\ to produce hypertext links in the document.
 ifthen     | The package's basic command is \\ifthenelse, which can use a wide array of tests.
 inputenc   | The package translates various standard and other input encodings into a \LaTeX\ internal language. The internal language is expressed entirely in \TeX\'s base encoding (standard ASCII printable characters, carriage control tokens and \TeX\ control sequences, the latter mostly defined by \LaTeX).
-lastpage   | Reference the number of pages in your \LaTeX\ document through the introduction of a new label which can be referenced like `gpageref{LastPage}' to give a reference to the last page of a document.
+lastpage   | Reference the number of pages in your \LaTeX\ document through the introduction of a new label which can be referenced with `pageref{LastPage}'.
 listings   | The package enables the user to typeset programs (programming code) within \LaTeX; the source code is read directly by \TeX\ -- no frontend processor is needed.
 lmodern    | Latin modern fonts
 longtable  | Longtable allows you to write tables that continue to the next page. You can write captions within the table (typically at the start of the table), and headers and trailers for pages of table.
 makecell   | This package supports common layouts for tabular column heads in whole documents, based on one-column tabular environment.
 multicol   | Multicol defines a multicols environment which typesets text in multiple columns (up to a maximum of 10), and (by default) balances the end of each column at the end of the environment.
-parskip    | Simply changing `gparskip' and `parindent' leaves a layout that is untidy; this package (though it is no substitute for a properly-designed class) helps alleviate this untidiness.
-pdf-pie    | This package provides the means to draw pie (and variant charts) using PGF/TikZ.
+multirow   | The package creates table cells that span multiple rows.
 pdflscape  | The package adds PDF support to the landscape environment of package lscape, by setting the PDF /Rotate page attribute.
 pdfpages   | This package simplifies the inclusion of external multipage PDF documents in \LaTeX\ documents.
-spverbatim | The spverbatim package provides an `gspverb' macro that is analogous to 'verb' and an spverbatim environment that is analogous to verbatim with the difference being that `spverb' and spverbatim allow \LaTeX\ to break lines at space characters.
+pgf-pie    | This package provides the means to draw pie and variant charts using PGF/TikZ.
+spverbatim | The spverbatim package provides an `spverb' macro and an spverbatim environment that allow \LaTeX\ to break lines at space characters.
 tabularx   | The package defines an environment tabularx, an extension of tabular which has an additional column designator, X, which creates a paragraph-like column whose width automatically expands so that the declared width of the environment is filled.
 textcomp   | The package supports the Text Companion fonts, which provide many text symbols (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen), in the TS1 encoding.
-titling    | The titling package provides control over the typesetting of the `gmaketitle' command and `thanks' commands, and makes the `title', `author' and `date' information permanently available.
-tocloft    | Provides control over the typography of the Table of Contents, List of Figures and List of Tables, and the ability to create new `List of ...'. The ToC `gparskip' may be changed.
+titling    | The titling package provides control over the typesetting of the `maketitle' and `thanks' commands, and makes the `title', `author' and `date' information permanently available.
+tocloft    | Provides control over the typography of the Table of Contents, List of Figures and List of Tables, and the ability to create new `List of ...' entries.
 todonotes  | The package lets the user mark things to do later, in a simple and visually appealing way.  The package takes several options to enable customization / fine-tuning of the visual appearance.
 xcolor     | The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors.

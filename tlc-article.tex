@@ -10,82 +10,49 @@
 \tlcTitlePageAndTableOfContents
   {tlc-article Getting Started Guide}
   {Gary Allan Howard}
-  {The \tlcA\ `Getting Started Guide' covers how to install \tlcA\ both globally
-   and locally, describes the general use case and how to customize your \tlcA\
-   environment, describes the commands \tlcA\ implements, and lists the
-   packages \tlcA\ depends upon.}
+  {The \tlcA\ ``Getting Started Guide'' explains how to install and use \tlcA,
+   customize its layout, use its public commands, and identify its package
+   dependencies.}
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Installation
 
 \section{Installation}
-This section describes how to install \tlcA\ either globally to make it
-available to your \LaTeX\ environment or locally to the document you are
-authoring.  This section also identifies the prerequisites you must meet in
-order to clone a repository from GitHub.com and install software on your
-computer.
+Install \tlcA\ with your \TeX\ distribution's package manager whenever
+possible. You can instead copy the class into an individual document project
+when you need a local installation or want to test a development version.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Prerequisites
 
-\subsection{Prerequisites}
-The following prerequisites are needed.
-\begin{description}[style=nextline]
-  \item[Administrative privilege] You will need administrative privileges to
-    install \tlcA\ globally because `sudo' is used.
-
-  \item[SSH key] You will need your private key to access \gitHub.  Please refer
-    to \url{http://help.github.com/articles/generating-an-ssh-key} for
-    instructions on `Generating an SSH key'.
-
-  \item[Enable your SSH key] The following instructions enable your SSH key so
-    you do not have to enter the passphrase for each git command.
-\end{description}
+\subsection{Distribution installation}
+\TeX\ Live users can install \tlcA\ with \texttt{tlmgr}:
 
 \begin{lstlisting}[language=bash]
-eval \$(ssh-agent -s)
-ssh-add ~/.ssh/your-private-key
+tlmgr install tlc-article
 \end{lstlisting}
+
+MiK\TeX\ users can install \tlcA\ with the MiK\TeX\ Console. Your distribution
+will place the class in the appropriate \TeX\ tree and maintain its filename
+database.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Local installation
 
 \subsection{Local installation}
-A local installation is done by installing \tlcA\ into
-/the/path/to/your/document.  Assuming your document is located at \tlcMyDoc\ the
-following shell commands will make \tlcA\ available to your document.
+Download the release archive or clone the repository, then copy
+\texttt{tlc-article.cls} next to your document's \texttt{.tex} file. \LaTeX\
+searches the current directory before installed package trees.
 
 \begin{lstlisting}[language=bash]
-cd $HOME
-git clone git@GitHub.com:Traap/tlc-article.git
-cd tlc-article
-mkdir $HOME/mydoc
-cp -v tlc-article.cls $HOME/mydoc/.
-\end{lstlisting}
-
-% -------------------------------------------------------------------------- }}}
-% {{{ Global installation
-
-\clearpage
-\subsection{Global installation}
-A global installation is done by installing \tlcA\ into your /path/to/your/texmf
-directory.  Assuming a \TeX\ Live installation exists at \texDist\ the following
-shell commands will make \tlcA\ available to your \LaTeX\ environment.
-
-\begin{lstlisting}[language=bash]
-cd $HOME
-git clone git@GitHub.com:Traap/tlc-article.git
-cd tlc-article
-sudo mkdir -p $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlc-article
-sudo cp -v tlc-article.cls $(kpsewhich -var-value TEXMFLOCAL)/tex/latex/tlc-article/.
-sudo mktexlsr $(kpsewhich -var-value TEXMFLOCAL)
+cp tlc-article.cls /path/to/document/
 \end{lstlisting}
 
 \tlcVspace
 
-\todo[inline]{%
-  \tlcNote: You may remove your local installation by removing \tlcA.%
-}%
+\tlcNote\ The files in the optional \texttt{data/} directory customize the
+class. Copy the directory into your document project when you want to use or
+adapt those examples.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ General Use Case
@@ -141,9 +108,8 @@ below reveals how to use \tlcTOC.
 % {{{ Table of Contents
 
 \subsection{Table of Contents}
-The Table of Contents immediately follows the document abstract on page 1, uses
-dark blue for content; dots separate table of contents sections and page numbers;
-and uses roman numerals.
+The table of contents begins on the page after the title and abstract. Its links
+are dark blue, and dotted leaders separate section titles from page numbers.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Header and Footer
@@ -156,18 +122,16 @@ uses when writing objects, and where the objects are defined.
 
 \tlcVspace
 
-\todo[inline]{%
-  \tlcNote: \tlcA\ ignores \tlcVE\ when \tlcHF\ is defined.
-}%
+\tlcNote\ \tlcA\ ignores \tlcVE\ when \tlcHF\ is defined.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ Header
 
 \subsubsection*{Header}
 \begin{description}
-  \item[lhead] When \tlcLG\ is found, the logo.
-  \item[chead] Document Title
-  \item[rhead] When \tlcVE\ is present, status, date, and version columns.
+  \item[Left] When \tlcLG\ is found, the logo.
+  \item[Center] The document title.
+  \item[Right] When \tlcVE\ is present, the status, date, and version.
 \end{description}
 
 % -------------------------------------------------------------------------- }}}
@@ -175,9 +139,9 @@ uses when writing objects, and where the objects are defined.
 
 \subsubsection*{Footer}
 \begin{description}
-  \item[lfoot] When \tlcVE\ is present, institution column.
-  \item[cfoot] When \tlcVE\ is present, permission column.
-  \item[rfoot] Page 1 of N.
+  \item[Left] When \tlcVE\ is present, the institution.
+  \item[Center] When \tlcVE\ is present, the permission or license.
+  \item[Right] The current and total page count.
 \end{description}
 
 % -------------------------------------------------------------------------- }}}
@@ -198,10 +162,7 @@ file-hooks are not found.
 
 \tlcVspace
 
-\todo[inline]{%
-  \tlcNote: \tlcA\ consumes \tlcAL\ \& \tlcHF\ during the preamble compilation
-  phase.
-}%
+\tlcNote\ \tlcA\ consumes \tlcAL\ and \tlcHF\ while processing the preamble.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ data/additional-layout.tex
@@ -236,7 +197,7 @@ packages. The default implementation is shown below:
 
 \newcommand{\useDefaultHeaderFooter}{%
   \useLogoFile%              Typeset Logo in the left side of the header.
-  \chead{\large{\thetitle}}% Typeset title in center of the header.
+  \useTitle%                 Typeset the title in the center of the header.
   \useVersionFile%           Typeset version info in right side of the header.
   \useRuler%                 Typeset header and footer with a ruler.
 }%
@@ -244,7 +205,7 @@ packages. The default implementation is shown below:
 \newcommand{\useLogoFile}{%
   \IfFileExists{\tlc@logoFile}%
   {%
-    \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+    \fancyhead[L]{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
   {%
    % Else: no operation because tlc@logoFile does not exist.
@@ -255,13 +216,13 @@ packages. The default implementation is shown below:
   \IfFileExists{\tlc@versionFile}%
   {%
    % document status, document date and document version.
-    \rhead{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
+    \fancyhead[R]{\tiny \tlc@status \\ \tlc@date \\ \tlc@version}%
    %
    % document owner.  This may be a person or company name.
-    \lfoot{\tiny \tlc@institution}%
+    \fancyfoot[L]{\tiny \tlc@institution}%
    %
    % document license. This may be a license or a word like confidential.
-    \cfoot{\tiny \tlc@permission}%
+    \fancyfoot[C]{\tiny \tlc@permission}%
   }%
   {%
    % Else: no operation because tlc@versionFile does not exist.
@@ -271,47 +232,48 @@ packages. The default implementation is shown below:
 \newcommand{\useRuler}{%
   \renewcommand{\headrulewidth}{0.1pt}%
   \setlength\headheight{34.0pt}%
-  \rfoot%
+  \fancyfoot[R]%
     {\tiny%
       {Page \thepage~of~\pageref{LastPage}}%
     }%
   \renewcommand{\footrulewidth}{0.1pt}%
 }%
 
+\newcommand{\useTitle}{%
+  \fancyhead[C]{\large{\thetitle}}%
+}%
+
 \end{lstlisting}
 
 The default implementation can be overridden by defining \tlcHF.
 
-\todo[inline]{%
-  \tlcNote: When \tlcHF\ exists and is empty, your document will be typeset with
-  the defaults from document-class \tlcDarkblue{article}.
-}%
+\tlcNote\ When \tlcHF\ exists and is empty, the document uses the header and
+footer defaults inherited from the \tlcDarkblue{article} class.
 
 % -------------------------------------------------------------------------- }}}
 % {{{ data/version.csv
 
 \subsection{\tlcVE} \label{sec:version}
 \tlcA\ will populate the built-in header and footer with information extracted
-from \tlcVE\ when it is present.  \tlcVE\ is a comma-separated values file
-that uses the pipe character as the field delimiter.  \tlcVE\ uses the following
-column names:
+from \tlcVE\ when it is present. \tlcVE\ is a tabular text file that uses the
+pipe character as its field delimiter and has the following column names:
 
 \begin{description}[style=nextline]
-  \item[version] The version value is typeset in the rhead area.  This field is
+  \item[version] The version value is typeset in the right header. This field is
     used to convey the document version when it reached its
     current state.
 
-  \item[date] The date value is typeset in the rhead area.  This field is used
+  \item[date] The date value is typeset in the right header. This field is used
     to communicate when the document transitioned into its current state.
 
-  \item[status] The status value is typeset in the rhead area.  This field is
+  \item[status] The status value is typeset in the right header. This field is
     used to convey the document state such as Approved, Draft, Effective, or
     Obsolete.
 
-  \item[institution] The institution value is typeset in the lfoot area.  This
+  \item[institution] The institution value is typeset in the left footer. This
     field is used to tell the reader the author name or company name.
 
-  \item[permission]  The permission value is typeset in the cfoot area.  This
+  \item[permission] The permission value is typeset in the center footer. This
     field is used to identify confidentiality or a particular license.
 
 \end{description}
@@ -339,8 +301,8 @@ The extraction methods are shown below.
     \def\tlc@version{\tlcVersionPart{\version}}
     \def\tlc@date{\tlcVersionPart{\date}}
     \def\tlc@status{\tlcVersionPart{\status}}
-    \def\tlc@institution{\tlcVersionPart{\version}}
-    \def\tlc@permission{\tlcVersionPart{\version}}
+    \def\tlc@institution{\tlcVersionPart{\institution}}
+    \def\tlc@permission{\tlcVersionPart{\permission}}
   }
   {% Else: no operation because tlc@versionFile does not exist.
   }
@@ -351,9 +313,9 @@ The extraction methods are shown below.
 
 \newpage
 \subsection{\tlcLG}
-\tlcA\ will typeset the lhead area with \tlcLG\ when it is present. Make sure
-your logo's height is not larger than 34pt to avoid the `Package Fancyhdr Warning:
-\\headheight is too small' warning.
+\tlcA\ will place \tlcLG\ in the left header when it is present. Make sure your
+logo's height is not larger than 34pt to avoid the ``Package Fancyhdr Warning:
+\\headheight is too small'' warning.
 
 \tlcVspace
 
@@ -366,7 +328,7 @@ your logo's height is not larger than 34pt to avoid the `Package Fancyhdr Warnin
 \newcommand{\useLogoFile}{%
   \IfFileExists{\tlc@logoFile}%
   {%
-    \lhead{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+    \fancyhead[L]{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
   }%
   {%
    % Else: no operation because tlc@logoFile does not exist.
@@ -419,14 +381,24 @@ Page layout is returned to portrait orientation when \tlcEL\ is reached.
 %   3 - the abstract
 
 \newcommand{\tlcTitlePageAndTableOfContents}[3]{%
-  \title{#1}%
-  \author{#2}%
+  \ifthenelse{\equal{#1}{}}{% title check
+    \title{}%
+  }{% Else: title
+    \title{#1}%
+  }%
+  \ifthenelse{\equal{#2}{}}{% author check
+    \author{}%
+  }{% Else: author
+    \author{#2}%
+  }%
   \maketitle%
-  \ifthenelse{\equal{#3}{}}% Check for Empty string.
-             {}% Do nothing.  Parameter is empty.
-             {\begin{abstract}#3\end{abstract}}%
+  \ifthenelse{\equal{#3}{}}{% abstract check
+  }{% Else: abstract
+    \begin{abstract}#3\end{abstract}%
+  }%
+  \thispagestyle{empty}%
+  \clearpage%
   \tableofcontents%
-  \thispagestyle{fancy}%
   \clearpage%
 }%
 
@@ -460,10 +432,8 @@ to your document.
 
 \tlcVspace
 
-\todo[inline]{%
-\url{http://github.com/Traap/autodoc} is a documentation framework that extends
-\tlcA.
-}%
+\tlcNote\ \url{https://github.com/Traap/autodoc} is a documentation framework
+that extends \tlcA.
 
 
 % -------------------------------------------------------------------------- }}}
@@ -514,17 +484,16 @@ The \tlcDebug\ command can assist you when you encounter compilation errors usin
   \clearpage%
   \section{tlc-article Debug}%
   \subsection{tlc-article default files}%
-  \begin{description}[align=right,leftmargin=*,labelindent=5cm]%
+  \begin{description}[align=right,labelindent=5cm]%
     \item[tlc@location:]\tlc@location%
     \item[tlc@additionalLayout:]\tlc@additionalLayout%
     \item[tlc@headerFooter:]\tlc@headerFooter%
-    \item[tlc@versionFile:]\tlc@versionFile%
     \item[tlc@logoFile:]\tlc@logoFile%
     \item[tlc@versionFile:]\tlc@versionFile%
   \end{description}%
   %
   \subsection{tlc-article file hooks}%
-  \begin{description}[align=right,leftmargin=*,labelindent=5cm]%
+  \begin{description}[align=right,labelindent=5cm]%
     \item [tlc@additionalLayout:]\tlcIsDefined{\tlc@additionalLayout}%
     \item [tlc@headerFooter:]\tlcIsDefined{\tlc@headerFooter}%
     \item [tlc@logoFile:]\tlcIsDefined{\tlc@logoFile}%
@@ -532,7 +501,7 @@ The \tlcDebug\ command can assist you when you encounter compilation errors usin
   \end{description}%
   %
   \subsection{tlc-article header and footer hooks}%
-  \begin{description}[align=right,leftmargin=*,labelindent=5cm]%
+  \begin{description}[align=right,labelindent=5cm]%
     \item[tlc@version:] \tlc@version%
     \item[tlc@date:] \tlc@date%
     \item[tlc@status:] \tlc@status%
@@ -548,10 +517,9 @@ The \tlcDebug\ command can assist you when you encounter compilation errors usin
 
 \clearpage
 \section{Required Packages}
-This section documents the dependencies required by tlc-article.
-Package names are listed in alphabetical order. A complete description for each
-package is found at \url{http://www.ctan.org/}. At this writing, you can type in
-the package name and press the search button to learn more about each package.
+This section documents the dependencies required by \tlcA. Package names are
+listed in alphabetical order. Search \url{https://ctan.org/} for complete
+package descriptions and documentation.
 
 % Render pckFile using pckStyle as a longtable.
 \csvreader[tlcPkgStyle, separator=pipe]{\tlcPkgFile}{}{\name & \description}

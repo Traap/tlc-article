@@ -12,34 +12,27 @@ The [getting-started guide](doc/tlc-article.pdf) is typeset with
 
 ## Current release
 
-Version 1.2.42
+Version 1.2.43
 
 ## Installation
 
-Clone the repository first:
+Install `tlc-article` with your TeX distribution's package manager whenever
+possible. For TeX Live:
 
 ```bash
-git clone https://github.com/Traap/tlc-article.git
-cd tlc-article
+tlmgr install tlc-article
 ```
+
+MiKTeX users can install `tlc-article` with the MiKTeX Console.
 
 ### Install for one document
 
-Copy the class next to your document's `.tex` file. LaTeX searches the current
-directory, so no system-wide installation is required.
+For a local installation, download or clone the repository and copy the class
+next to your document's `.tex` file. LaTeX searches the current directory, so
+no system-wide installation is required.
 
 ```bash
 cp tlc-article.cls /path/to/document/
-```
-
-### Install system-wide
-
-The deployment script copies the class into your TeX distribution and refreshes
-its filename database. It requires `sudo` and a TeX installation that provides
-`kpsewhich` and `mktexlsr`.
-
-```bash
-./bin/deploy tlc-article.cls
 ```
 
 ## Basic usage
@@ -83,6 +76,12 @@ directory:
 
 See the [getting-started guide](doc/tlc-article.pdf) for the expected formats,
 available commands, and package dependencies.
+
+## Author and contact
+
+`tlc-article` is maintained by Gary A. Howard. Report problems or request
+features through the
+[GitHub issue tracker](https://github.com/Traap/tlc-article/issues).
 
 ## License
 
