@@ -14,7 +14,7 @@
 % -------------------------------------------------------------------------- }}}
 % {{{ Base tlc-article definitions.
 
-\NeedsTeXFormat{LaTeX2e}%
+\NeedsTeXFormat{LaTeX2e}[2023/11/01]%
 \ProvidesClass{tlc-article}[2026/08/10 v1.2.43 Traap LaTeX Class Article]%
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}%
@@ -33,8 +33,6 @@
 % {{{ Required parts to use glossaries must come first.
 
 \RequirePackage{lmodern}%
-\RequirePackage{textcomp}%
-\RequirePackage[utf8]{inputenc}%
 \RequirePackage[T1]{fontenc}%
 \RequirePackage[colorlinks]{hyperref}%
 \RequirePackage{bookmark}%
@@ -138,7 +136,8 @@
   keywordstyle=\color{magenta},%
   numberstyle=\tiny\color{codegray},%
   stringstyle=\color{codepurple},%
-  basicstyle=\footnotesize,%
+  basicstyle=\ttfamily\footnotesize,%
+  columns=fullflexible,%
   breakatwhitespace=false,%
   breaklines=true,%
   captionpos=b,%
@@ -180,7 +179,7 @@
 % {{{ Define the optional input files.
 
 \def\tlc@location{data}%
-\def\tlc@logoFile{\tlc@location/logo.png}%
+\def\tlc@logoFile{\tlc@location/logo}%
 \def\tlc@versionFile{\tlc@location/version.csv}%
 \def\tlc@additionalLayout{\tlc@location/additional-layout.tex}%
 \def\tlc@headerFooter{\tlc@location/header-footer.tex}%
@@ -413,9 +412,23 @@
 % operation because tlc@logoFile does not exist.
 
 \newcommand{\useLogoFile}{%
+  % Keep explicit filenames; otherwise use the graphics driver's search order.
+  \IfFileExists{\tlc@logoFile}{}{%
+    \let\tlc@resolvedLogo\@empty%
+    \@for\tlc@logoExtension:=\Gin@extensions\do{%
+      \ifx\tlc@resolvedLogo\@empty%
+        \IfFileExists{\tlc@logoFile\tlc@logoExtension}{%
+          \edef\tlc@resolvedLogo{\tlc@logoFile\tlc@logoExtension}%
+        }{}%
+      \fi%
+    }%
+    \ifx\tlc@resolvedLogo\@empty\else%
+      \let\tlc@logoFile\tlc@resolvedLogo%
+    \fi%
+  }%
   \IfFileExists{\tlc@logoFile}%
   {%
-    \fancyhead[L]{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+    \fancyhead[L]{\includegraphics[width=3cm,height=1cm,keepaspectratio]{\tlc@logoFile}}%
   }%
   {%
    % Else: no operation because tlc@logoFile does not exist.

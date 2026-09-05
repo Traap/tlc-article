@@ -18,6 +18,10 @@
 % {{{ Installation
 
 \section{Installation}
+Requires \LaTeX{} 2023-11-01 or newer and the packages listed in this guide,
+including the LaTeX3 implementation of \texttt{csvsimple}. UTF-8 input and
+text companion symbols are provided by the \LaTeX{} kernel.
+
 Install \tlcA\ with your \TeX\ distribution's package manager whenever
 possible. You can instead copy the class into an individual document project
 when you need a local installation or want to test a development version.
@@ -85,7 +89,7 @@ this section.
 the article document class.  As an example, the author can specify the font as
 follows:
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
   \documentclass[12pt]{tlc-article}
 \end{lstlisting}
 
@@ -97,7 +101,7 @@ follows:
 author, and document abstract, and establish the Table of Contents.  The sample
 below reveals how to use \tlcTOC.
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
   \tlcTitlePageAndTableOfContents
      {Document Title}
      {Document Author}
@@ -171,7 +175,7 @@ file-hooks are not found.
 \tlcA\ will use whatever \LaTeX\ definitions are found in \tlcAL\ when it
 exists.  The file-check is shown below:
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
   \IfFileExists{data/additional-layout.tex}
     {\input{data/additional-layout.tex}}
     {}
@@ -185,7 +189,7 @@ In the absence of \tlcHF, \tlcA\ has a built-in header and footer strategy that
 is based on \textit{fancyhdr}, \textit{titling}, and \textit{lastpage} \LaTeX\
 packages. The default implementation is shown below:
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
 
 \IfFileExists{\tlc@headerFooter}%
 {% use the custom header and footer defined by \tlc@headerfooter
@@ -203,9 +207,23 @@ packages. The default implementation is shown below:
 }%
 
 \newcommand{\useLogoFile}{%
+  % Keep explicit filenames; otherwise use the graphics driver's search order.
+  \IfFileExists{\tlc@logoFile}{}{%
+    \let\tlc@resolvedLogo\@empty%
+    \@for\tlc@logoExtension:=\Gin@extensions\do{%
+      \ifx\tlc@resolvedLogo\@empty%
+        \IfFileExists{\tlc@logoFile\tlc@logoExtension}{%
+          \edef\tlc@resolvedLogo{\tlc@logoFile\tlc@logoExtension}%
+        }{}%
+      \fi%
+    }%
+    \ifx\tlc@resolvedLogo\@empty\else%
+      \let\tlc@logoFile\tlc@resolvedLogo%
+    \fi%
+  }%
   \IfFileExists{\tlc@logoFile}%
   {%
-    \fancyhead[L]{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+    \fancyhead[L]{\includegraphics[width=3cm,height=1cm,keepaspectratio]{\tlc@logoFile}}%
   }%
   {%
    % Else: no operation because tlc@logoFile does not exist.
@@ -279,7 +297,7 @@ pipe character as its field delimiter and has the following column names:
 \end{description}
 
 The extraction methods are shown below.
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
   % Extract document status, document date and document version from
   % \tlc@versionFile.
   % Argument:
@@ -313,22 +331,41 @@ The extraction methods are shown below.
 
 \newpage
 \subsection{\tlcLG}
-\tlcA\ will place \tlcLG\ in the left header when it is present. Make sure your
-logo's height is not larger than 34pt to avoid the ``Package Fancyhdr Warning:
-\\headheight is too small'' warning.
+\tlcA\ looks for \texttt{data/logo} using the active graphics driver's
+supported extensions, in its configured search order. With PDF output,
+formats include PDF, PNG, and JPEG. If multiple formats are present, the first
+matching extension wins. The resolved filename is used in file checks and
+debug output. An explicitly configured filename is also supported.
+
+The logo fits within a 3cm wide by 1cm high box while preserving its aspect
+ratio. If no supported logo file exists, the logo is omitted.
 
 \tlcVspace
 
 \tlcA\ file-check is shown below:
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
 % Typeset the logo in the left side of the document header.  Otherwise no
 % operation because tlc@logoFile does not exist.
 
 \newcommand{\useLogoFile}{%
+  % Keep explicit filenames; otherwise use the graphics driver's search order.
+  \IfFileExists{\tlc@logoFile}{}{%
+    \let\tlc@resolvedLogo\@empty%
+    \@for\tlc@logoExtension:=\Gin@extensions\do{%
+      \ifx\tlc@resolvedLogo\@empty%
+        \IfFileExists{\tlc@logoFile\tlc@logoExtension}{%
+          \edef\tlc@resolvedLogo{\tlc@logoFile\tlc@logoExtension}%
+        }{}%
+      \fi%
+    }%
+    \ifx\tlc@resolvedLogo\@empty\else%
+      \let\tlc@logoFile\tlc@resolvedLogo%
+    \fi%
+  }%
   \IfFileExists{\tlc@logoFile}%
   {%
-    \fancyhead[L]{\includegraphics[width=3cm,height=1cm]{\tlc@logoFile}}%
+    \fancyhead[L]{\includegraphics[width=3cm,height=1cm,keepaspectratio]{\tlc@logoFile}}%
   }%
   {%
    % Else: no operation because tlc@logoFile does not exist.
@@ -372,7 +409,7 @@ Page layout is returned to portrait orientation when \tlcEL\ is reached.
 
 \tlcTOC\ command is shown below:
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
 % Each document uses the same author name, title page and table of contents.
 %
 % Arguments:
@@ -416,7 +453,7 @@ aligned, ragged right, wrapped text within a 3.14159cm wide cell.
 
 \tlcVspace
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash}p{#1}}
@@ -475,7 +512,7 @@ The \tlcDebug\ command can assist you when you encounter compilation errors usin
 
 \tlcVspace
 
-\begin{lstlisting}[basicstyle=\tiny]
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
 % We define tlcDebug to aid our users when they are debugging their document.
 % tlcDebug should be placed at the end of your document to allow LaTeX to
 % fully expand all macros and definitions.

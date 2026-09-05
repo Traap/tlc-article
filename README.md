@@ -16,6 +16,10 @@ Version 1.2.43
 
 ## Installation
 
+Requires LaTeX 2023-11-01 or newer and the dependencies listed in
+`data/required-packages.csv`, including `csvsimple` with its LaTeX3 implementation.
+UTF-8 input and text companion symbols are provided by the LaTeX kernel.
+
 Install `tlc-article` with your TeX distribution's package manager whenever
 possible. For TeX Live:
 
@@ -71,8 +75,13 @@ directory:
 
 - `additional-layout.tex` for additional LaTeX definitions and layout changes
 - `header-footer.tex` for a custom header and footer
-- `logo.png` for title-page and header branding
+- `logo` with a supported graphics extension (for example, `logo.pdf`,
+  `logo.png`, or `logo.jpeg` with PDF output) for header branding
 - `version.csv` for document status, date, version, institution, and permission
+
+Logo selection follows the active graphics driver’s extension search order when
+multiple formats exist. Logos retain their proportions within a 3 cm × 1 cm box;
+if no supported logo exists, the header omits it.
 
 See the [getting-started guide](doc/tlc-article.pdf) for the expected formats,
 available commands, and package dependencies.
